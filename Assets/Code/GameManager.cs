@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance ??= FindFirstObjectByType<GameManager>();
     private InputController inputController;
     private Fading fading;
+    [SerializeField] Material damageFlashMaterial;
 
 
     private void Awake()
@@ -51,6 +52,11 @@ public class GameManager : MonoBehaviour
     public InputController GetInputController()
     {
         return inputController;
+    }
+
+    public Material GetDamageFlashMaterial()
+    {
+        return damageFlashMaterial;
     }
 
     public void LoadSceneByName(string sceneName) => StartCoroutine(ChangeScene(sceneName));

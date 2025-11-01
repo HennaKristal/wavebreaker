@@ -1,10 +1,12 @@
 using UnityEngine;
 
-
-public class PlayerMovement: MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float horizontalSpeed = 5;
-    [SerializeField] private float verticalSpeed = 5;
+    [Header("Movement Settings")]
+    [SerializeField] private float forwardSpeed = 1f;
+    [SerializeField] private float backwardSpeed = 0.5f;
+    [SerializeField] private float turnSpeed = 100f;
 
     private InputController inputController;
     private Rigidbody2D rb;
@@ -24,14 +26,13 @@ public class PlayerMovement: MonoBehaviour
     {
         Vector2 inputVector = inputController.Move;
 
-        if (inputVector.magnitude > 1f)
-        {
-            inputVector.Normalize();
-        }
+        // Turning (horizontal axis)
+        float turnAmount = -inputVector.x * turnSpeed * Time.fixedDeltaTime;
+        rb.MoveRotation(rb.rotation + turnAmount);
 
-        float xSpeed = inputVector.x * horizontalSpeed;
-        float ySpeed = inputVector.y * verticalSpeed;
-
-        rb.linearVelocity = new Vector2(xSpeed, ySpeed);
+        // Thrusting (vertical axis)
+        float speed = inputVector.y > 0 ? forwardSpeed : backwardSpeed;
+        Vector2 forward = transform.up;
+        rb.linearVelocity = forward * inputVector.y * speed;
     }
 }
