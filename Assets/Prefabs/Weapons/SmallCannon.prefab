@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1150016931611693437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0433, y: -0.0014, z: 0}
+  m_LocalPosition: {x: 0.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,7 +152,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2281899783889647532, guid: 926cef8555cf99743b23fc7466a45987, type: 3}
   firePoint: {fileID: 3179576003873511629}
   fireRate: 0.5
-  projectileSpeed: 1
+  projectileSpeed: 2.5
   minDamage: 5
   maxDamage: 8
   criticalChance: 15

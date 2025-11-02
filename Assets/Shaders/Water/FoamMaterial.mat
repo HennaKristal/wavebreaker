@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ScrollingSpriteMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 2dab6c1c282890748a2ab31d4dc0cdcc, type: 3}
+  m_Name: FoamMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: d9210b77dfef5419f8a7bed902824c72, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -27,6 +27,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_54dacb4ca5934ef694cba82d63976125_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7b499b63042340ef99ba35cb22bdf791_Texture_1:
+        m_Texture: {fileID: 2800000, guid: acde6cfd58de34840bcc93a13d37a05a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7b499b63042340ef99ba35cb22bdf791_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: acde6cfd58de34840bcc93a13d37a05a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,12 +53,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Speed: 0
+    - _CausticMovementAmount: 0.03
+    - _CausticMovementScale: 1.63
+    - _CausticScale: 0.1
+    - _Pixellisation: 20
+    - _SpecularScale1: 5
+    - _SpecularScale2: 3
+    - _SpecularSpeed: 0.13
+    - _SpecularThreshold: 0.95
+    - _Speed: 0.48
+    - _Transparency: 0.69
     m_Colors:
-    - _Direction: {r: 0, g: 0, b: 0, a: 0}
+    - _CausticColor: {r: 0.5518868, g: 1, b: 0.9701258, a: 0.039215688}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 0.6039216}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 0.7607843}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
---- !u!114 &6026431093500171575
+--- !u!114 &8231146613251600022
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,4 +80,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 10
+  version: 7

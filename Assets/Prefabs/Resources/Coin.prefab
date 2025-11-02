@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Resource
   resourceType: 0
   amount: 1
-  attractRadius: 0.3
+  attractRadius: 1.5
   attractForce: 5
 --- !u!212 &8285596837374130476
 SpriteRenderer:
@@ -147,13 +147,13 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.015625, y: 0.015625}
+    oldSize: {x: 0.03125, y: 0.03125}
     newSize: {x: 0.015625, y: 0.015625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.015625, y: 0.015625}
+  m_Size: {x: 0.0315, y: 0.0315}
   m_EdgeRadius: 0
 --- !u!50 &368840506894805011
 Rigidbody2D:
