@@ -2,13 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
+    [Header("REFERENCES")]
+    [SerializeField] Material damageFlashMaterial;
+
     private static GameManager _instance;
     public static GameManager Instance => _instance ??= FindFirstObjectByType<GameManager>();
     private InputController inputController;
     private Fading fading;
-    [SerializeField] Material damageFlashMaterial;
 
 
     private void Awake()

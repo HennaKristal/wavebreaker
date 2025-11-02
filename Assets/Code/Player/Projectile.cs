@@ -6,12 +6,13 @@ public class Projectile : MonoBehaviour
     private int damage;
     private float speed;
     private bool isCritical = false;
-    private bool hasProcessedCollision = false;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
 
     public void Initialize(float _speed, int _minDamage, int _maxDamage, float _criticalChance, float _criticalDamageMultiplier)
     {
@@ -30,10 +31,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hasProcessedCollision) return;
-        hasProcessedCollision = true;
 
         if (!collision.CompareTag("Enemy"))
         {
@@ -42,10 +42,7 @@ public class Projectile : MonoBehaviour
         }
 
         var enemy = collision.GetComponent<EnemyHealth>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage, isCritical);
-        }
+        enemy?.TakeDamage(damage, isCritical);
 
         Destroy(gameObject);
     }

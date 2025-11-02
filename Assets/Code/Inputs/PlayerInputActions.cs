@@ -129,52 +129,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""FireLeftInnerWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""65e21990-3b2d-472e-8ee9-28ed635fb7ee"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""FireLeftOuterWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""2f4bfab0-05b5-4352-bfa7-ab62eec153ab"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""FireRightInnerWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""3dc27a48-ec4a-4b38-862b-523c13aa4c8a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""FireRightOuterWeapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""cbeb8054-0c68-489c-abb1-bf323be6c704"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""45c850b6-f5cd-4588-8f4a-1c355f7c82fd"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dodge"",
+                    ""name"": ""Enter"",
                     ""type"": ""Button"",
                     ""id"": ""61ddeed0-5169-4dc7-9e72-6f7327b1fad0"",
                     ""expectedControlType"": """",
@@ -183,7 +138,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Heal"",
+                    ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""3b83d0e7-b673-4d1c-a521-ba95de9bbe4c"",
                     ""expectedControlType"": """",
@@ -437,122 +392,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""28c7685b-ae67-4f61-be96-f8c0b5f9fd9a"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""FireLeftInnerWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9dab0d64-b4f9-45a9-b24c-903832b71fdf"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""FireLeftInnerWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d37cc372-76e5-491c-97f9-f76c443f75a6"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""FireRightInnerWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""12490bf0-60c1-4dd1-8c28-950b254e5d56"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""FireRightInnerWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""402fb0f5-d033-4075-adc3-b9dfb6698e08"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""FireLeftOuterWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f7595996-a57b-4b20-944e-1d2482b47ac0"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""FireLeftOuterWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""df9e3d61-1785-4b0a-a3f6-77582b351140"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""FireRightOuterWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5c77a536-ff1c-412a-820d-7d8bfff674ad"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""FireRightOuterWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8481e210-9ef6-4a24-beef-f7a983da4cc1"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""324580ff-5f18-4ffd-9f8b-9dbb56eabd00"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8db35fb5-54dd-41bb-bed6-f9575b0a562c"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Dodge"",
+                    ""action"": ""Enter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -563,7 +408,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Dodge"",
+                    ""action"": ""Enter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -574,18 +419,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Heal"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""e7f38612-d561-44e2-bdfe-fd304cd027d1"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Heal"",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -661,13 +506,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_Escape = m_Gameplay.FindAction("Escape", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_FireMainWeapon = m_Gameplay.FindAction("FireMainWeapon", throwIfNotFound: true);
-        m_Gameplay_FireLeftInnerWeapon = m_Gameplay.FindAction("FireLeftInnerWeapon", throwIfNotFound: true);
-        m_Gameplay_FireLeftOuterWeapon = m_Gameplay.FindAction("FireLeftOuterWeapon", throwIfNotFound: true);
-        m_Gameplay_FireRightInnerWeapon = m_Gameplay.FindAction("FireRightInnerWeapon", throwIfNotFound: true);
-        m_Gameplay_FireRightOuterWeapon = m_Gameplay.FindAction("FireRightOuterWeapon", throwIfNotFound: true);
-        m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
-        m_Gameplay_Dodge = m_Gameplay.FindAction("Dodge", throwIfNotFound: true);
-        m_Gameplay_Heal = m_Gameplay.FindAction("Heal", throwIfNotFound: true);
+        m_Gameplay_Enter = m_Gameplay.FindAction("Enter", throwIfNotFound: true);
+        m_Gameplay_Cancel = m_Gameplay.FindAction("Cancel", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -752,13 +592,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Escape;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_FireMainWeapon;
-    private readonly InputAction m_Gameplay_FireLeftInnerWeapon;
-    private readonly InputAction m_Gameplay_FireLeftOuterWeapon;
-    private readonly InputAction m_Gameplay_FireRightInnerWeapon;
-    private readonly InputAction m_Gameplay_FireRightOuterWeapon;
-    private readonly InputAction m_Gameplay_Reload;
-    private readonly InputAction m_Gameplay_Dodge;
-    private readonly InputAction m_Gameplay_Heal;
+    private readonly InputAction m_Gameplay_Enter;
+    private readonly InputAction m_Gameplay_Cancel;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -787,33 +622,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @FireMainWeapon => m_Wrapper.m_Gameplay_FireMainWeapon;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/FireLeftInnerWeapon".
+        /// Provides access to the underlying input action "Gameplay/Enter".
         /// </summary>
-        public InputAction @FireLeftInnerWeapon => m_Wrapper.m_Gameplay_FireLeftInnerWeapon;
+        public InputAction @Enter => m_Wrapper.m_Gameplay_Enter;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/FireLeftOuterWeapon".
+        /// Provides access to the underlying input action "Gameplay/Cancel".
         /// </summary>
-        public InputAction @FireLeftOuterWeapon => m_Wrapper.m_Gameplay_FireLeftOuterWeapon;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/FireRightInnerWeapon".
-        /// </summary>
-        public InputAction @FireRightInnerWeapon => m_Wrapper.m_Gameplay_FireRightInnerWeapon;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/FireRightOuterWeapon".
-        /// </summary>
-        public InputAction @FireRightOuterWeapon => m_Wrapper.m_Gameplay_FireRightOuterWeapon;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Reload".
-        /// </summary>
-        public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Dodge".
-        /// </summary>
-        public InputAction @Dodge => m_Wrapper.m_Gameplay_Dodge;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Heal".
-        /// </summary>
-        public InputAction @Heal => m_Wrapper.m_Gameplay_Heal;
+        public InputAction @Cancel => m_Wrapper.m_Gameplay_Cancel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -852,27 +667,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FireMainWeapon.started += instance.OnFireMainWeapon;
             @FireMainWeapon.performed += instance.OnFireMainWeapon;
             @FireMainWeapon.canceled += instance.OnFireMainWeapon;
-            @FireLeftInnerWeapon.started += instance.OnFireLeftInnerWeapon;
-            @FireLeftInnerWeapon.performed += instance.OnFireLeftInnerWeapon;
-            @FireLeftInnerWeapon.canceled += instance.OnFireLeftInnerWeapon;
-            @FireLeftOuterWeapon.started += instance.OnFireLeftOuterWeapon;
-            @FireLeftOuterWeapon.performed += instance.OnFireLeftOuterWeapon;
-            @FireLeftOuterWeapon.canceled += instance.OnFireLeftOuterWeapon;
-            @FireRightInnerWeapon.started += instance.OnFireRightInnerWeapon;
-            @FireRightInnerWeapon.performed += instance.OnFireRightInnerWeapon;
-            @FireRightInnerWeapon.canceled += instance.OnFireRightInnerWeapon;
-            @FireRightOuterWeapon.started += instance.OnFireRightOuterWeapon;
-            @FireRightOuterWeapon.performed += instance.OnFireRightOuterWeapon;
-            @FireRightOuterWeapon.canceled += instance.OnFireRightOuterWeapon;
-            @Reload.started += instance.OnReload;
-            @Reload.performed += instance.OnReload;
-            @Reload.canceled += instance.OnReload;
-            @Dodge.started += instance.OnDodge;
-            @Dodge.performed += instance.OnDodge;
-            @Dodge.canceled += instance.OnDodge;
-            @Heal.started += instance.OnHeal;
-            @Heal.performed += instance.OnHeal;
-            @Heal.canceled += instance.OnHeal;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         /// <summary>
@@ -896,27 +696,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FireMainWeapon.started -= instance.OnFireMainWeapon;
             @FireMainWeapon.performed -= instance.OnFireMainWeapon;
             @FireMainWeapon.canceled -= instance.OnFireMainWeapon;
-            @FireLeftInnerWeapon.started -= instance.OnFireLeftInnerWeapon;
-            @FireLeftInnerWeapon.performed -= instance.OnFireLeftInnerWeapon;
-            @FireLeftInnerWeapon.canceled -= instance.OnFireLeftInnerWeapon;
-            @FireLeftOuterWeapon.started -= instance.OnFireLeftOuterWeapon;
-            @FireLeftOuterWeapon.performed -= instance.OnFireLeftOuterWeapon;
-            @FireLeftOuterWeapon.canceled -= instance.OnFireLeftOuterWeapon;
-            @FireRightInnerWeapon.started -= instance.OnFireRightInnerWeapon;
-            @FireRightInnerWeapon.performed -= instance.OnFireRightInnerWeapon;
-            @FireRightInnerWeapon.canceled -= instance.OnFireRightInnerWeapon;
-            @FireRightOuterWeapon.started -= instance.OnFireRightOuterWeapon;
-            @FireRightOuterWeapon.performed -= instance.OnFireRightOuterWeapon;
-            @FireRightOuterWeapon.canceled -= instance.OnFireRightOuterWeapon;
-            @Reload.started -= instance.OnReload;
-            @Reload.performed -= instance.OnReload;
-            @Reload.canceled -= instance.OnReload;
-            @Dodge.started -= instance.OnDodge;
-            @Dodge.performed -= instance.OnDodge;
-            @Dodge.canceled -= instance.OnDodge;
-            @Heal.started -= instance.OnHeal;
-            @Heal.performed -= instance.OnHeal;
-            @Heal.canceled -= instance.OnHeal;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         /// <summary>
@@ -1051,53 +836,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFireMainWeapon(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "FireLeftInnerWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Enter" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFireLeftInnerWeapon(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "FireLeftOuterWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFireLeftOuterWeapon(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "FireRightInnerWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFireRightInnerWeapon(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "FireRightOuterWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFireRightOuterWeapon(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Reload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnReload(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Dodge" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDodge(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Heal" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHeal(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

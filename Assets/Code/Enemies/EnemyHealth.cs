@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -7,7 +7,6 @@ public class EnemyHealth : MonoBehaviour
     [Header("STATS")]
     [SerializeField] private float health = 50;
     [SerializeField] private float collisionDamage = 100;
-
 
     [Header("DEATH")]
     [SerializeField] private GameObject explosionPrefab;
@@ -19,6 +18,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject damageNumberPrefab;
     private Collider2D enemyCollider;
     private bool isDead = false;
+
+    [Header("RESOURCE DROPS")]
+    [SerializeField] private List<ResourceDrop> resourceDrops = new List<ResourceDrop>();
+    [SerializeField] private float dropRadius = 0.1f;
 
 
     private void Start()
@@ -66,8 +69,21 @@ public class EnemyHealth : MonoBehaviour
 
     private void GiveKillRewards()
     {
-        // TODO: Spawn Rewards
+        foreach (ResourceDrop drop in resourceDrops)
+        {
+            if (drop.prefab == null || drop.amount <= 0) continue;
+
+            for (int i = 0; i < drop.amount; i++)
+            {
+                // Random offset within a circle
+                Vector2 offset = Random.insideUnitCircle * dropRadius;
+                Vector3 spawnPos = transform.position + new Vector3(offset.x, offset.y, 0);
+
+                Instantiate(drop.prefab, spawnPos, Quaternion.identity);
+            }
+        }
     }
+
 
 
     private IEnumerator SpawnExplosionsOverTime()
@@ -107,6 +123,7 @@ public class EnemyHealth : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+
 
     public float GetCollisionDamage()
     {

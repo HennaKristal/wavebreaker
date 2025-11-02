@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private InputController inputController;
     private Rigidbody2D rb;
 
+
     private void Start()
     {
         inputController = GameManager.Instance.GetComponent<InputController>();
@@ -26,11 +27,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 inputVector = inputController.Move;
 
-        // Turning (horizontal axis)
         float turnAmount = -inputVector.x * turnSpeed * Time.fixedDeltaTime;
         rb.MoveRotation(rb.rotation + turnAmount);
 
-        // Thrusting (vertical axis)
         float speed = inputVector.y > 0 ? forwardSpeed : backwardSpeed;
         Vector2 forward = transform.up;
         rb.linearVelocity = forward * inputVector.y * speed;

@@ -16,12 +16,12 @@ public class DamageNumber : MonoBehaviour
     [SerializeField] private Color criticalColor = new Color(1f, 1f, 0f);
     [SerializeField] private float criticalMoveDistance = 0.5f;
 
-
     private static Transform canvasParent;
     private TextMeshProUGUI textMesh;
     private Vector3 targetDirection;
     private float fadeDuration;
     private float moveDistance;
+
 
     private void Awake()
     {
@@ -34,6 +34,7 @@ public class DamageNumber : MonoBehaviour
             transform.SetParent(canvasParent, false);
         }
     }
+
 
     public void Initialize(int damage, bool isCritical)
     {
@@ -56,6 +57,7 @@ public class DamageNumber : MonoBehaviour
 
         StartCoroutine(FadeOutAndMove());
     }
+
 
     private IEnumerator FadeOutAndMove()
     {
