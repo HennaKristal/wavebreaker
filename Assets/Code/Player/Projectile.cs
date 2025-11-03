@@ -11,6 +11,12 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if (rb == null)
+        {
+            Destroy(gameObject);
+            Debug.LogWarning("Projectile Prefab did not have rigidbody2D");
+        }
     }
 
 
@@ -25,16 +31,12 @@ public class Projectile : MonoBehaviour
             damage = Mathf.RoundToInt(damage * _criticalDamageMultiplier);
         }
 
-        if (rb != null)
-        {
-            rb.linearVelocity = transform.right * speed;
-        }
+        rb.linearVelocity = transform.right * speed;
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (!collision.CompareTag("Enemy"))
         {
             Destroy(gameObject);

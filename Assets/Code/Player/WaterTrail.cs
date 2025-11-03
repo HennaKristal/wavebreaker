@@ -6,6 +6,7 @@ public class WaterTrail : MonoBehaviour
 {
     [Header("Trail Settings")]
     public int maxLength = 50;
+    public float minDistance = 0.1f;
     public float pointLifetime = 2f;
 
     [Header("Width Settings")]
@@ -41,8 +42,11 @@ public class WaterTrail : MonoBehaviour
     {
         Vector3 currentPos = transform.position;
 
-        points.Enqueue(new TrailPoint(currentPos));
-        lastPos = currentPos;
+        if (Vector3.Distance(currentPos, lastPos) >= minDistance)
+        {
+            points.Enqueue(new TrailPoint(currentPos));
+            lastPos = currentPos;
+        }
 
         // Update lifetime
         foreach (var p in points)

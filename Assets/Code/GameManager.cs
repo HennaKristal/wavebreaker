@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("REFERENCES")]
     [SerializeField] Material damageFlashMaterial;
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private Transform playerTransform;
 
     private static GameManager _instance;
     public static GameManager Instance => _instance ??= FindFirstObjectByType<GameManager>();
@@ -60,6 +62,16 @@ public class GameManager : MonoBehaviour
     public Material GetDamageFlashMaterial()
     {
         return damageFlashMaterial;
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return playerTransform;
+    }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
     }
 
     public void LoadSceneByName(string sceneName) => StartCoroutine(ChangeScene(sceneName));

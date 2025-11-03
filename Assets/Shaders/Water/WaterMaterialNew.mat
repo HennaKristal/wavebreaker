@@ -19,7 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _CurrentWorldTexturePos _MainColour
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -93,13 +93,13 @@ Material:
     - _SpecularSpeed: 0.3
     - _SpecularThreshold: -0.84
     m_Colors:
-    - _CausticColour: {r: 0.45490196, g: 0.77254903, b: 0.7647059, a: 0.12156863}
-    - _CausticHighlightColour: {r: 1, g: 1, b: 1, a: 0.36862746}
+    - _CausticColour: {r: 0.49019608, g: 0.78431374, b: 0.78431374, a: 0.11764706}
+    - _CausticHighlightColour: {r: 0, g: 0.88235295, b: 1, a: 0.49019608}
     - _CurrentWorldTexturePos: {r: 0, g: 0, b: 0, a: 0}
     - _FoamColour: {r: 1, g: 1, b: 1, a: 1}
     - _FoamTexelSize: {r: 0.005, g: 0.005, b: 0, a: 0}
-    - _MainColour: {r: 0.24251999, g: 0.5171283, b: 0.645, a: 0.5254902}
-    - _SpecularColour: {r: 1, g: 1, b: 1, a: 0.87058824}
+    - _MainColour: {r: 0.19607839, g: 0.54901963, b: 0.7058824, a: 0.78431374}
+    - _SpecularColour: {r: 0.78431374, g: 1, b: 1, a: 0.39215687}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1576172767386937083

@@ -1,13 +1,12 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("REFERENCES")]
     // [SerializeField] private Slider healthSlider;
     // [SerializeField] private TextMeshProUGUI healthText;
+    private Rigidbody2D rb;
 
     [Header("Stats")]
     [SerializeField] private float maxHealth = 100;
@@ -31,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
 
 
         //healthSlider = GameObject.Find("Health Bar").GetComponent<Slider>();
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
+            rb.simulated = false;
             audioSource.PlayOneShot(DieSound);
             StartCoroutine(SpawnExplosionsOverTime());
             Invoke(nameof(GameOver), 1.5f);
