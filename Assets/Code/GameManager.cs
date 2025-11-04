@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [Header("REFERENCES")]
-    [SerializeField] Material damageFlashMaterial;
+    [SerializeField] Material playerDamageFlashMaterial;
+    [SerializeField] Material enemyDamageFlashMaterial;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Transform playerTransform;
 
@@ -59,9 +60,14 @@ public class GameManager : MonoBehaviour
         return inputController;
     }
 
-    public Material GetDamageFlashMaterial()
+    public Material GetPlayerDamageFlashMaterial()
     {
-        return damageFlashMaterial;
+        return playerDamageFlashMaterial;
+    }
+
+    public Material GetEnemyDamageFlashMaterial()
+    {
+        return enemyDamageFlashMaterial;
     }
 
     public Transform GetPlayerTransform()

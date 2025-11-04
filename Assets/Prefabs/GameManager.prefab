@@ -47,7 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51e9deaa6be9d3468c1ecb50ef99f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  damageFlashMaterial: {fileID: 2100000, guid: 1a6fe496c968baa4492a26f962a0fee9, type: 2}
+  playerDamageFlashMaterial: {fileID: 2100000, guid: 1a6fe496c968baa4492a26f962a0fee9, type: 2}
+  enemyDamageFlashMaterial: {fileID: 2100000, guid: e78259e275f10444fa989985d092f023, type: 2}
+  inventory: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!114 &7618543026772377543
 MonoBehaviour:
   m_ObjectHideFlags: 0

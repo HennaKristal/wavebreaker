@@ -7,19 +7,21 @@ public class PlayerController : MonoBehaviour
     // [SerializeField] private Slider healthSlider;
     // [SerializeField] private TextMeshProUGUI healthText;
     private Rigidbody2D rb;
+    [SerializeField] private GameObject damageNumberPrefab;
 
     [Header("Stats")]
     [SerializeField] private float maxHealth = 100;
-    private float currentHealth;
+    [SerializeField] private float collisionDamage = 100;
+    [SerializeField] private float currentHealth;
     private bool isDead = false;
-    private float collisionDamage = 100;
 
     [Header("Damage Handling")]
-    [SerializeField] private float damageImmunityDuration = 1f;
     [SerializeField] private GameObject explosionPrefab;
-    private bool isInvincible = false;
     private SpriteRenderer sr;
     private Material defaultMaterial;
+    private Material flashMaterial;
+    private float collisionDamageImmunityDuration = 1f;
+    private bool collisionDamageImmunity = false;
 
     [Header("Audio")]
     [SerializeField] private AudioClip takeDamageSound;
@@ -32,19 +34,16 @@ public class PlayerController : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
 
+        currentHealth = maxHealth;
 
         //healthSlider = GameObject.Find("Health Bar").GetComponent<Slider>();
         //healthText = GameObject.Find("Health Bar Text").GetComponent<TextMeshProUGUI>();
-
-
-        currentHealth = maxHealth;
-
-
         //healthSlider.maxValue = maxHealth;
         //healthSlider.value = currentHealth;
 
         sr = GetComponent<SpriteRenderer>();
         defaultMaterial = sr.material;
+        flashMaterial = GameManager.Instance.GetPlayerDamageFlashMaterial();
 
         UpdateHealthUI();
     }
@@ -56,16 +55,21 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     public void TakeDamage(float damage)
     {
-        if (isInvincible || isDead) return;
+        if (isDead) return;
 
         audioSource.PlayOneShot(takeDamageSound);
 
         float healthBeforeDamage = currentHealth;
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
+
+        if (damageNumberPrefab != null)
+        {
+            GameObject damageNumber = Instantiate(damageNumberPrefab, transform.position, Quaternion.identity);
+            damageNumber.GetComponent<DamageNumber>().Initialize((int)damage, false);
+        }
 
         if (currentHealth <= 0)
         {
@@ -78,7 +82,15 @@ public class PlayerController : MonoBehaviour
 
         UpdateHealthUI();
 
-        StartCoroutine(DamageFlashCoroutine());
+        sr.material = flashMaterial;
+        StartCoroutine(RevertDamageFlash());
+    }
+
+
+    private IEnumerator RevertDamageFlash()
+    {
+        yield return new WaitForSeconds(0.2f);
+        sr.material = defaultMaterial;
     }
 
 
@@ -119,35 +131,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void GameOver()
-    {
-        /// TODO: restart game / reload scene / show end result
-    }
-
-
-    private IEnumerator DamageFlashCoroutine()
-    {
-        isInvincible = true;
-        float flashDuration = damageImmunityDuration;
-        float flashRate = 0.1f;
-        float elapsed = 0f;
-
-        Material flashMaterial = GameManager.Instance.GetDamageFlashMaterial();
-
-        while (elapsed < flashDuration)
-        {
-            sr.material = flashMaterial;
-            yield return new WaitForSeconds(flashRate / 2f);
-            sr.material = defaultMaterial;
-            yield return new WaitForSeconds(flashRate / 2f);
-            elapsed += flashRate;
-        }
-
-        sr.material = defaultMaterial;
-        isInvincible = false;
-    }
-
-
     private void UpdateHealthUI()
     {
         //healthSlider.value = currentHealth;
@@ -157,7 +140,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleEnemyCollision(GameObject enemyObject)
     {
-        if (isInvincible || isDead) return;
+        if (collisionDamageImmunity || isDead) { return; }
+
+        collisionDamageImmunity = true;
+        Invoke(nameof(CancelCollisionImmunity), collisionDamageImmunityDuration);
 
         var enemyHealth = enemyObject.GetComponent<EnemyHealth>();
 
@@ -169,13 +155,19 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void CancelCollisionImmunity()
+    {
+        collisionDamageImmunity = false;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isInvincible = false;
-
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            CancelInvoke(nameof(CancelCollisionImmunity));
+            collisionDamageImmunity = false;
+
             HandleEnemyCollision(collision.gameObject);
         }
     }
@@ -183,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !collisionDamageImmunity)
         {
             HandleEnemyCollision(collision.gameObject);
         }
@@ -192,10 +184,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        isInvincible = false;
-
         if (other.CompareTag("Enemy"))
         {
+            CancelInvoke(nameof(CancelCollisionImmunity));
+            collisionDamageImmunity = false;
+
             HandleEnemyCollision(other.gameObject);
         }
     }
@@ -203,9 +196,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && !collisionDamageImmunity)
         {
             HandleEnemyCollision(other.gameObject);
         }
+    }
+
+
+    private void GameOver()
+    {
+        /// TODO: restart game / reload scene / show end result
     }
 }

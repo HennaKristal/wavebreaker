@@ -8,6 +8,7 @@ public class WaterTrail : MonoBehaviour
     public int maxLength = 50;
     public float minDistance = 0.1f;
     public float pointLifetime = 2f;
+    public SpriteRenderer waterRippleRenderer;
 
     [Header("Width Settings")]
     public float minWidth = 0.35f;
@@ -60,7 +61,14 @@ public class WaterTrail : MonoBehaviour
             points.Dequeue();
 
         if (points.Count == 0)
+        {
+            waterRippleRenderer.enabled = true;
             return;
+        }
+        else if (waterRippleRenderer.enabled)
+        {
+            waterRippleRenderer.enabled = false;
+        }
 
         var array = System.Array.ConvertAll(points.ToArray(), p => p.position);
         lineRenderer.positionCount = array.Length;

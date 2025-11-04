@@ -23,24 +23,32 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private List<ResourceDrop> resourceDrops = new List<ResourceDrop>();
     [SerializeField] private float dropRadius = 0.1f;
 
+    private SpriteRenderer sr;
+    private Material defaultMaterial;
+    private Material flashMaterial;
+
 
     private void Start()
     {
         enemyCollider = GetComponent<Collider2D>();
+
+        sr = GetComponent<SpriteRenderer>();
+        defaultMaterial = sr.material;
+        flashMaterial = GameManager.Instance.GetEnemyDamageFlashMaterial();
     }
 
 
-    public void TakeDamage(float damageAmount, bool isCritical)
+    public void TakeDamage(float damage, bool isCritical)
     {
         if (isDead) { return; }
 
-        damageAmount = Mathf.Round(damageAmount);
-        health -= damageAmount;
+        damage = Mathf.Round(damage);
+        health -= damage;
 
         if (damageNumberPrefab != null)
         {
             GameObject damageNumber = Instantiate(damageNumberPrefab, transform.position, Quaternion.identity);
-            damageNumber.GetComponent<DamageNumber>().Initialize((int)damageAmount, isCritical);
+            damageNumber.GetComponent<DamageNumber>().Initialize((int)damage, isCritical);
         }
 
         if (health <= 0 && !isDead)
@@ -64,6 +72,16 @@ public class EnemyHealth : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        sr.material = flashMaterial;
+        StartCoroutine(RevertDamageFlash());
+    }
+
+
+    private IEnumerator RevertDamageFlash()
+    {
+        yield return new WaitForSeconds(0.2f);
+        sr.material = defaultMaterial;
     }
 
 

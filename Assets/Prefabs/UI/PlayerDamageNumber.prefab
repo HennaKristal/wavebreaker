@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1794955369388583511}
   - component: {fileID: 2516962827475835107}
   m_Layer: 5
-  m_Name: DamageNumber
+  m_Name: PlayerDamageNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,13 +59,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageNumber
   normalDuration: 1
-  normalFontSize: 0.3
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  normalFontSize: 0.15
+  normalColor: {r: 1, g: 0, b: 0, a: 1}
   normalMoveDistance: 0.3
-  criticalDuration: 1.5
-  criticalFontSize: 0.4
-  criticalColor: {r: 1, g: 1, b: 0, a: 1}
-  criticalMoveDistance: 0.2
+  criticalDuration: 1
+  criticalFontSize: 0.15
+  criticalColor: {r: 1, g: 0, b: 0, a: 1}
+  criticalMoveDistance: 0.3
 --- !u!114 &2516962827475835107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 571260c8165c7a34e80414b203dc8b91, type: 2}
   m_sharedMaterial: {fileID: 1880609878249667154, guid: 571260c8165c7a34e80414b203dc8b91, type: 2}
@@ -113,8 +113,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
-  m_fontSizeBase: 0.3
+  m_fontSize: 0.15
+  m_fontSizeBase: 0.15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
