@@ -30,7 +30,7 @@ public class Mine : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
-                var enemy = hit.GetComponent<EnemyHealth>();
+                var enemy = hit.GetComponent<EnemyHealthBase>();
                 enemy?.TakeDamage(damage, false);
             }
             else if (hit.CompareTag("Player"))

@@ -5,6 +5,7 @@ public class EnemyProjectile : MonoBehaviour
     private Rigidbody2D rb;
     private int damage;
     private float speed;
+    private float lifeDuration = 15f;
 
 
     private void Awake()
@@ -16,6 +17,8 @@ public class EnemyProjectile : MonoBehaviour
             Destroy(gameObject);
             Debug.LogWarning("Enemy Projectile Prefab did not have rigidbody2D");
         }
+
+        Destroy(gameObject, lifeDuration);
     }
 
 

@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
     private int damage;
     private float speed;
     private bool isCritical = false;
+    private float lifeDuration = 15f;
 
 
     private void Awake()
@@ -17,6 +18,8 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             Debug.LogWarning("Projectile Prefab did not have rigidbody2D");
         }
+
+        Destroy(gameObject, lifeDuration);
     }
 
 
@@ -43,7 +46,7 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        var enemy = collision.GetComponent<EnemyHealth>();
+        var enemy = collision.GetComponent<EnemyHealthBase>();
         enemy?.TakeDamage(damage, isCritical);
 
         Destroy(gameObject);

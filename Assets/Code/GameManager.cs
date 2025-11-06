@@ -1,6 +1,9 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -10,6 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Material enemyDamageFlashMaterial;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private Light2D globalLight;
+    [SerializeField] private GameObject bossHealthBar;
+    [SerializeField] private Slider bossHealthBarSlider;
+    [SerializeField] private TextMeshProUGUI bossHealthBarText;
 
     private static GameManager _instance;
     public static GameManager Instance => _instance ??= FindFirstObjectByType<GameManager>();
@@ -78,6 +85,26 @@ public class GameManager : MonoBehaviour
     public Inventory GetInventory()
     {
         return inventory;
+    }
+
+    public Light2D GetGlobalLight()
+    {
+        return globalLight;
+    }
+
+    public GameObject GetBossHealthBar()
+    {
+        return bossHealthBar;
+    }
+
+    public Slider GetBossHealthBarSlider()
+    {
+        return bossHealthBarSlider;
+    }
+
+    public TextMeshProUGUI GetBossHealthBarText()
+    {
+        return bossHealthBarText;
     }
 
     public void LoadSceneByName(string sceneName) => StartCoroutine(ChangeScene(sceneName));

@@ -5,7 +5,7 @@ public class Resource : MonoBehaviour
     private Inventory inventory;
     private Transform player;
 
-    private enum ResourceType { Coin, Material }
+    private enum ResourceType { Coin, Wood, Metal }
     [SerializeField] private ResourceType resourceType;
     [SerializeField] private int amount = 1;
 
@@ -44,8 +44,11 @@ public class Resource : MonoBehaviour
                 case ResourceType.Coin:
                     inventory?.AddCoins(amount);
                     break;
-                case ResourceType.Material:
-                    inventory?.AddMaterials(amount);
+                case ResourceType.Wood:
+                    inventory?.AddWood(amount);
+                    break;
+                case ResourceType.Metal:
+                    inventory?.AddMetal(amount);
                     break;
             }
 

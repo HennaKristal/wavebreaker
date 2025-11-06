@@ -1,18 +1,20 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("REFERENCES")]
-    // [SerializeField] private Slider healthSlider;
-    // [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI healthText;
     private Rigidbody2D rb;
     [SerializeField] private GameObject damageNumberPrefab;
 
     [Header("Stats")]
-    [SerializeField] private float maxHealth = 100;
-    [SerializeField] private float collisionDamage = 100;
-    [SerializeField] private float currentHealth;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int collisionDamage = 100;
+    [SerializeField] private int currentHealth;
     private bool isDead = false;
 
     [Header("Damage Handling")]
@@ -35,11 +37,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         currentHealth = maxHealth;
-
-        //healthSlider = GameObject.Find("Health Bar").GetComponent<Slider>();
-        //healthText = GameObject.Find("Health Bar Text").GetComponent<TextMeshProUGUI>();
-        //healthSlider.maxValue = maxHealth;
-        //healthSlider.value = currentHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
 
         sr = GetComponent<SpriteRenderer>();
         defaultMaterial = sr.material;
@@ -55,13 +54,13 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (isDead) return;
 
         audioSource.PlayOneShot(takeDamageSound);
 
-        float healthBeforeDamage = currentHealth;
+        int healthBeforeDamage = currentHealth;
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
@@ -89,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RevertDamageFlash()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         sr.material = defaultMaterial;
     }
 
@@ -98,34 +97,9 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            // Random position within the radius
             Vector2 randomOffset = Random.insideUnitCircle * 0.5f;
             Vector3 spawnPosition = transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
-
-            // Instantiate the explosion
-            GameObject explosion = Instantiate(explosionPrefab, spawnPosition, Quaternion.identity);
-
-            // Try to get the Animator and auto-destroy when animation ends
-            Animator anim = explosion.GetComponent<Animator>();
-            if (anim != null)
-            {
-                // Get the length of the current animation clip (first state)
-                AnimatorClipInfo[] clipInfo = anim.GetCurrentAnimatorClipInfo(0);
-                if (clipInfo.Length > 0)
-                {
-                    float clipLength = clipInfo[0].clip.length;
-                    Destroy(explosion, clipLength);
-                }
-                else
-                {
-                    Destroy(explosion, 2f);
-                }
-            }
-            else
-            {
-                Destroy(explosion, 2f);
-            }
-
+            Instantiate(explosionPrefab, spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(0.25f);
         }
     }
@@ -133,8 +107,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-        //healthSlider.value = currentHealth;
-        //healthText.text = Mathf.Ceil(currentHealth).ToString();
+        healthSlider.value = currentHealth;
+        healthText.text = Mathf.Ceil(currentHealth).ToString() + " / " + maxHealth.ToString();
     }
 
 
@@ -145,7 +119,7 @@ public class PlayerController : MonoBehaviour
         collisionDamageImmunity = true;
         Invoke(nameof(CancelCollisionImmunity), collisionDamageImmunityDuration);
 
-        var enemyHealth = enemyObject.GetComponent<EnemyHealth>();
+        var enemyHealth = enemyObject.GetComponent<EnemyHealthBase>();
 
         if (enemyHealth != null)
         {
