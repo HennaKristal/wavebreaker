@@ -50,6 +50,13 @@ public class BossSubmarineAI : MonoBehaviour
     private void Update()
     {
         RotateGunsTowardPlayer();
+
+        if (enemyHealthBase.isDead)
+        {
+            CancelInvoke(nameof(Attack));
+            CancelInvoke(nameof(Submerge));
+            CancelInvoke(nameof(Ascend));
+        }
     }
 
 
@@ -177,7 +184,7 @@ public class BossSubmarineAI : MonoBehaviour
 
     private void RotateGunsTowardPlayer()
     {
-        if (playerTransform == null) return;
+        if (playerTransform == null && !enemyHealthBase.isDead) return;
 
         // Rear gun always tracks player
         Vector3 direction = playerTransform.position - rearGunTransform.position;

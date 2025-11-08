@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretRotate
   rotationSpeed: 100
+  mouseSwitchThreshold: 20
+  controllerSwitchThreshold: 0.25
 --- !u!114 &3927014047963737595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd7e84dbc8fc064ba03908296ee535e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretShoot
-  projectilePrefab: {fileID: 2281899783889647532, guid: 926cef8555cf99743b23fc7466a45987, type: 3}
+  projectilePrefab: {fileID: 7327395685562055106, guid: bea1a60755ba70b49975cfce3a568725, type: 3}
   firePoint: {fileID: 3179576003873511629}
-  fireRate: 0.5
+  fireRate: 0.25
   projectileSpeed: 5
   minDamage: 5
   maxDamage: 8

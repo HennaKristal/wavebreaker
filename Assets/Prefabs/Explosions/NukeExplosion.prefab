@@ -69,7 +69,7 @@ MonoBehaviour:
   midLightIntensity: 25
   globalLightDimmingEnabled: 1
   globalLightStartIntensity: 1
-  globalLightDimIntensity: 0
+  globalLightDimIntensity: 0.1
   globalLightDimDuration: 1
   globalLightStayDimmedTime: 1
 --- !u!212 &4090363095144858691

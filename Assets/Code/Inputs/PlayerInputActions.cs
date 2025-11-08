@@ -120,6 +120,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""RotateGuns"",
+                    ""type"": ""Value"",
+                    ""id"": ""a6f40e98-82ac-4ef5-9e62-c0c337afb997"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""FireMainWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""38b990ef-b7c7-43b4-bb97-320bbc67045b"",
@@ -161,17 +170,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""76aee44a-6171-4bc0-b9ec-147254912c3d"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Screenshot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""39379a3f-3ed2-4960-ad42-f0f04b184db7"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -185,6 +183,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""54efb25f-c03c-4b4a-abc1-a046f4edb937"",
                     ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99f2a8ec-b0e5-4944-bc5d-ce04b08256c5"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -358,6 +367,61 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""GamepadRightStick"",
+                    ""id"": ""2cb44853-9ca4-41b9-a639-c0269948b43a"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateGuns"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2f7f9763-efed-47d4-9009-d4dc5e4235af"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""RotateGuns"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""86172a4b-7459-430f-8f57-5c4db13750b5"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""RotateGuns"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""357dca17-65ee-498f-83d0-540b823b8517"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""RotateGuns"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""528a4607-cfdb-4d8e-aee0-60a79f9dc106"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""RotateGuns"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""f9152241-3ab7-4df5-a46e-2bd40100a594"",
                     ""path"": ""<Mouse>/leftButton"",
@@ -370,19 +434,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a33c1a94-8bc6-4375-ba4d-c283f09dc032"",
-                    ""path"": ""<Keyboard>/numpad0"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""FireMainWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4046f330-de3c-4f30-9bda-8c737621744e"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -505,6 +558,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_Screenshot = m_Gameplay.FindAction("Screenshot", throwIfNotFound: true);
         m_Gameplay_Escape = m_Gameplay.FindAction("Escape", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_RotateGuns = m_Gameplay.FindAction("RotateGuns", throwIfNotFound: true);
         m_Gameplay_FireMainWeapon = m_Gameplay.FindAction("FireMainWeapon", throwIfNotFound: true);
         m_Gameplay_Enter = m_Gameplay.FindAction("Enter", throwIfNotFound: true);
         m_Gameplay_Cancel = m_Gameplay.FindAction("Cancel", throwIfNotFound: true);
@@ -591,6 +645,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Screenshot;
     private readonly InputAction m_Gameplay_Escape;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_RotateGuns;
     private readonly InputAction m_Gameplay_FireMainWeapon;
     private readonly InputAction m_Gameplay_Enter;
     private readonly InputAction m_Gameplay_Cancel;
@@ -617,6 +672,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/RotateGuns".
+        /// </summary>
+        public InputAction @RotateGuns => m_Wrapper.m_Gameplay_RotateGuns;
         /// <summary>
         /// Provides access to the underlying input action "Gameplay/FireMainWeapon".
         /// </summary>
@@ -664,6 +723,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @RotateGuns.started += instance.OnRotateGuns;
+            @RotateGuns.performed += instance.OnRotateGuns;
+            @RotateGuns.canceled += instance.OnRotateGuns;
             @FireMainWeapon.started += instance.OnFireMainWeapon;
             @FireMainWeapon.performed += instance.OnFireMainWeapon;
             @FireMainWeapon.canceled += instance.OnFireMainWeapon;
@@ -693,6 +755,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @RotateGuns.started -= instance.OnRotateGuns;
+            @RotateGuns.performed -= instance.OnRotateGuns;
+            @RotateGuns.canceled -= instance.OnRotateGuns;
             @FireMainWeapon.started -= instance.OnFireMainWeapon;
             @FireMainWeapon.performed -= instance.OnFireMainWeapon;
             @FireMainWeapon.canceled -= instance.OnFireMainWeapon;
@@ -828,6 +893,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "RotateGuns" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateGuns(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "FireMainWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

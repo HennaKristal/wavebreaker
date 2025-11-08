@@ -18,7 +18,7 @@ public abstract class EnemyHealthBase : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] protected GameObject damageNumberPrefab;
     protected Collider2D enemyCollider;
-    protected bool isDead = false;
+    public bool isDead = false;
 
     [Header("RESOURCE DROPS")]
     [SerializeField] protected List<ResourceDrop> resourceDrops = new List<ResourceDrop>();

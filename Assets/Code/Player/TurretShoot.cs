@@ -16,6 +16,7 @@ public class TurretShoot : MonoBehaviour
     [SerializeField] private float criticalChance = 10f;
     [SerializeField] private float criticalMultiplier = 2f;
     private float fireTimer;
+    public bool isShooting = false;
 
 
     private void Start()
@@ -25,11 +26,12 @@ public class TurretShoot : MonoBehaviour
 
     private void Update()
     {
+        isShooting = (inputController.MainWeaponHeld);
         fireTimer += Time.deltaTime;
 
         if (fireTimer >= fireRate)
         {
-            if (inputController.MainWeaponPressed || inputController.MainWeaponHeld)
+            if (isShooting)
             {
                 Fire();
                 fireTimer = 0f;

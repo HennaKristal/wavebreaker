@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
 
     public Vector2 Move { get; private set; }
+    public Vector2 RotateGuns { get; private set; }
 
     public bool EscapePressed { get; private set; }
     public bool EscapeReleased { get; private set; }
@@ -53,6 +53,8 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         Move = PlayerInputActions.Gameplay.Move.ReadValue<Vector2>();
+
+        RotateGuns = PlayerInputActions.Gameplay.RotateGuns.ReadValue<Vector2>();
 
         EscapePressed = PlayerInputActions.Gameplay.Escape.WasPressedThisFrame();
         EscapeReleased = PlayerInputActions.Gameplay.Escape.WasReleasedThisFrame();
