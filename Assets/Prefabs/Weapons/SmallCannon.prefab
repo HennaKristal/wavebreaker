@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretRotate
   rotationSpeed: 100
+  rotationSpeedMultiplierWhileShooting: 0.66
   mouseSwitchThreshold: 20
   controllerSwitchThreshold: 0.25
 --- !u!114 &3927014047963737595
@@ -159,3 +160,4 @@ MonoBehaviour:
   maxDamage: 8
   criticalChance: 15
   criticalMultiplier: 2.25
+  isShooting: 0
