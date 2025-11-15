@@ -6,7 +6,6 @@ public class TurretShoot : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
-    private InputController inputController;
 
     [Header("STATS")]
     [SerializeField] private float fireRate = 0.5f;
@@ -19,14 +18,9 @@ public class TurretShoot : MonoBehaviour
     public bool isShooting = false;
 
 
-    private void Start()
-    {
-        inputController = GameManager.Instance.GetComponent<InputController>();
-    }
-
     private void Update()
     {
-        isShooting = (inputController.MainWeaponHeld);
+        isShooting = (InputController.Instance.MainWeaponHeld);
         fireTimer += Time.deltaTime;
 
         if (fireTimer >= fireRate)

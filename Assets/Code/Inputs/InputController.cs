@@ -2,78 +2,56 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    private static InputController _instance;
+    public static InputController Instance => _instance;
+
     private PlayerInputActions playerInputActions;
+    private PlayerInputActions.GameplayActions gameplayInputs;
 
     public Vector2 Move { get; private set; }
     public Vector2 RotateGuns { get; private set; }
-
-    public bool EscapePressed { get; private set; }
-    public bool EscapeReleased { get; private set; }
-    public bool EscapeHeld { get; private set; }
-
+    public bool PausePressed { get; private set; }
     public bool ScreenshotPressed { get; private set; }
-    public bool ScreenshotReleased { get; private set; }
-    public bool ScreenshotHeld { get; private set; }
-
     public bool MainWeaponPressed { get; private set; }
-    public bool MainWeaponReleased { get; private set; }
     public bool MainWeaponHeld { get; private set; }
-
     public bool EnterPressed { get; private set; }
-    public bool EnterReleased { get; private set; }
-    public bool EnterHeld { get; private set; }
-
     public bool CancelPressed { get; private set; }
-    public bool CancelReleased { get; private set; }
-    public bool CancelHeld { get; private set; }
 
-    private PlayerInputActions PlayerInputActions
+
+    private void Awake()
     {
-        get
+        if (_instance != null && _instance != this)
         {
-            if (playerInputActions == null)
-            {
-                playerInputActions = new PlayerInputActions();
-            }
-
-            return playerInputActions;
+            Destroy(gameObject);
+            return;
         }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        playerInputActions = new PlayerInputActions();
+        gameplayInputs = playerInputActions.Gameplay;
     }
 
     private void OnEnable()
     {
-        PlayerInputActions.Enable();
+        playerInputActions.Enable();
     }
 
     private void OnDisable()
     {
-        PlayerInputActions.Disable();
+        playerInputActions.Disable();
     }
 
     private void Update()
     {
-        Move = PlayerInputActions.Gameplay.Move.ReadValue<Vector2>();
-
-        RotateGuns = PlayerInputActions.Gameplay.RotateGuns.ReadValue<Vector2>();
-
-        EscapePressed = PlayerInputActions.Gameplay.Escape.WasPressedThisFrame();
-        EscapeReleased = PlayerInputActions.Gameplay.Escape.WasReleasedThisFrame();
-        EscapeHeld = PlayerInputActions.Gameplay.Escape.IsPressed();
-
-        ScreenshotPressed = PlayerInputActions.Gameplay.Screenshot.WasPressedThisFrame();
-        ScreenshotReleased = PlayerInputActions.Gameplay.Screenshot.WasReleasedThisFrame();
-        ScreenshotHeld = PlayerInputActions.Gameplay.Screenshot.IsPressed();
-
-        MainWeaponPressed = PlayerInputActions.Gameplay.FireMainWeapon.WasPressedThisFrame();
-        MainWeaponReleased = PlayerInputActions.Gameplay.FireMainWeapon.WasReleasedThisFrame();
-        MainWeaponHeld = PlayerInputActions.Gameplay.FireMainWeapon.IsPressed();
-
-        EnterPressed = PlayerInputActions.Gameplay.Enter.WasPressedThisFrame();
-        EnterReleased = PlayerInputActions.Gameplay.Enter.WasReleasedThisFrame();
-        EnterHeld = PlayerInputActions.Gameplay.Enter.IsPressed();
-
-        CancelPressed = PlayerInputActions.Gameplay.Cancel.WasPressedThisFrame();
-        CancelReleased = PlayerInputActions.Gameplay.Cancel.WasReleasedThisFrame();
-        CancelHeld = PlayerInputActions.Gameplay.Cancel.IsPressed();
+        Move = gameplayInputs.Move.ReadValue<Vector2>();
+        RotateGuns = gameplayInputs.RotateGuns.ReadValue<Vector2>();
+        PausePressed = gameplayInputs.Pause.WasPressedThisFrame();
+        ScreenshotPressed = gameplayInputs.Screenshot.WasPressedThisFrame();
+        MainWeaponPressed = gameplayInputs.FireMainWeapon.WasPressedThisFrame();
+        MainWeaponHeld = gameplayInputs.FireMainWeapon.IsPressed();
+        EnterPressed = gameplayInputs.Enter.WasPressedThisFrame();
+        CancelPressed = gameplayInputs.Cancel.WasPressedThisFrame();
     }
 }

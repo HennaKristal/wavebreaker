@@ -16,18 +16,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Escape",
-                    "type": "Button",
-                    "id": "a63ed9d5-0f42-4d8e-87da-c56775683866",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "38d1b7cb-f649-4f71-8996-d5c72265e55d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Pause",
+                    "type": "Value",
+                    "id": "0bea9a9e-972f-4859-904a-2d38c0d9c73d",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -84,34 +84,12 @@
                 },
                 {
                     "name": "",
-                    "id": "39379a3f-3ed2-4960-ad42-f0f04b184db7",
+                    "id": "b53163bb-901f-428b-920c-46424352c24b",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "54efb25f-c03c-4b4a-abc1-a046f4edb937",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "99f2a8ec-b0e5-4944-bc5d-ce04b08256c5",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Escape",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -360,6 +338,28 @@
                 {
                     "name": "",
                     "id": "8db35fb5-54dd-41bb-bed6-f9575b0a562c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8cdfdc79-60e8-4f97-b242-655092fdf981",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0b1c529-c371-4993-8a0b-02660af985cb",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
@@ -382,6 +382,17 @@
                 {
                     "name": "",
                     "id": "468e8796-bd6e-43e9-9590-9b3ab5241aa5",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83bc6634-d2ea-46e1-b375-59c923222fc1",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
@@ -393,7 +404,7 @@
                 {
                     "name": "",
                     "id": "e7f38612-d561-44e2-bdfe-fd304cd027d1",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",

@@ -8,7 +8,6 @@ public class TurretRotate : MonoBehaviour
     [SerializeField] private float controllerSwitchThreshold = 0.25f;
 
     private Camera mainCamera;
-    private InputController inputController;
     private TurretShoot turretShoot;
 
     private enum InputMethod { Mouse, Controller }
@@ -22,14 +21,13 @@ public class TurretRotate : MonoBehaviour
     {
         turretShoot = GetComponent<TurretShoot>();
         mainCamera = Camera.main;
-        inputController = GameManager.Instance.GetComponent<InputController>();
         lastMousePos = Input.mousePosition;
     }
 
 
     private void Update()
     {
-        controllerInput = inputController.RotateGuns;
+        controllerInput = InputController.Instance.RotateGuns;
         currentMousePos = Input.mousePosition;
 
         DetectInputMethod();
