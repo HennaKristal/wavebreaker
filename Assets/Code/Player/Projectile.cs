@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     private int damage;
     private float speed;
     private bool isCritical = false;
-    private float lifeDuration = 15f;
+    [SerializeField] private float lifeDuration = 8f;
 
 
     private void Awake()

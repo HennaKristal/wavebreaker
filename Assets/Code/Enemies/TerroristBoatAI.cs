@@ -20,30 +20,73 @@ public class TerroristBoatAI : MonoBehaviour
     [SerializeField] private int minDamage = 5;
     [SerializeField] private int maxDamage = 10;
 
-    private Transform playerTransform;
     private Rigidbody2D rb;
     private enum State { Approaching, Strafing }
     private State currentState;
     private float fireTimer;
 
+    [SerializeField] private Transform currentTarget;
+    [SerializeField] private float targetRefreshRate = 5f;
+    private float targetTimer;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerTransform = GameManager.Instance.GetPlayerTransform();
+        SelectNewTarget();
+        idealRange = Random.Range(idealRange - 1f, idealRange + 1f);
     }
+
+    private void SelectNewTarget()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+
+        Transform closest = null;
+        float closestDist = Mathf.Infinity;
+
+        void CheckTargets(GameObject[] arr)
+        {
+            foreach (var obj in arr)
+            {
+                float d = Vector2.Distance(transform.position, obj.transform.position);
+                if (d < closestDist)
+                {
+                    closestDist = d;
+                    closest = obj.transform;
+                }
+            }
+        }
+
+        CheckTargets(players);
+        CheckTargets(allies);
+
+        currentTarget = closest;
+    }
+
 
     private void FixedUpdate()
     {
-        if (playerTransform == null) { return; }
+        if (currentTarget == null)
+        {
+            SelectNewTarget();
+            return;
+        }
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        targetTimer += Time.fixedDeltaTime;
+        if (targetTimer >= targetRefreshRate)
+        {
+            SelectNewTarget();
+            targetTimer = 0f;
+        }
 
-        if (currentState == State.Approaching && distanceToPlayer <= idealRange)
+        float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
+
+        if (currentState == State.Approaching && distanceToTarget <= idealRange)
         {
             currentState = State.Strafing;
         }
-        else if (currentState == State.Strafing && distanceToPlayer > idealRange + rangeBuffer)
+        else if (currentState == State.Strafing && distanceToTarget > idealRange + rangeBuffer)
         {
             currentState = State.Approaching;
         }
@@ -51,31 +94,31 @@ public class TerroristBoatAI : MonoBehaviour
         switch (currentState)
         {
             case State.Approaching:
-                MoveTowardPlayer();
+                MoveTowardTarget();
                 break;
             case State.Strafing:
-                StrafeAroundPlayer();
-                RotateGunTowardPlayer();
+                StrafeAroundTarget();
+                RotateGunTowardTarget();
                 HandleShooting();
                 break;
         }
     }
 
-    private void MoveTowardPlayer()
+    private void MoveTowardTarget()
     {
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        Vector2 direction = (currentTarget.position - transform.position).normalized;
 
-        float angleToPlayer = Vector2.SignedAngle(transform.up, direction);
-        float rotationStep = Mathf.Clamp(angleToPlayer, -turnSpeed * Time.fixedDeltaTime, turnSpeed * Time.fixedDeltaTime);
+        float angleToTarget = Vector2.SignedAngle(transform.up, direction);
+        float rotationStep = Mathf.Clamp(angleToTarget, -turnSpeed * Time.fixedDeltaTime, turnSpeed * Time.fixedDeltaTime);
 
         rb.MoveRotation(rb.rotation + rotationStep);
         rb.linearVelocity = transform.up * approachSpeed;
     }
 
-    private void StrafeAroundPlayer()
+    private void StrafeAroundTarget()
     {
-        Vector2 vectorToPlayer = (playerTransform.position - transform.position).normalized;
-        Vector2 strafeDirection = Vector2.Perpendicular(vectorToPlayer);
+        Vector2 vectorToTarget = (currentTarget.position - transform.position).normalized;
+        Vector2 strafeDirection = Vector2.Perpendicular(vectorToTarget);
 
         float angleToStrafe = Vector2.SignedAngle(transform.up, strafeDirection);
         float rotationStep = Mathf.Clamp(angleToStrafe, -turnSpeed * Time.fixedDeltaTime, turnSpeed * Time.fixedDeltaTime);
@@ -84,11 +127,11 @@ public class TerroristBoatAI : MonoBehaviour
         rb.linearVelocity = transform.up * strafeSpeed;
     }
 
-    private void RotateGunTowardPlayer()
+    private void RotateGunTowardTarget()
     {
-        if (gunTransform == null || playerTransform == null) { return; }
+        if (gunTransform == null || currentTarget == null) { return; }
 
-        Vector3 direction = playerTransform.position - gunTransform.position;
+        Vector3 direction = currentTarget.position - gunTransform.position;
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float currentAngle = gunTransform.eulerAngles.z;
@@ -99,7 +142,7 @@ public class TerroristBoatAI : MonoBehaviour
 
     private void HandleShooting()
     {
-        if (projectilePrefab == null || firePoint == null || playerTransform == null)
+        if (projectilePrefab == null || firePoint == null || currentTarget == null)
         {
             return;
         }

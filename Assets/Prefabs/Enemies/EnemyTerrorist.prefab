@@ -806,17 +806,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TerroristBoatAI
   approachSpeed: 0.8
   strafeSpeed: 0.5
-  turnSpeed: 60
-  idealRange: 2.5
-  rangeBuffer: 1.5
+  turnSpeed: 90
+  idealRange: 3.5
+  rangeBuffer: 2
   gunTransform: {fileID: 6049518608963302758}
-  gunRotationSpeed: 50
+  gunRotationSpeed: 60
   firePoint: {fileID: 7811077684269091856}
   projectilePrefab: {fileID: 2281899783889647532, guid: 79c138e4434e28649b38c86b67e8aa5c, type: 3}
   fireRate: 1
   projectileSpeed: 2
   minDamage: 5
   maxDamage: 10
+  currentTarget: {fileID: 0}
+  targetRefreshRate: 1
 --- !u!212 &8022176837552959855
 SpriteRenderer:
   m_ObjectHideFlags: 0

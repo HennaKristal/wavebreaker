@@ -31,6 +31,7 @@ public class AircraftCarrier : MonoBehaviour
         }
 
         yield return new WaitForSeconds(waveCooldown);
+
         isSpawning = false;
     }
 }

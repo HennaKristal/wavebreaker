@@ -31,9 +31,7 @@ public class PirateShipAI : MonoBehaviour
     [SerializeField] private int sideShotCount = 5;
     [SerializeField] private float sideShotSpreadAngle = 45f;
 
-
     private Transform sideFirePoint;
-    private Transform playerTransform;
     private Rigidbody2D rb;
 
     private enum State { Approaching, Strafing }
@@ -43,32 +41,74 @@ public class PirateShipAI : MonoBehaviour
     private float sideFireTimer = 0f;
     private bool sideGunEnabled = false;
 
+    private Transform currentTarget;
+    [SerializeField] private float targetRefreshRate = 1f;
+    private float targetTimer;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerTransform = GameManager.Instance.GetPlayerTransform();
+        SelectNewTarget();
+        idealRange = Random.Range(idealRange - 1f, idealRange + 1f);
     }
 
+    private void SelectNewTarget()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+
+        Transform closest = null;
+        float closestDist = Mathf.Infinity;
+
+        void CheckGroup(GameObject[] arr)
+        {
+            foreach (var obj in arr)
+            {
+                float d = Vector2.Distance(transform.position, obj.transform.position);
+                if (d < closestDist)
+                {
+                    closestDist = d;
+                    closest = obj.transform;
+                }
+            }
+        }
+
+        CheckGroup(players);
+        CheckGroup(allies);
+
+        currentTarget = closest;
+    }
 
     private void FixedUpdate()
     {
-        if (playerTransform == null) { return; }
+        if (currentTarget == null)
+        {
+            SelectNewTarget();
+            return;
+        }
+
+        targetTimer += Time.fixedDeltaTime;
+        if (targetTimer >= targetRefreshRate)
+        {
+            SelectNewTarget();
+            targetTimer = 0f;
+        }
 
         UpdateState();
 
         switch (currentState)
         {
             case State.Approaching:
-                MoveTowardPlayer();
+                MoveTowardTarget();
                 break;
 
             case State.Strafing:
-                StrafeAroundPlayer();
+                StrafeAroundTarget();
 
                 if (mainGunEnabled)
                 {
-                    RotateGunTowardPlayer();
+                    RotateGunTowardTarget();
                     HandleShooting();
                 }
 
@@ -81,29 +121,26 @@ public class PirateShipAI : MonoBehaviour
         }
     }
 
-
     private void UpdateState()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
 
-        if (currentState == State.Approaching && distanceToPlayer <= idealRange)
+        if (currentState == State.Approaching && distanceToTarget <= idealRange)
         {
             currentState = State.Strafing;
         }
-        else if (currentState == State.Strafing && distanceToPlayer > idealRange + rangeBuffer)
+        else if (currentState == State.Strafing && distanceToTarget > idealRange + rangeBuffer)
         {
             currentState = State.Approaching;
         }
     }
 
-
-    private void MoveTowardPlayer()
+    private void MoveTowardTarget()
     {
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        Vector2 direction = (currentTarget.position - transform.position).normalized;
         RotateTowards(direction);
         rb.linearVelocity = transform.up * approachSpeed;
     }
-
 
     private void RotateTowards(Vector2 targetDirection)
     {
@@ -112,21 +149,19 @@ public class PirateShipAI : MonoBehaviour
         rb.MoveRotation(rb.rotation + step);
     }
 
-
-    private void StrafeAroundPlayer()
+    private void StrafeAroundTarget()
     {
-        Vector2 toPlayer = (playerTransform.position - transform.position).normalized;
-        Vector2 strafeDir = Vector2.Perpendicular(toPlayer);
+        Vector2 toTarget = (currentTarget.position - transform.position).normalized;
+        Vector2 strafeDir = Vector2.Perpendicular(toTarget);
         RotateTowards(strafeDir);
         rb.linearVelocity = transform.up * strafeSpeed;
     }
 
-
-    private void RotateGunTowardPlayer()
+    private void RotateGunTowardTarget()
     {
-        if (!gunTransform || !playerTransform) { return; }
+        if (!gunTransform || !currentTarget) { return; }
 
-        Vector3 direction = playerTransform.position - gunTransform.position;
+        Vector3 direction = currentTarget.position - gunTransform.position;
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float currentAngle = gunTransform.eulerAngles.z;
@@ -134,7 +169,6 @@ public class PirateShipAI : MonoBehaviour
 
         gunTransform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
-
 
     private void HandleShooting()
     {
@@ -146,7 +180,6 @@ public class PirateShipAI : MonoBehaviour
             fireTimer = 0f;
         }
     }
-
 
     private void HandleSideShooting()
     {
@@ -168,7 +201,6 @@ public class PirateShipAI : MonoBehaviour
         }
     }
 
-
     private void Fire(GameObject prefab, Vector3 position, Quaternion rotation, float speed, int minDmg, int maxDmg)
     {
         if (!prefab) return;
@@ -181,14 +213,11 @@ public class PirateShipAI : MonoBehaviour
         }
     }
 
-
-
     public void EnableSideGuns(bool useRightSide)
     {
         sideGunEnabled = true;
         sideFirePoint = useRightSide ? sideFirePointRight : sideFirePointLeft;
     }
-
 
     public void DisableSideGuns()
     {
