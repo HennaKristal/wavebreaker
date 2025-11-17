@@ -286,8 +286,8 @@ MonoBehaviour:
   approachSpeed: 0.25
   rammingSpeed: 0.75
   speedLerpSpeed: 2.5
-  turnSpeed: 40
-  rammingAngleThreshold: 30
+  turnSpeed: 50
+  rammingAngleThreshold: 80
 --- !u!212 &1785339503876253366
 SpriteRenderer:
   m_ObjectHideFlags: 0

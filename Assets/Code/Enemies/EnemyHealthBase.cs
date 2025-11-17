@@ -40,7 +40,6 @@ public abstract class EnemyHealthBase : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-
     public virtual void TakeDamage(int damage, bool isCritical)
     {
         if (isDead) { return; }
@@ -77,13 +76,11 @@ public abstract class EnemyHealthBase : MonoBehaviour
         }
     }
 
-
     protected virtual IEnumerator RevertDamageFlash()
     {
         yield return new WaitForSeconds(0.1f);
         sr.material = defaultMaterial;
     }
-
 
     protected virtual void GiveKillRewards()
     {
@@ -93,7 +90,6 @@ public abstract class EnemyHealthBase : MonoBehaviour
 
             for (int i = 0; i < drop.amount; i++)
             {
-                // Random offset within a circle
                 Vector2 offset = Random.insideUnitCircle * dropRadius;
                 Vector3 spawnPos = transform.position + new Vector3(offset.x, offset.y, 0);
 
@@ -101,8 +97,6 @@ public abstract class EnemyHealthBase : MonoBehaviour
             }
         }
     }
-
-
 
     protected virtual IEnumerator SpawnExplosionsOverTime()
     {
@@ -116,7 +110,6 @@ public abstract class EnemyHealthBase : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
-
 
     public int GetCollisionDamage()
     {
@@ -132,7 +125,6 @@ public abstract class EnemyHealthBase : MonoBehaviour
     {
         return maxHealth;
     }
-
 
     protected abstract void UpdateHealthBar();
 }

@@ -489,6 +489,9 @@ MonoBehaviour:
   resourceDrops: []
   dropRadius: 0.1
   bossName: Unknown Submarine
+  healthBar: {fileID: 0}
+  healthBarSlider: {fileID: 0}
+  healthBarText: {fileID: 0}
 --- !u!114 &6858901899758556189
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -132,7 +132,10 @@ public class PauseController : MonoBehaviour
             {
                 case 1: break;
                 case 2: settingsController.OpenSettingsPanel(); break;
-                case 3: GameManager.Instance.LoadSceneByName("Game"); break;
+                case 3:
+                    GameManager.Instance.gameStarted = false;
+                    GameManager.Instance.LoadSceneByName("Game");
+                    break;
             }
         }
     }
@@ -169,6 +172,7 @@ public class PauseController : MonoBehaviour
     public void RestartClicked()
     {
         ClosePausePanel();
+        GameManager.Instance.gameStarted = false;
         GameManager.Instance.LoadSceneByName("Game");
     }
 }

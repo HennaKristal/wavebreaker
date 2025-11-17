@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 
@@ -45,6 +46,27 @@ public class SettingsController : MonoBehaviour
     private bool isEditingSlider = false;
     [HideInInspector] public bool navigationEnabled = false;
 
+    [Header("Audio Settings")]
+    [SerializeField] private Slider MusicVolumeSlider;
+    [SerializeField] private Slider AmbientVolumeSlider;
+    [SerializeField] private Slider SFXVolumeSlider;
+    [SerializeField] private Slider UIVolumeSlider;
+    [SerializeField] private TextMeshProUGUI MusicVolumeSliderText;
+    [SerializeField] private TextMeshProUGUI AmbientVolumeSliderText;
+    [SerializeField] private TextMeshProUGUI SFXVolumeSliderText;
+    [SerializeField] private TextMeshProUGUI UIVolumeSliderText;
+    private bool isInitializing = true;
+
+
+    private void Start()
+    {
+        AudioManager.Instance.LoadVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
+        AudioManager.Instance.LoadVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
+        AudioManager.Instance.LoadVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
+        AudioManager.Instance.LoadVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
+
+        isInitializing = false;
+    }
 
     public void OpenSettingsPanel()
     {
@@ -229,7 +251,7 @@ public class SettingsController : MonoBehaviour
             else
             {
                 SaveAccessibilitySettings();
-                AudioManager.Instance.SaveAudioSettings();
+                PlayerPrefs.Save();
                 CloseSettingsPanel();
             }
         }
@@ -290,5 +312,18 @@ public class SettingsController : MonoBehaviour
     public void ReturnClicked()
     {
         CloseSettingsPanel();
+    }
+
+    public void OnVolumeSliderChanged()
+    {
+        if (isInitializing)
+        {
+            return;
+        }
+
+        AudioManager.Instance.ApplyVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
+        AudioManager.Instance.ApplyVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
+        AudioManager.Instance.ApplyVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
+        AudioManager.Instance.ApplyVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
     }
 }

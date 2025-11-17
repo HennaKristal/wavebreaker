@@ -1,25 +1,20 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+    public static GameManager Instance => _instance;
+
     [Header("REFERENCES")]
     [SerializeField] Material playerDamageFlashMaterial;
     [SerializeField] Material enemyDamageFlashMaterial;
-    [SerializeField] private Inventory inventory;
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private Light2D globalLight;
-    [SerializeField] private GameObject bossHealthBar;
-    [SerializeField] private Slider bossHealthBarSlider;
-    [SerializeField] private TextMeshProUGUI bossHealthBarText;
-
-    private static GameManager _instance;
-    public static GameManager Instance => _instance;
+    private Transform playerTransform;
+    private Light2D globalLight;
+    private Inventory inventoryController;
     private Fading fading;
     private Coroutine sceneRoutine;
     public bool gameStarted = false;
@@ -39,6 +34,8 @@ public class GameManager : MonoBehaviour
         fading = GetComponent<Fading>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+
 
     private void OnDestroy()
     {
@@ -73,29 +70,14 @@ public class GameManager : MonoBehaviour
         return playerTransform;
     }
 
-    public Inventory GetInventory()
+    public Inventory GetInventoryController()
     {
-        return inventory;
+        return inventoryController;
     }
 
     public Light2D GetGlobalLight()
     {
         return globalLight;
-    }
-
-    public GameObject GetBossHealthBar()
-    {
-        return bossHealthBar;
-    }
-
-    public Slider GetBossHealthBarSlider()
-    {
-        return bossHealthBarSlider;
-    }
-
-    public TextMeshProUGUI GetBossHealthBarText()
-    {
-        return bossHealthBarText;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -104,6 +86,10 @@ public class GameManager : MonoBehaviour
         {
             fading.StartFadeIn(2f);
         }
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
+        inventoryController = GameObject.Find("InventoryController").GetComponent<Inventory>();
     }
 
     public void LoadSceneByName(string sceneName)

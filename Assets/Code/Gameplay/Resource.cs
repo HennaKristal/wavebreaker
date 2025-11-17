@@ -25,7 +25,7 @@ public class Resource : MonoBehaviour
     private void Start()
     {
         player = GameManager.Instance.GetPlayerTransform();
-        inventory = GameManager.Instance.GetInventory();
+        inventory = GameManager.Instance.GetInventoryController();
     }
 
     private void FixedUpdate()

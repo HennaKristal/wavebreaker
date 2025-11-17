@@ -201,15 +201,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3016869187273328083, guid: c31f5b8c36fcf1f4680ada553542913d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3016869187273328083, guid: c31f5b8c36fcf1f4680ada553542913d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4160967483283778352, guid: c31f5b8c36fcf1f4680ada553542913d, type: 3}
       propertyPath: m_Name
       value: SmallPirateShipWithCannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160967483283778352, guid: c31f5b8c36fcf1f4680ada553542913d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702547668989811783, guid: c31f5b8c36fcf1f4680ada553542913d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -369,6 +373,15 @@ MonoBehaviour:
     toggle: {fileID: 1528547246}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0.19607843, g: 1, b: 1, a: 1}
+  navigationEnabled: 0
+  MusicVolumeSlider: {fileID: 2755752059744430870}
+  AmbientVolumeSlider: {fileID: 8766505594242636134}
+  SFXVolumeSlider: {fileID: 8252178337491650830}
+  UIVolumeSlider: {fileID: 7081703453993102735}
+  MusicVolumeSliderText: {fileID: 961870287349462092}
+  AmbientVolumeSliderText: {fileID: 183333237206858188}
+  SFXVolumeSliderText: {fileID: 8470695926162530884}
+  UIVolumeSliderText: {fileID: 2220681832827750989}
 --- !u!4 &410663949 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8353462378893533809, guid: 4d1acef0cd2b37c47823c8ce2323ac5e, type: 3}
@@ -431,11 +444,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4363100890271195466, guid: 721436608003ed146b0f6f35a30b9015, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4363100890271195466, guid: 721436608003ed146b0f6f35a30b9015, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4631001143411624376, guid: 721436608003ed146b0f6f35a30b9015, type: 3}
       propertyPath: m_LocalPosition.x
@@ -480,6 +493,10 @@ PrefabInstance:
     - target: {fileID: 7117310208643461999, guid: 721436608003ed146b0f6f35a30b9015, type: 3}
       propertyPath: m_Name
       value: LargePirateShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117310208643461999, guid: 721436608003ed146b0f6f35a30b9015, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41010,7 +41027,7 @@ Tilemap:
       - {fileID: -17399659, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1505392389, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 2063713644, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5000002
+      m_AnimationSpeed: 2.5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: -35, z: 0}
@@ -42137,7 +42154,7 @@ Tilemap:
       - {fileID: 988694446, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 722514835, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -1581700420, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5000002
+      m_AnimationSpeed: 2.5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 36, y: -24, z: 0}
@@ -42367,7 +42384,7 @@ Tilemap:
       - {fileID: -431330007, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 705410160, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -1402667787, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5000002
+      m_AnimationSpeed: 2.5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -28, y: -20, z: 0}
@@ -43402,7 +43419,7 @@ Tilemap:
       - {fileID: -1628169057, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 40615822, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1422542245, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5000002
+      m_AnimationSpeed: 2.5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 38, y: 1, z: 0}
@@ -43586,7 +43603,7 @@ Tilemap:
       - {fileID: -431330007, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 705410160, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -1402667787, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5000002
+      m_AnimationSpeed: 2.5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -26, y: 5, z: 0}
@@ -43701,7 +43718,7 @@ Tilemap:
       - {fileID: -431330007, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 705410160, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -1402667787, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -25, y: 7, z: 0}
@@ -44828,7 +44845,7 @@ Tilemap:
       - {fileID: 1133128325, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1708104942, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -209832231, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5000002
+      m_AnimationSpeed: 2.5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -15, y: 24, z: 0}
@@ -44943,7 +44960,7 @@ Tilemap:
       - {fileID: -1632449439, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1629452603, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 807328484, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 30, y: 25, z: 0}
@@ -44989,7 +45006,7 @@ Tilemap:
       - {fileID: 1133128325, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1708104942, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -209832231, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 32, y: 25, z: 0}
@@ -45081,7 +45098,7 @@ Tilemap:
       - {fileID: -1632449439, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1629452603, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 807328484, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 28, y: 26, z: 0}
@@ -45219,7 +45236,7 @@ Tilemap:
       - {fileID: -1632449439, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1629452603, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 807328484, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: 27, z: 0}
@@ -45357,7 +45374,7 @@ Tilemap:
       - {fileID: -789301179, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -150664405, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 811915624, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -10, y: 28, z: 0}
@@ -46070,7 +46087,7 @@ Tilemap:
       - {fileID: 1133128325, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: 1708104942, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
       - {fileID: -209832231, guid: fb5a82b1f233b44ab934cb17882550c8, type: 3}
-      m_AnimationSpeed: 2.5
+      m_AnimationSpeed: 2.5000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 21, y: 28, z: 0}
@@ -46258,13 +46275,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallPirateShip
       objectReference: {fileID: 0}
-    - target: {fileID: 5005494551250620210, guid: 4d1acef0cd2b37c47823c8ce2323ac5e, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 4087983724789816019, guid: 4d1acef0cd2b37c47823c8ce2323ac5e, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5005494551250620210, guid: 4d1acef0cd2b37c47823c8ce2323ac5e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005494551250620210, guid: 4d1acef0cd2b37c47823c8ce2323ac5e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8353462378893533809, guid: 4d1acef0cd2b37c47823c8ce2323ac5e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47653,14 +47674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   audioMixer: {fileID: 24100000, guid: 68c3bbb7f188bc84cb3ceda832cd9b5e, type: 2}
-  MusicVolumeSlider: {fileID: 2755752059744430870}
-  AmbientVolumeSlider: {fileID: 8766505594242636134}
-  SFXVolumeSlider: {fileID: 8252178337491650830}
-  UIVolumeSlider: {fileID: 7081703453993102735}
-  MusicVolumeSliderText: {fileID: 961870287349462092}
-  AmbientVolumeSliderText: {fileID: 183333237206858188}
-  SFXVolumeSliderText: {fileID: 8470695926162530884}
-  UIVolumeSliderText: {fileID: 2220681832827750989}
 --- !u!1 &1340590425
 GameObject:
   m_ObjectHideFlags: 0
@@ -48175,6 +48188,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 537258984}
     m_Modifications:
+    - target: {fileID: 2132230286687052980, guid: a8fbdb2b501b6a24496b10a6e9d3da6f, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1194667008}
+    - target: {fileID: 2132230286687052980, guid: a8fbdb2b501b6a24496b10a6e9d3da6f, type: 3}
+      propertyPath: healthBarText
+      value: 
+      objectReference: {fileID: 936142936}
+    - target: {fileID: 2132230286687052980, guid: a8fbdb2b501b6a24496b10a6e9d3da6f, type: 3}
+      propertyPath: healthBarSlider
+      value: 
+      objectReference: {fileID: 752301616}
     - target: {fileID: 6320861427845519963, guid: a8fbdb2b501b6a24496b10a6e9d3da6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.37719
@@ -48218,6 +48243,10 @@ PrefabInstance:
     - target: {fileID: 8973270982363269071, guid: a8fbdb2b501b6a24496b10a6e9d3da6f, type: 3}
       propertyPath: m_Name
       value: Submarine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973270982363269071, guid: a8fbdb2b501b6a24496b10a6e9d3da6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48637,14 +48666,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7382232670026985787, guid: 8886f03e118e2e24687b2aab4229cb3a, type: 3}
-      propertyPath: maxWidth
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7382232670026985787, guid: 8886f03e118e2e24687b2aab4229cb3a, type: 3}
-      propertyPath: minWidth
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 7934657943826049933, guid: 8886f03e118e2e24687b2aab4229cb3a, type: 3}
       propertyPath: m_Name
       value: FlagShipHQ
@@ -48796,21 +48817,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: AircraftCarrier
       objectReference: {fileID: 0}
-    - target: {fileID: 6572704838985716640, guid: c893d725cd39cc24a8179d7bc60a1bc0, type: 3}
-      propertyPath: maxWidth
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6572704838985716640, guid: c893d725cd39cc24a8179d7bc60a1bc0, type: 3}
-      propertyPath: minWidth
-      value: 0.7
+    - target: {fileID: 2235365136555137116, guid: c893d725cd39cc24a8179d7bc60a1bc0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6689728681531960036, guid: c893d725cd39cc24a8179d7bc60a1bc0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6689728681531960036, guid: c893d725cd39cc24a8179d7bc60a1bc0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48887,12 +48904,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerDamageFlashMaterial: {fileID: 2100000, guid: 1a6fe496c968baa4492a26f962a0fee9, type: 2}
   enemyDamageFlashMaterial: {fileID: 2100000, guid: e78259e275f10444fa989985d092f023, type: 2}
-  inventory: {fileID: 1909943206}
-  playerTransform: {fileID: 1218663910}
-  globalLight: {fileID: 1134472581}
-  bossHealthBar: {fileID: 1194667008}
-  bossHealthBarSlider: {fileID: 752301616}
-  bossHealthBarText: {fileID: 936142936}
   gameStarted: 0
 --- !u!1001 &7056346005325446780
 PrefabInstance:
@@ -49133,14 +49144,6 @@ PrefabInstance:
     - target: {fileID: 4099039765091154373, guid: 74f40bdc1ace1524ea0c902714b2af74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4288655052954553010, guid: 74f40bdc1ace1524ea0c902714b2af74, type: 3}
-      propertyPath: maxWidth
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4288655052954553010, guid: 74f40bdc1ace1524ea0c902714b2af74, type: 3}
-      propertyPath: minWidth
-      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6135419863976227871, guid: 74f40bdc1ace1524ea0c902714b2af74, type: 3}
       propertyPath: m_AnchorMax.x

@@ -591,8 +591,8 @@ MonoBehaviour:
   minDistance: 0.1
   pointLifetime: 2
   waterRippleRenderer: {fileID: 1426074756325490844}
-  minWidth: 0.2
-  maxWidth: 0.75
+  minWidth: 0.7
+  maxWidth: 2.25
 --- !u!120 &3167889423969259840
 LineRenderer:
   serializedVersion: 2
@@ -731,7 +731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7934657943826049933}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.2158101, y: 0.87345004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

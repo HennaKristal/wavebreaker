@@ -14,14 +14,12 @@ public class TerroristKamikazeBoatAI : MonoBehaviour
     [SerializeField] private float rammingAngleThreshold = 30f;
     private float currentSpeed = 0f;
 
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GameManager.Instance.GetPlayerTransform();
         currentSpeed = approachSpeed;
     }
-
 
     private void FixedUpdate()
     {

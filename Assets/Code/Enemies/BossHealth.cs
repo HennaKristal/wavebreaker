@@ -5,28 +5,12 @@ using UnityEngine.UI;
 public class BossHealth : EnemyHealthBase
 {
     [SerializeField] private string bossName = "Boss";
-    private GameObject healthBar;
-    private Slider healthBarSlider;
-    private TextMeshProUGUI healthBarText;
-    private bool referencedLoaded = false;
-
-
-    private void LoadReferences()
-    {
-        healthBar = GameManager.Instance.GetBossHealthBar();
-        healthBarSlider = GameManager.Instance.GetBossHealthBarSlider();
-        healthBarText = GameManager.Instance.GetBossHealthBarText();
-        referencedLoaded = true;
-    }
-
+    [SerializeField] private GameObject healthBar;
+    [SerializeField] private Slider healthBarSlider;
+    [SerializeField] private TextMeshProUGUI healthBarText;
 
     protected override void UpdateHealthBar()
     {
-        if (!referencedLoaded)
-        {
-            LoadReferences();
-        }
-
         healthBarSlider.maxValue = maxHealth;
         healthBarSlider.value = currentHealth;
 

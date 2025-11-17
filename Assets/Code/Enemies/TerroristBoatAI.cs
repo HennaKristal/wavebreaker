@@ -33,7 +33,6 @@ public class TerroristBoatAI : MonoBehaviour
         playerTransform = GameManager.Instance.GetPlayerTransform();
     }
 
-
     private void FixedUpdate()
     {
         if (playerTransform == null) { return; }
@@ -62,7 +61,6 @@ public class TerroristBoatAI : MonoBehaviour
         }
     }
 
-
     private void MoveTowardPlayer()
     {
         Vector2 direction = (playerTransform.position - transform.position).normalized;
@@ -73,7 +71,6 @@ public class TerroristBoatAI : MonoBehaviour
         rb.MoveRotation(rb.rotation + rotationStep);
         rb.linearVelocity = transform.up * approachSpeed;
     }
-
 
     private void StrafeAroundPlayer()
     {
@@ -87,7 +84,6 @@ public class TerroristBoatAI : MonoBehaviour
         rb.linearVelocity = transform.up * strafeSpeed;
     }
 
-
     private void RotateGunTowardPlayer()
     {
         if (gunTransform == null || playerTransform == null) { return; }
@@ -100,7 +96,6 @@ public class TerroristBoatAI : MonoBehaviour
 
         gunTransform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
-
 
     private void HandleShooting()
     {
@@ -117,7 +112,6 @@ public class TerroristBoatAI : MonoBehaviour
             fireTimer = 0f;
         }
     }
-
 
     private void Fire()
     {

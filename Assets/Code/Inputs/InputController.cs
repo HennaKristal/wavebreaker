@@ -40,7 +40,10 @@ public class InputController : MonoBehaviour
 
     private void OnDisable()
     {
-        playerInputActions.Disable();
+        if (playerInputActions != null)
+        {
+            playerInputActions.Disable();
+        }
     }
 
     private void Update()
