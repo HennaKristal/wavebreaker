@@ -26,9 +26,9 @@ public class MissileExplosion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Ally"))
         {
-            var playerController = other.gameObject.GetComponent<PlayerController>();
+            var playerController = other.gameObject.GetComponent<PlayerHealthBase>();
             float elapsedTime = Time.time - startTime;
             float damageModifier;
 

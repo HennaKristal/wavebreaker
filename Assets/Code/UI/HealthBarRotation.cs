@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealthBarRotation : MonoBehaviour
 {
-    void LateUpdate()
+    private void LateUpdate()
     {
         transform.rotation = Quaternion.identity;
     }

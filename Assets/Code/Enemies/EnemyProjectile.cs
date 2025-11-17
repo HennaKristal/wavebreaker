@@ -33,13 +33,13 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player"))
+        if (!collision.CompareTag("Player") && !collision.CompareTag("Ally"))
         {
             Destroy(gameObject);
             return;
         }
 
-        var player = collision.GetComponent<PlayerController>();
+        var player = collision.GetComponent<PlayerHealthBase>();
         player?.TakeDamage(damage);
 
         Destroy(gameObject);

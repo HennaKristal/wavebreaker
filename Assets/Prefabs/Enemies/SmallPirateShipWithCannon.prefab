@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4420000717354909105}
   - component: {fileID: 3766348547373989535}
   - component: {fileID: 625268978508945091}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,9 +168,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7871326183628784131}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftSideFirePoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,9 +199,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6296943003521486969}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightSideFirePoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 617340080292790778}
   - component: {fileID: 6225432638784249991}
   - component: {fileID: 5663170496282607350}
+  - component: {fileID: 4187956365725551477}
   m_Layer: 7
   m_Name: SmallPirateShipWithCannon
   m_TagString: Enemy
@@ -284,6 +285,7 @@ MonoBehaviour:
   explosionAmount: 1
   explosionRadius: 0
   damageNumberPrefab: {fileID: 2465754038236049761, guid: 2ede6d624ff68ce459b299fb9ac630dc, type: 3}
+  isDead: 0
   resourceDrops:
   - prefab: {fileID: 338670203385394097, guid: 9635724a55d203249b6fe10a00fbc9b2, type: 3}
     amount: 5
@@ -460,6 +462,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.32762152, y: 0.66824436}
   m_EdgeRadius: 0
+--- !u!114 &4187956365725551477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160967483283778352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd59cb1534279748988b78bcbc2d8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorInteract
+  cursorType: 1
 --- !u!1 &4219764500242554170
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,9 +485,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6510872773901014009}
   - component: {fileID: 8359697906367112259}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PirateCannon
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1503491540804878869}
   - component: {fileID: 9090006773817296799}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WaterRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2189218796033192406}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

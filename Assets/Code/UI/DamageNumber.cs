@@ -27,14 +27,17 @@ public class DamageNumber : MonoBehaviour
     {
         textMesh = GetComponent<TextMeshProUGUI>();
 
-        canvasParent ??= GameObject.FindGameObjectWithTag("DamageNumberCanvas")?.transform;
+        canvasParent = GameObject.FindGameObjectWithTag("DamageNumberCanvas")?.transform;
 
-        if (canvasParent != null)
+        if (canvasParent == null)
         {
-            transform.SetParent(canvasParent, false);
+            Debug.LogWarning("DamageNumber Canvas is missing");
+            this.enabled = false;
+            return;
         }
-    }
 
+        transform.SetParent(canvasParent, false);
+    }
 
     public void Initialize(int damage, bool isCritical)
     {
@@ -57,7 +60,6 @@ public class DamageNumber : MonoBehaviour
 
         StartCoroutine(FadeOutAndMove());
     }
-
 
     private IEnumerator FadeOutAndMove()
     {

@@ -14,6 +14,10 @@ public class MainMenuController : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private SettingsManager settingsManager;
+    [SerializeField] private GameObject healthbarUI;
+    [SerializeField] private GameObject flagshipHPUI;
+    [SerializeField] private GameObject resourcesUI;
+    [SerializeField] private GameObject controlHintsUI;
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI[] gameButtons;
@@ -152,6 +156,69 @@ public class MainMenuController : MonoBehaviour
     private void StartGame()
     {
         GameManager.Instance.gameStarted = true;
+
         mainMenuPanel.SetActive(false);
+
+        healthbarUI.SetActive(true);
+        flagshipHPUI.SetActive(true);
+        resourcesUI.SetActive(true);
+        controlHintsUI.SetActive(true);
     }
+
+
+    public void DeveloperCreditHovered()
+    {
+        column = MainMenuColumn.Credits;
+        row = 1;
+        UpdateVisuals();
+    }
+
+
+    public void MusicCreditHovered()
+    {
+        column = MainMenuColumn.Credits;
+        row = 2;
+        UpdateVisuals();
+    }
+
+
+    public void StartGameHovered()
+    {
+        column = MainMenuColumn.Menu;
+        row = 1;
+        UpdateVisuals();
+    }
+
+
+    public void SettingsHovered()
+    {
+        column = MainMenuColumn.Menu;
+        row = 2;
+        UpdateVisuals();
+    }
+
+
+    public void DeveloperCreditClicked()
+    {
+        GameManager.Instance.OpenLink(credits[row - 1].url);
+    }
+
+
+    public void MusicCreditClicked()
+    {
+        GameManager.Instance.OpenLink(credits[row - 1].url);
+    }
+
+
+    public void StartGameClicked()
+    {
+        StartGame();
+    }
+
+
+    public void SettingsClicked()
+    {
+        settingsManager.OpenSettingsPanel();
+    }
+
 }

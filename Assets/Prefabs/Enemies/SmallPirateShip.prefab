@@ -212,9 +212,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7119455915550153170}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightSideFirePoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 5766432157446202402}
   - component: {fileID: 1199580960258614961}
   - component: {fileID: 8374217787150733669}
+  - component: {fileID: 680037793780450959}
   m_Layer: 7
   m_Name: SmallPirateShip
   m_TagString: Enemy
@@ -447,6 +448,7 @@ MonoBehaviour:
   explosionAmount: 1
   explosionRadius: 0
   damageNumberPrefab: {fileID: 2465754038236049761, guid: 2ede6d624ff68ce459b299fb9ac630dc, type: 3}
+  isDead: 0
   resourceDrops:
   - prefab: {fileID: 338670203385394097, guid: 9635724a55d203249b6fe10a00fbc9b2, type: 3}
     amount: 3
@@ -623,6 +625,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.32762152, y: 0.66824436}
   m_EdgeRadius: 0
+--- !u!114 &680037793780450959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4087983724789816019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd59cb1534279748988b78bcbc2d8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorInteract
+  cursorType: 1
 --- !u!1 &4101593171064647879
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +649,7 @@ GameObject:
   - component: {fileID: 1581988210714430129}
   - component: {fileID: 4375873098017933821}
   - component: {fileID: 4755904392867659755}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6560242736421454346}
   - component: {fileID: 1486442803578748733}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WaterRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,9 +989,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3622668180920244750}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftSideFirePoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - PlayerBullet
   - MainLight
+  - Ally
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Resource
   - Mines
   - EnemyAttackArea
-  - 
+  - Ally
   - 
   - 
   - 

@@ -30,7 +30,8 @@ public class CursorManager : MonoBehaviour
     {
         Pointer,
         Combat,
-        Talk
+        Interact,
+        Friendly
     }
 
 

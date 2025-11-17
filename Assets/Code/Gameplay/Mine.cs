@@ -12,7 +12,7 @@ public class Mine : MonoBehaviour
     {
         if (hasExploded) return;
 
-        if (collision.CompareTag("Enemy") || collision.CompareTag("Player") || collision.CompareTag("PlayerBullet") || collision.CompareTag("EnemyBullet"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Ally") || collision.CompareTag("Player") || collision.CompareTag("PlayerBullet") || collision.CompareTag("EnemyBullet"))
         {
             hasExploded = true;
             DealAreaDamage();
@@ -33,9 +33,9 @@ public class Mine : MonoBehaviour
                 var enemy = hit.GetComponent<EnemyHealthBase>();
                 enemy?.TakeDamage(damage, false);
             }
-            else if (hit.CompareTag("Player"))
+            else if (hit.CompareTag("Player") || hit.CompareTag("Ally"))
             {
-                var player = hit.GetComponent<PlayerController>();
+                var player = hit.GetComponent<PlayerHealthBase>();
                 player?.TakeDamage(damage);
             }
         }

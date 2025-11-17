@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 376938508731967489}
   - component: {fileID: 2264368595257835144}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WaterRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 3349024141793555471}
   - component: {fileID: 3450101566180326613}
   - component: {fileID: 3263806440704354432}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,6 +739,7 @@ GameObject:
   - component: {fileID: 8022176837552959855}
   - component: {fileID: 8427748965338081361}
   - component: {fileID: 7765926760977311648}
+  - component: {fileID: 2230669418361273507}
   m_Layer: 7
   m_Name: EnemyTerrorist
   m_TagString: Enemy
@@ -784,6 +785,7 @@ MonoBehaviour:
   explosionAmount: 1
   explosionRadius: 0
   damageNumberPrefab: {fileID: 2465754038236049761, guid: 2ede6d624ff68ce459b299fb9ac630dc, type: 3}
+  isDead: 0
   resourceDrops:
   - prefab: {fileID: 338670203385394097, guid: 9635724a55d203249b6fe10a00fbc9b2, type: 3}
     amount: 5
@@ -946,3 +948,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.17809832, y: 0.28674048}
   m_EdgeRadius: 0
+--- !u!114 &2230669418361273507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8227778106047851596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd59cb1534279748988b78bcbc2d8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorInteract
+  cursorType: 1

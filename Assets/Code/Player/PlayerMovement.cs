@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 fakeInput = new Vector2(idleDirection, 1f);
 
-        float turnAmount = -fakeInput.x * turnSpeed * Time.fixedDeltaTime;
+        float turnAmount = -fakeInput.x * idleTurnSpeed * Time.fixedDeltaTime;
         rb.MoveRotation(rb.rotation + turnAmount);
 
         Vector2 forward = transform.up;

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5946912295898080962}
   - component: {fileID: 7133525783709906154}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WaterRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8357205030847809709}
   - component: {fileID: 7179555650162952012}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Foam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 1499202769518674677}
   - component: {fileID: 944553505708226427}
   - component: {fileID: 6258451057928436432}
+  - component: {fileID: 816273720647948656}
   m_Layer: 7
   m_Name: Submarine
   m_TagString: Enemy
@@ -477,13 +478,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66184ae78c08864297e07a4b15674bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
-  maxHealth: 2000
+  maxHealth: 1000
   collisionDamage: 150
   explosionPrefab: {fileID: 2015304144034905864, guid: 4935c5e31e45c2d4ca67b94c8b0e294e, type: 3}
-  explosionDuration: 2
-  explosionAmount: 10
+  explosionDuration: 5
+  explosionAmount: 25
   explosionRadius: 0.5
   damageNumberPrefab: {fileID: 2465754038236049761, guid: 2ede6d624ff68ce459b299fb9ac630dc, type: 3}
+  isDead: 0
   resourceDrops: []
   dropRadius: 0.1
   bossName: Unknown Submarine
@@ -670,3 +672,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4289279, y: 2.3232813}
   m_EdgeRadius: 0
+--- !u!114 &816273720647948656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973270982363269071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd59cb1534279748988b78bcbc2d8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorInteract
+  cursorType: 1

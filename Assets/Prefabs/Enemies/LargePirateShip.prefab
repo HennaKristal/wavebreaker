@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3497344421972470957}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RightSideFirePoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 158399372144544382}
   - component: {fileID: 7177070274267417592}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WaterRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,9 +299,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8127051766531306933}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LeftSideFirePoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -706,6 +706,7 @@ GameObject:
   - component: {fileID: 8743359008632230607}
   - component: {fileID: 6653257003165125420}
   - component: {fileID: 4442458615902855107}
+  - component: {fileID: 3488948480449971365}
   m_Layer: 7
   m_Name: LargePirateShip
   m_TagString: Enemy
@@ -754,6 +755,7 @@ MonoBehaviour:
   explosionAmount: 1
   explosionRadius: 0
   damageNumberPrefab: {fileID: 2465754038236049761, guid: 2ede6d624ff68ce459b299fb9ac630dc, type: 3}
+  isDead: 0
   resourceDrops:
   - prefab: {fileID: 338670203385394097, guid: 9635724a55d203249b6fe10a00fbc9b2, type: 3}
     amount: 3
@@ -932,6 +934,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.39839625, y: 0.8403684}
   m_EdgeRadius: 0
+--- !u!114 &3488948480449971365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117310208643461999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd59cb1534279748988b78bcbc2d8fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorInteract
+  cursorType: 1
 --- !u!1 &7728784525995183470
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,7 +958,7 @@ GameObject:
   - component: {fileID: 8832827897645143030}
   - component: {fileID: 5417887512476304905}
   - component: {fileID: 1763081200826665689}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

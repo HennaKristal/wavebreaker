@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8165896711411223408}
   - component: {fileID: 241541521963777139}
   - component: {fileID: 7938964412717818220}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: MissileExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ AudioSource:
   m_GameObject: {fileID: 2995736044313881672}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4030100643516294267, guid: 68c3bbb7f188bc84cb3ceda832cd9b5e, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ab63f6fe4a201df49a333c93f69761e5, type: 3}
   m_PlayOnAwake: 1

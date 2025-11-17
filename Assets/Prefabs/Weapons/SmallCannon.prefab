@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3179576003873511629}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1150016931611693437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3892, y: 0.0001, z: 0}
+  m_LocalPosition: {x: 0.3892, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4499225560253147204}
   - component: {fileID: 1787770922302459081}
   - component: {fileID: 3927014047963737595}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SmallCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
