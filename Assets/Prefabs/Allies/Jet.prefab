@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2038235227852127327}
   - component: {fileID: 7917781510655835088}
   - component: {fileID: 4140490762334903260}
+  - component: {fileID: 769938322074461028}
   m_Layer: 0
   m_Name: Jet
   m_TagString: Untagged
@@ -49,17 +50,18 @@ MonoBehaviour:
   maxSpeed: 1
   accelerationTime: 2
   turnSpeed: 120
-  flyPastDuration: 2
+  flyPastDuration: 4
   firePoint: {fileID: 8878098247294762768}
   bulletPrefab: {fileID: 6667032202948221864, guid: 1e6821c5b76affc49a068f0f061478a6, type: 3}
-  burstCount: 12
-  burstDelay: 0.25
-  projectileSpeed: 2.5
-  minDamage: 3
-  maxDamage: 5
+  burstCount: 8
+  burstDelay: 0.3
+  projectileSpeed: 2.8
+  minDamage: 2
+  maxDamage: 4
   criticalChance: 5
   criticalMultiplier: 1.5
   lifeTime: 30
+  endFlyAwayDuration: 10
 --- !u!212 &4140490762334903260
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,6 +120,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &769938322074461028
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790826271919544955}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c61f8c05058449247a33a0f4ad45b285, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6746439681552240186
 GameObject:
   m_ObjectHideFlags: 0

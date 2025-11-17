@@ -22,7 +22,10 @@ public class Jet : MonoBehaviour
 
     [Header("Lifetime")]
     [SerializeField] private float lifeTime = 30f;
+    [SerializeField] private float endFlyAwayDuration = 5f;
 
+    private Transform carrier;
+    private bool flyingAway = false;
     private float currentSpeed = 0f;
     private Transform currentTarget;
 
@@ -30,7 +33,12 @@ public class Jet : MonoBehaviour
     private void Start()
     {
         StartCoroutine(JetRoutine());
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(LifetimeRoutine());
+    }
+
+    public void SetCarrier(Transform carrierTransform)
+    {
+        carrier = carrierTransform;
     }
 
     private IEnumerator JetRoutine()
@@ -48,45 +56,87 @@ public class Jet : MonoBehaviour
         // Main behavior loop
         while (true)
         {
+            if (flyingAway)
+            {
+                yield return null;
+                continue;
+            }
+
             AcquireTarget();
 
             if (currentTarget)
             {
-                // Rotate toward target
                 yield return StartCoroutine(RotateTowards(currentTarget));
 
-                // Fire burst
-                yield return StartCoroutine(FireBurst());
+                // Only fire if target is NOT the carrier
+                if (currentTarget != carrier)
+                {
+                    yield return StartCoroutine(FireBurst());
+                }
 
-                // Fly past target for a moment
                 yield return new WaitForSeconds(flyPastDuration);
             }
             else
             {
-                // No target: just fly straight
                 transform.position += transform.up * maxSpeed * Time.deltaTime;
                 yield return null;
             }
         }
+
     }
+
+    private IEnumerator LifetimeRoutine()
+    {
+        yield return new WaitForSeconds(lifeTime);
+
+        flyingAway = true;
+        currentTarget = null;
+        currentSpeed = maxSpeed;
+
+        Quaternion lockedRotation = transform.rotation;
+
+        float t = 0f;
+        while (t < endFlyAwayDuration)
+        {
+            transform.rotation = lockedRotation;
+            transform.position += transform.up * currentSpeed * Time.deltaTime;
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
 
     private void Update()
     {
-        // Continuous forward movement
-        transform.position += transform.up * currentSpeed * Time.deltaTime;
+        if (!flyingAway)
+        {
+            transform.position += transform.up * currentSpeed * Time.deltaTime;
+        }
     }
+
 
     private void AcquireTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length == 0)
+        if (flyingAway)
         {
             currentTarget = null;
             return;
         }
 
-        currentTarget = enemies[Random.Range(0, enemies.Length)].transform;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemies.Length > 0)
+        {
+            currentTarget = enemies[Random.Range(0, enemies.Length)].transform;
+            return;
+        }
+
+        // No enemies: orbit/target the carrier
+        currentTarget = carrier;
     }
+
 
     private IEnumerator RotateTowards(Transform target)
     {

@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4206d536a41fee948a021a2d9a48ea23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destroyer
+  MovementSpeed: 0.2
 --- !u!114 &2365989816701043877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +514,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 15000
   m_LinearDamping: 5
   m_AngularDamping: 5
   m_GravityScale: 0
@@ -742,7 +743,7 @@ Transform:
   m_GameObject: {fileID: 4549921510686856728}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -761,11 +762,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaterTrail
   maxLength: 100
-  minDistance: 0.1
-  pointLifetime: 2
+  minDistance: 0.05
+  pointLifetime: 10
   waterRippleRenderer: {fileID: 5556818603180560899}
-  minWidth: 0.7
-  maxWidth: 2.25
+  minWidth: 0.35
+  maxWidth: 1.25
 --- !u!120 &2984640624575584386
 LineRenderer:
   serializedVersion: 2

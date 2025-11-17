@@ -569,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 7330440532920433534}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.029, y: -0.653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -588,11 +588,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaterTrail
   maxLength: 100
-  minDistance: 0.1
-  pointLifetime: 2
+  minDistance: 0.05
+  pointLifetime: 10
   waterRippleRenderer: {fileID: 1426074756325490844}
-  minWidth: 0.7
-  maxWidth: 2.25
+  minWidth: 0.65
+  maxWidth: 2
 --- !u!120 &3167889423969259840
 LineRenderer:
   serializedVersion: 2
@@ -710,7 +710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5595763036397002528}
-  - component: {fileID: 9016689120732306705}
+  - component: {fileID: 8250654987490537447}
   - component: {fileID: 1685133668985789623}
   - component: {fileID: 4185037557173712762}
   - component: {fileID: 2739064138935855937}
@@ -743,7 +743,7 @@ Transform:
   - {fileID: 5451972925078671284}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9016689120732306705
+--- !u!114 &8250654987490537447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -752,16 +752,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7934657943826049933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59cb6a338dadbc344ac4477981a91e67, type: 3}
+  m_Script: {fileID: 11500000, guid: c646371602b1c1645bf2b06f49668970, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AllyHealth
+  m_EditorClassIdentifier: Assembly-CSharp::FlagshipHQHealthj
   damageNumberPrefab: {fileID: 2465754038236049761, guid: 5b45e48849d8ccb42829af7530229bc6, type: 3}
-  maxHealth: 5555
-  currentHealth: 5555
-  collisionDamage: 50
+  maxHealth: 5000
+  currentHealth: 5000
+  collisionDamage: 100
   explosionPrefab: {fileID: 2015304144034905864, guid: 4935c5e31e45c2d4ca67b94c8b0e294e, type: 3}
-  explosionDuration: 1
-  explosionAmount: 3
+  explosionDuration: 5
+  explosionAmount: 20
   explosionRadius: 0.5
   healthBar: {fileID: 0}
   healthBarSlider: {fileID: 0}
@@ -777,6 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7564e65cb553174babb40560250deeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlagshipHQ
+  MovementSpeed: 0.2
 --- !u!114 &4185037557173712762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,7 +861,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
+  m_Mass: 30000
   m_LinearDamping: 5
   m_AngularDamping: 5
   m_GravityScale: 0

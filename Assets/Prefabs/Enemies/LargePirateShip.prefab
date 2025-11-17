@@ -803,6 +803,7 @@ MonoBehaviour:
   sideMaxDamage: 10
   sideShotCount: 5
   sideShotSpreadAngle: 35
+  targetRefreshRate: 1
 --- !u!212 &8743359008632230607
 SpriteRenderer:
   m_ObjectHideFlags: 0

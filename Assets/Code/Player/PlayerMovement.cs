@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float forwardSpeed = 1f;
     [SerializeField] private float backwardSpeed = 0.5f;
     [SerializeField] private float turnSpeed = 100f;
-    private Rigidbody2D rb;
+    private Rigidbody2D rigidBody;
 
     [Header("Idle Boat Animation")]
     [SerializeField] private float idleDirection = 1f;
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -38,11 +38,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 inputVector = InputController.Instance.Move;
         float turnAmount = -inputVector.x * turnSpeed * Time.fixedDeltaTime;
-        rb.MoveRotation(rb.rotation + turnAmount);
+        rigidBody.MoveRotation(rigidBody.rotation + turnAmount);
 
         float finalSpeed = inputVector.y > 0 ? forwardSpeed : backwardSpeed;
         Vector2 forward = transform.up;
-        rb.linearVelocity = forward * inputVector.y * finalSpeed;
+        rigidBody.linearVelocity = forward * inputVector.y * finalSpeed;
     }
 
     private void IdleBoatAnimation()
@@ -50,12 +50,12 @@ public class PlayerMovement : MonoBehaviour
         Vector2 fakeInput = new Vector2(idleDirection, 1f);
 
         float turnAmount = -fakeInput.x * idleTurnSpeed * Time.fixedDeltaTime;
-        rb.MoveRotation(rb.rotation + turnAmount);
+        rigidBody.MoveRotation(rigidBody.rotation + turnAmount);
 
         Vector2 forward = transform.up;
-        rb.linearVelocity = forward * fakeInput.y * idleSpeed;
+        rigidBody.linearVelocity = forward * fakeInput.y * idleSpeed;
 
-        float z = rb.rotation % 360f;
+        float z = rigidBody.rotation % 360f;
         if (z < 0) z += 360f;
 
         bool inFlipZone = Mathf.Abs(Mathf.DeltaAngle(z, flipCenter)) < flipThreshold;

@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float MovementSpeed;
+    private Rigidbody2D rigidBody;
+
+
+    private void Start()
     {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        rigidBody.linearVelocity = transform.up * MovementSpeed;
     }
 }

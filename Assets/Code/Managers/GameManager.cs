@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private Fading fading;
     private Coroutine sceneRoutine;
     public bool gameStarted = false;
+    public bool bossReached = false;
 
 
     private void Awake()
@@ -80,6 +81,11 @@ public class GameManager : MonoBehaviour
         return globalLight;
     }
 
+    public void GameOver()
+    {
+        LoadSceneByName("Game");
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (fading != null)
@@ -87,6 +93,7 @@ public class GameManager : MonoBehaviour
             fading.StartFadeIn(2f);
         }
 
+        gameStarted = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
         inventoryController = GameObject.Find("InventoryController").GetComponent<Inventory>();

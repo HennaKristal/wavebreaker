@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class PlayerController : PlayerHealthBase
@@ -30,6 +29,6 @@ public class PlayerController : PlayerHealthBase
 
     private void GameOver()
     {
-        GameManager.Instance.LoadSceneByName("Game");
+        GameManager.Instance.GameOver();
     }
 }

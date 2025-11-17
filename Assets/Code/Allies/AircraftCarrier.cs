@@ -3,6 +3,9 @@ using System.Collections;
 
 public class AircraftCarrier : MonoBehaviour
 {
+    [SerializeField] private float MovementSpeed;
+    private Rigidbody2D rigidBody;
+
     [Header("Spawning")]
     [SerializeField] private GameObject jetPrefab;
     [SerializeField] private Transform jetSpawnPoint;
@@ -12,12 +15,19 @@ public class AircraftCarrier : MonoBehaviour
 
     private bool isSpawning = false;
 
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         if (!isSpawning)
         {
             StartCoroutine(SpawnWave());
         }
+
+        rigidBody.linearVelocity = transform.up * MovementSpeed;
     }
 
     private IEnumerator SpawnWave()
@@ -26,12 +36,18 @@ public class AircraftCarrier : MonoBehaviour
 
         for (int i = 0; i < jetsPerWave; i++)
         {
-            Instantiate(jetPrefab, jetSpawnPoint.position, jetSpawnPoint.rotation);
+            GameObject jetObj = Instantiate(jetPrefab, jetSpawnPoint.position, jetSpawnPoint.rotation);
+
+            if (jetObj.TryGetComponent(out Jet jet))
+            {
+                jet.SetCarrier(this.transform);
+            }
+
             yield return new WaitForSeconds(delayBetweenJets);
         }
 
         yield return new WaitForSeconds(waveCooldown);
-
+        
         isSpawning = false;
     }
 }
