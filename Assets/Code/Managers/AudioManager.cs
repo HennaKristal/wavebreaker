@@ -9,15 +9,15 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance => _instance;
 
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider MusicVolumeSlider;
-    [SerializeField] private Slider AmbientVolumeSlider;
-    [SerializeField] private Slider SFXVolumeSlider;
-    [SerializeField] private Slider UIVolumeSlider;
+    private Slider MusicVolumeSlider;
+    private Slider AmbientVolumeSlider;
+    private Slider SFXVolumeSlider;
+    private Slider UIVolumeSlider;
 
-    [SerializeField] private TextMeshProUGUI MusicVolumeSliderText;
-    [SerializeField] private TextMeshProUGUI AmbientVolumeSliderText;
-    [SerializeField] private TextMeshProUGUI SFXVolumeSliderText;
-    [SerializeField] private TextMeshProUGUI UIVolumeSliderText;
+    private TextMeshProUGUI MusicVolumeSliderText;
+    private TextMeshProUGUI AmbientVolumeSliderText;
+    private TextMeshProUGUI SFXVolumeSliderText;
+    private TextMeshProUGUI UIVolumeSliderText;
 
     private bool isInitializing = true;
 
@@ -36,6 +36,20 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        GameObject audioPanel = GameObject.Find("AudioOptions");
+
+        MusicVolumeSlider = audioPanel.transform.Find("MusicVolumeSlider").GetComponent<Slider>();
+        MusicVolumeSliderText = MusicVolumeSlider.transform.Find("ValueLabel").GetComponent<TextMeshProUGUI>();
+
+        AmbientVolumeSlider = audioPanel.transform.Find("AmbientVolumeSlider").GetComponent<Slider>();
+        AmbientVolumeSliderText = AmbientVolumeSlider.transform.Find("ValueLabel").GetComponent<TextMeshProUGUI>();
+
+        SFXVolumeSlider = audioPanel.transform.Find("SFXVolumeSlider").GetComponent<Slider>();
+        SFXVolumeSliderText = SFXVolumeSlider.transform.Find("ValueLabel").GetComponent<TextMeshProUGUI>();
+
+        UIVolumeSlider = audioPanel.transform.Find("UIVolumeSlider").GetComponent<Slider>();
+        UIVolumeSliderText = UIVolumeSlider.transform.Find("ValueLabel").GetComponent<TextMeshProUGUI>();
+
         LoadVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
         LoadVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
         LoadVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);

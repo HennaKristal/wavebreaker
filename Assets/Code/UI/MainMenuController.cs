@@ -9,11 +9,11 @@ public class MainMenuController : MonoBehaviour
     {
         public Image image;
         public string url;
-
     }
+
     [Header("References")]
     [SerializeField] private GameObject mainMenuPanel;
-    [SerializeField] private SettingsManager settingsManager;
+    [SerializeField] private SettingsController settingsController;
     [SerializeField] private GameObject healthbarUI;
     [SerializeField] private GameObject flagshipHPUI;
     [SerializeField] private GameObject resourcesUI;
@@ -28,8 +28,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Color highlightColor = new Color(0.3f, 0.9f, 1f);
 
     private enum MainMenuColumn { Credits, Menu };
-    private int row = 1;
     private MainMenuColumn column = MainMenuColumn.Menu;
+    private int row = 1;
     private float cooldown = 0.2f;
     private float nextInputTime;
     private float deadZone = 0.4f;
@@ -143,7 +143,7 @@ public class MainMenuController : MonoBehaviour
                 switch (row)
                 {
                     case 1: StartGame(); break;
-                    case 2: settingsManager.OpenSettingsPanel(); break;
+                    case 2: settingsController.OpenSettingsPanel(); break;
                 }
             }
             else
@@ -163,8 +163,10 @@ public class MainMenuController : MonoBehaviour
         flagshipHPUI.SetActive(true);
         resourcesUI.SetActive(true);
         controlHintsUI.SetActive(true);
-    }
 
+        navigationEnabled = false;
+        this.enabled = false;
+    }
 
     public void DeveloperCreditHovered()
     {
@@ -173,14 +175,12 @@ public class MainMenuController : MonoBehaviour
         UpdateVisuals();
     }
 
-
     public void MusicCreditHovered()
     {
         column = MainMenuColumn.Credits;
         row = 2;
         UpdateVisuals();
     }
-
 
     public void StartGameHovered()
     {
@@ -189,7 +189,6 @@ public class MainMenuController : MonoBehaviour
         UpdateVisuals();
     }
 
-
     public void SettingsHovered()
     {
         column = MainMenuColumn.Menu;
@@ -197,28 +196,23 @@ public class MainMenuController : MonoBehaviour
         UpdateVisuals();
     }
 
-
     public void DeveloperCreditClicked()
     {
         GameManager.Instance.OpenLink(credits[row - 1].url);
     }
-
 
     public void MusicCreditClicked()
     {
         GameManager.Instance.OpenLink(credits[row - 1].url);
     }
 
-
     public void StartGameClicked()
     {
         StartGame();
     }
 
-
     public void SettingsClicked()
     {
-        settingsManager.OpenSettingsPanel();
+        settingsController.OpenSettingsPanel();
     }
-
 }

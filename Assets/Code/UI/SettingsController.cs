@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +21,12 @@ public class AudioSlot
 }
 
 
-public class SettingsManager : MonoBehaviour
+public class SettingsController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private MainMenuController mainMenuController;
+    [SerializeField] private PauseController pauseController;
 
     [Header("Right Column Elements")]
     [SerializeField] private AudioSlot[] audioElements;
@@ -41,22 +43,29 @@ public class SettingsManager : MonoBehaviour
     private float nextInputTime;
     private float deadZone = 0.4f;
     private bool isEditingSlider = false;
-    private bool navigationEnabled = false;
+    [HideInInspector] public bool navigationEnabled = false;
 
 
     public void OpenSettingsPanel()
     {
+        Time.timeScale = 0f;
         row = 1;
         column = 1;
         settingsPanel.SetActive(true);
         LoadAccessibilitySettings();
         UpdateVisuals();
-        Invoke(nameof(ActivateNavigation), 0.1f);
+        StartCoroutine(ActivateNavigationDelayed(0.1f));
     }
 
-    private void ActivateNavigation()
+    private IEnumerator ActivateNavigationDelayed(float delay)
     {
-        mainMenuController.navigationEnabled = false;
+        yield return new WaitForSecondsRealtime(delay);
+
+        if (!GameManager.Instance.gameStarted)
+        {
+            mainMenuController.navigationEnabled = false;
+        }
+
         navigationEnabled = true;
     }
 
@@ -65,7 +74,16 @@ public class SettingsManager : MonoBehaviour
      
         navigationEnabled = false;
         settingsPanel.SetActive(false);
-        Invoke(nameof(ActivateMainMenuNavigation), 0.1f);
+        Time.timeScale = 1f;
+
+        if (!GameManager.Instance.gameStarted)
+        {
+            Invoke(nameof(ActivateMainMenuNavigation), 0.1f);
+        }
+        else
+        {
+            pauseController.OpenPausePanel(true);
+        }
     }
 
     private void ActivateMainMenuNavigation()
@@ -98,22 +116,22 @@ public class SettingsManager : MonoBehaviour
 
         if (move == Vector2.zero)
         {
-            nextInputTime = Time.time;
+            nextInputTime = Time.unscaledTime;
             return;
         }
 
-        if (Time.time < nextInputTime)
+        if (Time.unscaledTime < nextInputTime)
         {
             return;
         }
 
-        nextInputTime = Time.time + cooldown;
+        nextInputTime = Time.unscaledTime + (cooldown / 2);
 
-        if (move.x > deadZone)
+        if (move.x > deadZone / 2)
         {
             audioElements[row - 1].slider.value = Mathf.Clamp(audioElements[row - 1].slider.value + 0.05f, 0f, 1f);
         }
-        else if (move.x < -deadZone)
+        else if (move.x < -deadZone / 2)
         {
             audioElements[row - 1].slider.value = Mathf.Clamp(audioElements[row - 1].slider.value - 0.05f, 0f, 1f);
         }
@@ -125,11 +143,11 @@ public class SettingsManager : MonoBehaviour
 
         if (move == Vector2.zero)
         {
-            nextInputTime = Time.time;
+            nextInputTime = Time.unscaledTime;
             return;
         }
 
-        if (Time.time < nextInputTime)
+        if (Time.unscaledTime < nextInputTime)
         {
             return;
         }
@@ -172,7 +190,7 @@ public class SettingsManager : MonoBehaviour
 
         if (previousRow != row || previousColumn != column)
         {
-            nextInputTime = Time.time + cooldown;
+            nextInputTime = Time.unscaledTime + cooldown;
             UpdateVisuals();
         }
     }
@@ -224,8 +242,15 @@ public class SettingsManager : MonoBehaviour
             }
             else if (column == 1)
             {
-                isEditingSlider = true;
-                audioElements[row - 1].handle.color = highlightColor;
+                if (row == audioElements.Length)
+                {
+                    CloseSettingsPanel();
+                }
+                else
+                {
+                    isEditingSlider = true;
+                    audioElements[row - 1].handle.color = highlightColor;
+                }
             }
             else if (column == 2)
             {
@@ -253,5 +278,17 @@ public class SettingsManager : MonoBehaviour
             i++;
             PlayerPrefs.SetInt("accessibility_" + i, toggleElement.toggle.isOn ? 1 : 0);
         }
+    }
+
+    public void ReturnHovered()
+    {
+        column = 1;
+        row = audioElements.Length;
+        UpdateVisuals();
+    }
+
+    public void ReturnClicked()
+    {
+        CloseSettingsPanel();
     }
 }

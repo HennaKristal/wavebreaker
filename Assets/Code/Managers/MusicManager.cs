@@ -19,7 +19,6 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private SoundTrack[] soundTracks;
     private AudioSource audioSource;
-    private string currentlyPlaying = "";
 
 
     private void Awake()
@@ -52,7 +51,6 @@ public class MusicManager : MonoBehaviour
 
         if (newTrack != null)
         {
-            currentlyPlaying = trackName;
             StartCoroutine(AnimateMusicCrossfade(newTrack, musicVolume, fadeDuration));
         }
         else
