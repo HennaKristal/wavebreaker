@@ -4,16 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class WaterTrail : MonoBehaviour
 {
-    [Header("Trail Settings")]
-    public int maxLength = 50;
-    public float minDistance = 0.1f;
-    public float pointLifetime = 2f;
-    public SpriteRenderer waterRippleRenderer;
-
-    [Header("Width Settings")]
-    public float minWidth = 0.35f;
-    public float maxWidth = 1.0f;
-
     private class TrailPoint
     {
         public Vector3 position;
@@ -26,51 +16,70 @@ public class WaterTrail : MonoBehaviour
         }
     }
 
-    private Queue<TrailPoint> points = new Queue<TrailPoint>();
+    [Header("Trail Settings")]
+    [SerializeField] private int maxLength = 50;
+    [SerializeField] private float minDistance = 0.1f;
+    [SerializeField] private float pointLifetime = 2f;
+    [SerializeField] private float minWidth = 0.35f;
+    [SerializeField] private float maxWidth = 1.0f;
+    [SerializeField] private SpriteRenderer waterRippleRenderer;
+
+    private Queue<TrailPoint> pointQueue = new Queue<TrailPoint>();
     private LineRenderer lineRenderer;
     private Vector3 lastPos;
 
-    void Start()
+
+    private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = true;
 
         lastPos = transform.position;
-        points.Enqueue(new TrailPoint(lastPos));
+        pointQueue.Enqueue(new TrailPoint(lastPos));
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Vector3 currentPos = transform.position;
 
         if (Vector3.Distance(currentPos, lastPos) >= minDistance)
         {
-            points.Enqueue(new TrailPoint(currentPos));
+            pointQueue.Enqueue(new TrailPoint(currentPos));
             lastPos = currentPos;
         }
 
         // Update lifetime
-        foreach (var p in points)
-            p.timeAlive += Time.deltaTime;
+        foreach (var point in pointQueue)
+        {
+            point.timeAlive += Time.deltaTime;
+        }
 
         // Remove old points
-        while (points.Count > 0 && points.Peek().timeAlive > pointLifetime)
-            points.Dequeue();
-
-        while (points.Count > maxLength)
-            points.Dequeue();
-
-        if (points.Count == 0)
+        while (pointQueue.Count > 0 && pointQueue.Peek().timeAlive > pointLifetime)
         {
-            waterRippleRenderer.enabled = true;
-            return;
+            pointQueue.Dequeue();
         }
-        else if (waterRippleRenderer.enabled)
+        while (pointQueue.Count > maxLength)
         {
-            waterRippleRenderer.enabled = false;
+            pointQueue.Dequeue();
         }
 
-        var array = System.Array.ConvertAll(points.ToArray(), p => p.position);
+        // Display Water ripple if no trail points
+        if (waterRippleRenderer != null)
+        {
+            if (pointQueue.Count == 0)
+            {
+                waterRippleRenderer.enabled = true;
+                return;
+            }
+            else if (waterRippleRenderer.enabled)
+            {
+                waterRippleRenderer.enabled = false;
+            }
+        }
+
+        // Display water trail
+        var array = System.Array.ConvertAll(pointQueue.ToArray(), p => p.position);
         lineRenderer.positionCount = array.Length;
         lineRenderer.SetPositions(array);
 

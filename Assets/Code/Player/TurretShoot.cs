@@ -8,7 +8,7 @@ public class TurretShoot : MonoBehaviour
     [SerializeField] private Transform firePoint;
 
     [Header("STATS")]
-    [SerializeField] private float fireRate = 0.5f;
+    [SerializeField] private float fireDelay = 0.5f;
     [SerializeField] private float projectileSpeed = 1f;
     [SerializeField] private int minDamage = 5;
     [SerializeField] private int maxDamage = 10;
@@ -23,7 +23,7 @@ public class TurretShoot : MonoBehaviour
         isShooting = (InputController.Instance.MainWeaponHeld);
         fireTimer += Time.deltaTime;
 
-        if (fireTimer >= fireRate)
+        if (fireTimer >= fireDelay)
         {
             if (isShooting)
             {

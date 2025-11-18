@@ -48,9 +48,9 @@ MonoBehaviour:
   maxLength: 100
   minDistance: 0.1
   pointLifetime: 2
-  waterRippleRenderer: {fileID: 9090006773817296799}
   minWidth: 0.35
   maxWidth: 1.25
+  waterRippleRenderer: {fileID: 9090006773817296799}
 --- !u!120 &625268978508945091
 LineRenderer:
   serializedVersion: 2
@@ -291,8 +291,6 @@ MonoBehaviour:
     amount: 5
   - prefab: {fileID: 1539581152666071431, guid: d4a01615831d7de4ba19802c825af90a, type: 3}
     amount: 1
-  - prefab: {fileID: 8711459577295741626, guid: 2093e79794c9dfb459fba6c2639e3db9, type: 3}
-    amount: 3
   dropRadius: 1
   healthBar: {fileID: 7584231539928265915}
   healthBarSlider: {fileID: 6198590698520949529}

@@ -14,5 +14,10 @@ public class Destroyer : MonoBehaviour
     private void Update()
     {
         rigidBody.linearVelocity = transform.up * MovementSpeed;
+
+        if (transform.rotation.z != 0)
+        {
+            transform.rotation = Quaternion.identity;
+        }
     }
 }

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ed6fe74d1f4464bb1e73549b7dd256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  lifeDuration: 8
 --- !u!212 &8378235223625529382
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,9 +95,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
-  m_Sprite: {fileID: 30997296, guid: 432af602c785c8a4883b44fd5f9cbc18, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_SortingOrder: 99
+  m_Sprite: {fileID: -1992843818, guid: d21ba5136ff46664f8bff6174f4e228a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,7 +117,7 @@ Animator:
   m_GameObject: {fileID: 513782165361930572}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e564543cf8b68a54fb7d7ee984755853, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1c9eb8dc778391c4e9ac037c9d16704d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -189,7 +190,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0076800734, y: 0.008123159}
+  m_Offset: {x: -0.00002503395, y: 0.007909149}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -199,5 +200,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.11125454, y: 0.078466535}
+  m_Size: {x: 0.06416798, y: 0.078894556}
   m_EdgeRadius: 0

@@ -32,7 +32,7 @@ public class MissileAnimation : MonoBehaviour
         materialRenderer = GetComponent<Renderer>();
         light2D = GetComponent<Light2D>();
         missileExplosion = GetComponent<MissileExplosion>();
-        globalLight = GameManager.Instance.GetGlobalLight();
+        globalLight = GameObject.Find("WaterWarningLight").GetComponent<Light2D>();
 
         StartCoroutine(AnimateDissolveEffect());
     }

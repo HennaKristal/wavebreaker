@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae02066b299c184fb02c9cc532cee78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
+  lifeDuration: 8
 --- !u!212 &1695912969673848727
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,7 +96,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: a5504a08ed72cae46837209d00a46b5f, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.47058824, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -166,7 +167,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0002965033, y: 0.007967547}
+  m_Offset: {x: -0.0002965033, y: 0.007558733}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -176,5 +177,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.063286126, y: 0.10865232}
+  m_Size: {x: 0.063286126, y: 0.11028749}
   m_EdgeRadius: 0

@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
+    [SerializeField] private float lifeDuration = 8f;
     private Rigidbody2D rigidBody;
     private int damage;
     private float speed;
-    private float lifeDuration = 15f;
 
 
     private void Awake()

@@ -32,7 +32,15 @@ public abstract class PlayerHealthBase : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultMaterial = spriteRenderer.material;
-        flashMaterial = GameManager.Instance.GetPlayerDamageFlashMaterial();
+
+        if (this.tag == "Ally")
+        {
+            flashMaterial = GameManager.Instance.GetAllyDamageFlashMaterial();
+        }
+        else
+        {
+            flashMaterial = GameManager.Instance.GetPlayerDamageFlashMaterial();
+        }
 
         currentHealth = maxHealth;
         UpdateHealthUI();

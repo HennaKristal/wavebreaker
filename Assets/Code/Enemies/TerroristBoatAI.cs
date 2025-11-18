@@ -25,8 +25,8 @@ public class TerroristBoatAI : MonoBehaviour
     private State currentState;
     private float fireTimer;
 
-    [SerializeField] private Transform currentTarget;
     [SerializeField] private float targetRefreshRate = 5f;
+    private Transform currentTarget;
     private float targetTimer;
 
 

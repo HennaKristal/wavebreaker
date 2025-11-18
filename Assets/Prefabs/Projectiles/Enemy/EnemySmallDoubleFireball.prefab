@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae02066b299c184fb02c9cc532cee78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
+  lifeDuration: 8
 --- !u!212 &8742039298302516388
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -96,7 +97,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 100
   m_Sprite: {fileID: -3070893, guid: 17b8b41ac03c37346adbd478c4653e39, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.47058824, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

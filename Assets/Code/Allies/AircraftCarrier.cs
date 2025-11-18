@@ -28,6 +28,11 @@ public class AircraftCarrier : MonoBehaviour
         }
 
         rigidBody.linearVelocity = transform.up * MovementSpeed;
+
+        if (transform.rotation.z != 0)
+        {
+            transform.rotation = Quaternion.identity;
+        }
     }
 
     private IEnumerator SpawnWave()

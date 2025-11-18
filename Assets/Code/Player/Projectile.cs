@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    [SerializeField] private float lifeDuration = 8f;
+    private Rigidbody2D rigidBody;
     private int damage;
     private float speed;
     private bool isCritical = false;
-    [SerializeField] private float lifeDuration = 8f;
 
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
 
-        if (rb == null)
+        if (rigidBody == null)
         {
             Destroy(gameObject);
             Debug.LogWarning("Projectile Prefab did not have rigidbody2D");
@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
             damage = Mathf.RoundToInt(damage * _criticalDamageMultiplier);
         }
 
-        rb.linearVelocity = transform.right * speed;
+        rigidBody.linearVelocity = transform.right * speed;
     }
 
 

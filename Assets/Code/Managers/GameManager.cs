@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 
@@ -12,12 +11,15 @@ public class GameManager : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] Material playerDamageFlashMaterial;
     [SerializeField] Material enemyDamageFlashMaterial;
+    [SerializeField] Material allyDamageFlashMaterial;
     private Transform playerTransform;
-    private Light2D globalLight;
+    private Transform flagshipHQTransform;
     private Inventory inventoryController;
+    private AudioSource UIAudioSource;
     private Fading fading;
     private Coroutine sceneRoutine;
     public bool gameStarted = false;
+    public bool gameEnded = false;
     public bool bossReached = false;
 
 
@@ -66,9 +68,19 @@ public class GameManager : MonoBehaviour
         return enemyDamageFlashMaterial;
     }
 
+    public Material GetAllyDamageFlashMaterial()
+    {
+        return allyDamageFlashMaterial;
+    }
+
     public Transform GetPlayerTransform()
     {
         return playerTransform;
+    }
+
+    public Transform GetFlagshipHQTransform()
+    {
+        return flagshipHQTransform;
     }
 
     public Inventory GetInventoryController()
@@ -76,14 +88,20 @@ public class GameManager : MonoBehaviour
         return inventoryController;
     }
 
-    public Light2D GetGlobalLight()
+    public AudioSource GetUIAudioSource()
     {
-        return globalLight;
+        return UIAudioSource;
     }
 
     public void GameOver()
     {
+        gameEnded = true;
         LoadSceneByName("Game");
+    }
+
+    public void GameCompleted()
+    {
+        gameEnded = true;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -95,7 +113,8 @@ public class GameManager : MonoBehaviour
 
         gameStarted = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
+        flagshipHQTransform = GameObject.Find("FlagShipHQ").transform;
+        UIAudioSource = GameObject.Find("UIAudioSource").GetComponent<AudioSource>();
         inventoryController = GameObject.Find("InventoryController").GetComponent<Inventory>();
     }
 

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ed6fe74d1f4464bb1e73549b7dd256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  lifeDuration: 8
 --- !u!212 &6067150444264546363
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,9 +94,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 99
   m_Sprite: {fileID: 21300000, guid: a5504a08ed72cae46837209d00a46b5f, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
