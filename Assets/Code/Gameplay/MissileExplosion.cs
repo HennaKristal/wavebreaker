@@ -10,6 +10,7 @@ public class MissileExplosion : MonoBehaviour
     private float startTime;
 
     [Header("Shake")]
+    [SerializeField] private Settings settings;
     [SerializeField] private ShakeData explosionShake;
 
 
@@ -17,10 +18,11 @@ public class MissileExplosion : MonoBehaviour
     {
         startTime = Time.time;
 
-        //if (PlayerPrefs.GetInt("DisableScreenShake", 0) == 0)
-        //{
-        //    CameraShakerHandler.Shake(explosionShake);
-        //}
+        if (settings.screenShakeEnabled)
+        {
+            Debug.Log("shake");
+            CameraShakerHandler.Shake(explosionShake);
+        }
     }
 
 

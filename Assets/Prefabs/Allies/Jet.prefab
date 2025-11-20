@@ -55,13 +55,14 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6667032202948221864, guid: 1e6821c5b76affc49a068f0f061478a6, type: 3}
   burstCount: 8
   burstDelay: 0.3
-  projectileSpeed: 2.8
-  minDamage: 2
-  maxDamage: 4
-  criticalChance: 5
-  criticalMultiplier: 1.5
+  projectileSpeed: 3
+  minDamage: 1
+  maxDamage: 3
+  criticalChance: 0
+  criticalMultiplier: 1
   lifeTime: 30
   endFlyAwayDuration: 10
+  carrierTargetRange: 5
 --- !u!212 &4140490762334903260
 SpriteRenderer:
   m_ObjectHideFlags: 0

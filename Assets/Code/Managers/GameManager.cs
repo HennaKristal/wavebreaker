@@ -113,7 +113,9 @@ public class GameManager : MonoBehaviour
 
         gameStarted = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform.gameObject.SetActive(false);
         flagshipHQTransform = GameObject.Find("FlagShipHQ").transform;
+        flagshipHQTransform.gameObject.SetActive(false);
         UIAudioSource = GameObject.Find("UIAudioSource").GetComponent<AudioSource>();
         inventoryController = GameObject.Find("InventoryController").GetComponent<Inventory>();
     }

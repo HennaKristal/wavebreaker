@@ -80,9 +80,9 @@ MonoBehaviour:
   firePoint: {fileID: 4087899329764906214}
   projectilePrefab: {fileID: 6667032202948221864, guid: 1e6821c5b76affc49a068f0f061478a6, type: 3}
   fireDelay: 0.25
-  projectileSpeed: 2
-  minDamage: 4
-  maxDamage: 5
+  projectileSpeed: 2.75
+  minDamage: 2
+  maxDamage: 3
   gunRotationSpeed: 180
   rotationLimits: {x: -180, y: 0}
   shootingRange: 5

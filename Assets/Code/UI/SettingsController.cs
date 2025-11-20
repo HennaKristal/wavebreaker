@@ -1,7 +1,8 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 
@@ -24,6 +25,11 @@ public class AudioSlot
 
 public class SettingsController : MonoBehaviour
 {
+    [SerializeField] private Settings settings;
+    [SerializeField] private Volume volume;
+    private MotionBlur motionBlur;
+    private FilmGrain filmGrain;
+
     [Header("References")]
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private MainMenuController mainMenuController;
@@ -57,6 +63,14 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UIVolumeSliderText;
     private bool isInitializing = true;
 
+    [Header("Control Hints")]
+    [SerializeField] private GameObject controlsBoth;
+    [SerializeField] private GameObject controlsKeyboard;
+    [SerializeField] private GameObject controlsController;
+    [SerializeField] private GameObject mainMenuNavigationBoth;
+    [SerializeField] private GameObject mainMenuNavigationKeyboard;
+    [SerializeField] private GameObject mainMenuNavigationController;
+
 
     private void Start()
     {
@@ -64,6 +78,11 @@ public class SettingsController : MonoBehaviour
         AudioManager.Instance.LoadVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
         AudioManager.Instance.LoadVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
         AudioManager.Instance.LoadVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
+
+        volume.profile.TryGet<MotionBlur>(out motionBlur);
+        volume.profile.TryGet<FilmGrain>(out filmGrain);
+
+        LoadToggleSettings();
 
         isInitializing = false;
     }
@@ -74,7 +93,6 @@ public class SettingsController : MonoBehaviour
         row = 1;
         column = 1;
         settingsPanel.SetActive(true);
-        LoadAccessibilitySettings();
         UpdateVisuals();
         StartCoroutine(ActivateNavigationDelayed(0.1f));
     }
@@ -96,6 +114,8 @@ public class SettingsController : MonoBehaviour
      
         navigationEnabled = false;
         settingsPanel.SetActive(false);
+        SaveToggleSettings();
+
         Time.timeScale = 1f;
 
         if (!GameManager.Instance.gameStarted)
@@ -200,12 +220,27 @@ public class SettingsController : MonoBehaviour
         // Right
         else if (move.x > deadZone)
         {
+            if (row == audioElements.Length)
+            {
+                row = toggleElements.Length;
+            }
+
+            if (row == 4)
+            {
+                row = 3;
+            }
+
             column = 2;
             row = Mathf.Min(row, toggleElements.Length);
         }
         // Left
         else if (move.x < -deadZone)
         {
+            if (row >= toggleElements.Length - 1)
+            {
+                row = audioElements.Length;
+            }
+
             column = 1;
             row = Mathf.Min(row, audioElements.Length);
         }
@@ -250,7 +285,7 @@ public class SettingsController : MonoBehaviour
             }
             else
             {
-                SaveAccessibilitySettings();
+                SaveToggleSettings();
                 PlayerPrefs.Save();
                 CloseSettingsPanel();
             }
@@ -281,26 +316,95 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    private void LoadAccessibilitySettings()
+    private void LoadToggleSettings()
     {
         int i = 0;
         foreach (var toggleElement in toggleElements)
         {
             i++;
-            int savedValue = PlayerPrefs.GetInt("accessibility_" + i, toggleElement.toggle.isOn ? 1 : 0);
+            int savedValue = PlayerPrefs.GetInt("toggle_" + i, toggleElement.toggle.isOn ? 1 : 0);
             toggleElement.toggle.isOn = savedValue == 1;
+
+            switch (i)
+            {
+                case 1: settings.screenShakeEnabled = toggleElement.toggle.isOn; break;
+                case 2: settings.motionBlurEnabled = toggleElement.toggle.isOn; break;
+                case 3: settings.filmGrainEnabled = toggleElement.toggle.isOn; break;
+                case 4: settings.showKeyboardControls = toggleElement.toggle.isOn; break;
+                case 5: settings.showControllerControls = toggleElement.toggle.isOn; break;
+                default: break;
+            }
+        }
+
+        UpdateUIControlHints();
+        ApplyPostProcessingChanges();
+    }
+
+    private void SaveToggleSettings()
+    {
+        int i = 0;
+        foreach (var toggleElement in toggleElements)
+        {
+            i++;
+            PlayerPrefs.SetInt("toggle_" + i, toggleElement.toggle.isOn ? 1 : 0);
+
+            switch (i)
+            {
+                case 1: settings.screenShakeEnabled = toggleElement.toggle.isOn; break;
+                case 2: settings.motionBlurEnabled = toggleElement.toggle.isOn; break;
+                case 3: settings.filmGrainEnabled = toggleElement.toggle.isOn; break;
+                case 4: settings.showKeyboardControls = toggleElement.toggle.isOn; break;
+                case 5: settings.showControllerControls = toggleElement.toggle.isOn; break;
+                default: break;
+            }
+        }
+
+        UpdateUIControlHints();
+        ApplyPostProcessingChanges();
+    }
+
+    private void UpdateUIControlHints()
+    {
+        controlsBoth.SetActive(false);
+        controlsKeyboard.SetActive(false);
+        controlsController.SetActive(false);
+        mainMenuNavigationBoth.SetActive(false);
+        mainMenuNavigationKeyboard.SetActive(false);
+        mainMenuNavigationController.SetActive(false);
+
+        if (settings.showKeyboardControls && settings.showControllerControls)
+        {
+            controlsBoth.SetActive(true);
+            mainMenuNavigationBoth.SetActive(true);
+        }
+        else if (settings.showKeyboardControls)
+        {
+            controlsKeyboard.SetActive(true);
+            mainMenuNavigationKeyboard.SetActive(true);
+        }
+        else if (settings.showControllerControls)
+        {
+            controlsController.SetActive(true);
+            mainMenuNavigationController.SetActive(true);
         }
     }
 
-    private void SaveAccessibilitySettings()
+
+    private void ApplyPostProcessingChanges()
     {
-        int i = 0;
-        foreach (var toggleElement in toggleElements)
+        if (motionBlur != null)
         {
-            i++;
-            PlayerPrefs.SetInt("accessibility_" + i, toggleElement.toggle.isOn ? 1 : 0);
+            motionBlur.intensity.overrideState = true;
+            motionBlur.intensity.Override(settings.motionBlurEnabled ? 0.3f : 0f);
+        }
+
+        if (filmGrain != null)
+        {
+            filmGrain.intensity.overrideState = true;
+            filmGrain.intensity.Override(settings.filmGrainEnabled ? 0.25f : 0f);
         }
     }
+
 
     public void ReturnHovered()
     {

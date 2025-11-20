@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66184ae78c08864297e07a4b15674bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
-  maxHealth: 1000
+  maxHealth: 2500
   collisionDamage: 150
   explosionPrefab: {fileID: 2015304144034905864, guid: 4935c5e31e45c2d4ca67b94c8b0e294e, type: 3}
   explosionDuration: 5

@@ -14,5 +14,5 @@ AssetOrigin:
   productId: 162991
   packageName: Smooth Camera Shaker
   packageVersion: 2.12
-  assetPath: Assets/FirstGearGames/Utilities/FrameRateCalculator.cs
+  assetPath: Assets/Unity/Plugins/FirstGearGames/Utilities/FrameRateCalculator.cs
   uploadId: 376379

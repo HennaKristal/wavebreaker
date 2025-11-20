@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Jet : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Jet : MonoBehaviour
     [Header("Lifetime")]
     [SerializeField] private float lifeTime = 30f;
     [SerializeField] private float endFlyAwayDuration = 5f;
+    [SerializeField] private float carrierTargetRange = 20f;
 
     private Transform carrier;
     private bool flyingAway = false;
@@ -129,11 +131,36 @@ public class Jet : MonoBehaviour
 
         if (enemies.Length > 0)
         {
-            currentTarget = enemies[Random.Range(0, enemies.Length)].transform;
-            return;
+            // Filter enemies to those within carrierTargetRange of the carrier (if carrier exists)
+            List<GameObject> valid = new List<GameObject>();
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                var e = enemies[i];
+                if (e == null) continue;
+
+                if (carrier == null)
+                {
+                    // If carrier not assigned, consider all enemies valid
+                    valid.Add(e);
+                }
+                else
+                {
+                    float dist = Vector2.Distance(e.transform.position, carrier.position);
+                    if (dist <= carrierTargetRange)
+                    {
+                        valid.Add(e);
+                    }
+                }
+            }
+
+            if (valid.Count > 0)
+            {
+                currentTarget = valid[Random.Range(0, valid.Count)].transform;
+                return;
+            }
         }
 
-        // No enemies: orbit/target the carrier
+        // No enemies in range: orbit/target the carrier
         currentTarget = carrier;
     }
 

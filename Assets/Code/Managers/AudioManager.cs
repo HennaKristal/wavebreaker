@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
 
     public void ApplyVolume(string parameter, Slider slider, TextMeshProUGUI label)
     {
+  
         float value = slider.value;
         label.text = Mathf.Ceil(value * 100f).ToString() + "%";
         PlayerPrefs.SetFloat(parameter, value);

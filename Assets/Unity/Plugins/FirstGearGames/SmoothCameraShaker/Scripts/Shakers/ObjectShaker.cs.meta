@@ -20,5 +20,5 @@ AssetOrigin:
   productId: 162991
   packageName: Smooth Camera Shaker
   packageVersion: 2.12
-  assetPath: Assets/FirstGearGames/SmoothCameraShaker/Scripts/Shakers/ObjectShaker.cs
+  assetPath: Assets/Unity/Plugins/FirstGearGames/SmoothCameraShaker/Scripts/Shakers/ObjectShaker.cs
   uploadId: 376379

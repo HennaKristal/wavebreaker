@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField] private int coins = 0;
     [SerializeField] private TextMeshProUGUI coinsText;
-
-    private int coins = 0;
 
 
     private void UpdateInventoryUI()
     {
-        coinsText.text = coins.ToString();
+        coinsText.text = coins.ToString() + "$";
     }
-
 
     public void AddCoins(int amount)
     {

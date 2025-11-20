@@ -1,86 +1,83 @@
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class CameraTarget : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform HQTransform;
+    private Vector3 HQPosition;
 
     [Header("Distances")]
     [SerializeField] private float maxDistance = 20f;
-    [SerializeField] private float killDistance = 25f;
+    [SerializeField] private float gameOverDistance = 25f;
 
-    [Header("Warning Light")]
+    [Header("Warnings")]
     [SerializeField] private GameObject warningLabel;
     [SerializeField] private GameObject warningLight;
-
-    private Vector3 HQLastPosition;
-    private bool HQDestroyed = false;
 
 
     private void LateUpdate()
     {
-        if (!player) return;
+        if (!player)
+        {
+            return;
+        }
 
         TrackHQPosition();
-        Vector3 hqPos = HQDestroyed ? HQLastPosition : HQTransform.position;
-
-        UpdateWarningSystem(hqPos);
-        FollowPlayerWithinBounds(hqPos);
-        UpdateWarningLightPosition(hqPos);
+        UpdateWarningSystem();
+        FollowPlayerWithinBounds();
+        UpdateWarningLightPosition();
     }
 
     private void TrackHQPosition()
     {
-        if (!HQDestroyed)
+        if (HQTransform != null)
         {
-            if (HQTransform == null)
-            {
-                HQDestroyed = true;
-            }
-            else
-            {
-                HQLastPosition = HQTransform.position;
-            }
+            HQPosition = HQTransform.position;
         }
     }
 
-    private void UpdateWarningSystem(Vector3 HQPosition)
+    private void UpdateWarningSystem()
     {
-        float distance = Vector2.Distance(player.position, HQPosition);
+        float playerToHQDistance = Vector2.Distance(player.position, HQPosition);
 
-        // Kill if too far
-        if (distance > killDistance)
+        // Fail if player goes too far from HQ
+        if (playerToHQDistance > gameOverDistance)
         {
             GameManager.Instance.GameOver();
             this.enabled = false;
             return;
         }
 
-        warningLabel.SetActive(distance > maxDistance);
+        if (playerToHQDistance > maxDistance)
+        {
+            if (!warningLabel.activeSelf)
+            {
+                warningLabel.SetActive(true);
+            }
+        }
+        else if (warningLabel.activeSelf)
+        {
+            warningLabel.SetActive(false);
+        }
     }
 
-    private void FollowPlayerWithinBounds(Vector3 HQPosition)
+    private void FollowPlayerWithinBounds()
     {
-        Vector3 desiredPos = player.position;
-
-        Vector2 offset = desiredPos - HQPosition;
+        Vector3 desiredPosition = player.position;
+        Vector2 offset = desiredPosition - HQPosition;
         float distance = offset.magnitude;
 
         if (distance > maxDistance)
         {
-            desiredPos = HQPosition + (Vector3)(offset.normalized * maxDistance);
+            desiredPosition = HQPosition + (Vector3)(offset.normalized * maxDistance);
         }
 
-        transform.position = new Vector3(desiredPos.x, desiredPos.y, transform.position.z);
+        transform.position = new Vector3(desiredPosition.x, desiredPosition.y, transform.position.z);
     }
 
-    private void UpdateWarningLightPosition(Vector3 HQPosition)
+    private void UpdateWarningLightPosition()
     {
-        if (warningLight)
-        {
-            warningLight.transform.position = HQPosition;
-        }
+        warningLight.transform.position = HQPosition;
     }
 }

@@ -7,6 +7,7 @@ public class PauseController : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private SettingsController settingsController;
+    [SerializeField] private ShopController shopController;
 
     [Header("Buttons")]
     [SerializeField] private TextMeshProUGUI[] buttons;
@@ -48,7 +49,12 @@ public class PauseController : MonoBehaviour
     {
         navigationEnabled = false;
         pausePanel.SetActive(false);
-        Time.timeScale = 1f;
+
+        // Don't unpause if placing shop items
+        if (!shopController.isPlacingShopItems)
+        {
+            Time.timeScale = 1f;
+        }
     }
 
 

@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 162991
   packageName: Smooth Camera Shaker
   packageVersion: 2.12
-  assetPath: Assets/FirstGearGames/SmoothCameraShaker/Scripts/Presets/CurveFade.asset
+  assetPath: Assets/Unity/Plugins/FirstGearGames/SmoothCameraShaker/Scripts/Presets/CurveFade.asset
   uploadId: 376379

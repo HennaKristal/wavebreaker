@@ -31,7 +31,6 @@ public class CustomSpawn
 
 public class WaveSpawner : MonoBehaviour
 {
-
     [SerializeField] private Transform enemyContainer;
     [SerializeField] private float spawnRadius = 10f;
     [SerializeField] private Transform spawnPoint;
@@ -40,30 +39,18 @@ public class WaveSpawner : MonoBehaviour
     private float waveTimer = 0f;
     private string currentSong = "";
 
-    [Header("Between-Wave UI")]
+    [Header("Between Wave UI")]
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private Transform FlagshipHQ;
     [SerializeField] private Transform player;
-    [SerializeField] private UpgradeController upgradeController;
+    [SerializeField] private ShopController shopController;
     private bool isTransitioningToUpgrade = false;
     public bool waitingForUpgrade = false;
-    public bool gameEnded = false;
     [SerializeField] private float transitionDuration = 2f;
-
-    // store original camera targets so we can restore them
-    private Transform originalCamFollow;
-    private Transform originalCamLookAt;
 
 
     private void Start()
     {
-        // capture original camera targets if available
-        if (cinemachineCamera != null)
-        {
-            originalCamFollow = cinemachineCamera.Follow;
-            originalCamLookAt = cinemachineCamera.LookAt;
-        }
-
         StartNextWave();
     }
 
@@ -71,7 +58,6 @@ public class WaveSpawner : MonoBehaviour
     {
         if (GameManager.Instance.gameEnded) return;
 
-        // If we're currently paused waiting for the upgrade UI, do nothing
         if (waitingForUpgrade) return;
 
         waveTimer += Time.deltaTime;
@@ -117,54 +103,45 @@ public class WaveSpawner : MonoBehaviour
 
         isTransitioningToUpgrade = true;
 
-        // switch camera target to HQ now so Cinemachine can blend/track for a bit
+        // switch camera target to HQ
         if (cinemachineCamera != null && FlagshipHQ != null)
         {
-            if (originalCamFollow == null) originalCamFollow = cinemachineCamera.Follow;
-            if (originalCamLookAt == null) originalCamLookAt = cinemachineCamera.LookAt;
-
             cinemachineCamera.Follow = FlagshipHQ;
             cinemachineCamera.LookAt = FlagshipHQ;
         }
+        else
+        {
+            cinemachineCamera.Follow = player;
+            cinemachineCamera.LookAt = player;
+        }
 
-        // start coroutine that waits in real time (unscaled) and then pauses and shows upgrade UI
         StartCoroutine(TransitionToUpgradeAndPause());
     }
 
     private IEnumerator TransitionToUpgradeAndPause()
     {
-        // Wait using real time (unscaled) so this still runs even if Time.timeScale changes elsewhere
         yield return new WaitForSecondsRealtime(transitionDuration);
 
         waitingForUpgrade = true;
         isTransitioningToUpgrade = false;
-        upgradeController.OpenUpgradePanel();
+        shopController.OpenShopPanel();
     }
 
-    // Call this method from your UI (e.g., close/continue button) to resume and start the next wave
     public void SpawnNextWave()
     {
         if (!waitingForUpgrade) return;
 
-        // restore camera targets
         if (cinemachineCamera != null)
         {
-            // prefer the explicit player transform if provided, otherwise restore original
             if (player != null)
             {
                 cinemachineCamera.Follow = player;
                 cinemachineCamera.LookAt = player;
             }
-            else
-            {
-                cinemachineCamera.Follow = originalCamFollow;
-                cinemachineCamera.LookAt = originalCamLookAt;
-            }
         }
 
         waitingForUpgrade = false;
 
-        // Start the next wave
         StartNextWave();
     }
 
@@ -211,7 +188,6 @@ public class WaveSpawner : MonoBehaviour
         {
             float delay = task.spawnTime - previousSpawnTime;
 
-            // If the delay is zero or negative (shouldn't often happen), just continue without waiting
             if (delay > 0f)
             {
                 yield return new WaitForSeconds(delay);

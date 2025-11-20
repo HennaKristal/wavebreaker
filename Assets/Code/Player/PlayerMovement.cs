@@ -9,14 +9,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float turnSpeed = 100f;
     private Rigidbody2D rigidBody;
 
-    [Header("Idle Boat Animation")]
-    [SerializeField] private float idleDirection = 1f;
-    [SerializeField] private float idleSpeed = 1f;
-    [SerializeField] private float idleTurnSpeed = 40f;
-    [SerializeField] private float flipCenter = 0f;
-    [SerializeField] private float flipThreshold = 15f;
-    private bool canFlip = true;
-
 
     private void Start()
     {
@@ -25,12 +17,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.gameStarted)
-        {
-            IdleBoatAnimation();
-            return;
-        }
-
         Move();
     }
 
@@ -43,32 +29,5 @@ public class PlayerMovement : MonoBehaviour
         float finalSpeed = inputVector.y > 0 ? forwardSpeed : backwardSpeed;
         Vector2 forward = transform.up;
         rigidBody.linearVelocity = forward * inputVector.y * finalSpeed;
-    }
-
-    private void IdleBoatAnimation()
-    {
-        Vector2 fakeInput = new Vector2(idleDirection, 1f);
-
-        float turnAmount = -fakeInput.x * idleTurnSpeed * Time.fixedDeltaTime;
-        rigidBody.MoveRotation(rigidBody.rotation + turnAmount);
-
-        Vector2 forward = transform.up;
-        rigidBody.linearVelocity = forward * fakeInput.y * idleSpeed;
-
-        float z = rigidBody.rotation % 360f;
-        if (z < 0) z += 360f;
-
-        bool inFlipZone = Mathf.Abs(Mathf.DeltaAngle(z, flipCenter)) < flipThreshold;
-
-        if (canFlip && inFlipZone)
-        {
-            idleDirection *= -1f;
-            canFlip = false;
-        }
-
-        if (!inFlipZone)
-        {
-            canFlip = true;
-        }
     }
 }

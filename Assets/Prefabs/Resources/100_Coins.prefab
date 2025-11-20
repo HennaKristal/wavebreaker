@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Resource
   resourceType: 0
   amount: 100
-  attractRadius: 1.5
+  attractRadius: 2
   attractForce: 2
 --- !u!212 &6529333499139964791
 SpriteRenderer:

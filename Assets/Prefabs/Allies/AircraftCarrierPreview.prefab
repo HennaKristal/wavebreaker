@@ -49,7 +49,7 @@ MonoBehaviour:
   prefab: {fileID: 2235365136555137116, guid: c893d725cd39cc24a8179d7bc60a1bc0, type: 3}
   inputMoveSpeed: 3
   mouseMoveThreshold: 0.01
-  price: 2000
+  price: 6000
   errorAudioClip: {fileID: 8300000, guid: b4af92c0848063e4591d228c5f239687, type: 3}
 --- !u!212 &1071660297020019497
 SpriteRenderer:
