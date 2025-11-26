@@ -52,6 +52,7 @@ MonoBehaviour:
   damage: 100
   duration: 1
   fullDamageTimeWindow: 0.1
+  settings: {fileID: 0}
   explosionShake: {fileID: 11400000, guid: 6c1cfc78604eccc4c878bd0d392a0459, type: 2}
 --- !u!114 &1956528545490444214
 MonoBehaviour:
@@ -158,7 +159,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -161,3 +161,6 @@ MonoBehaviour:
   criticalChance: 15
   criticalMultiplier: 2.25
   isShooting: 0
+  SFXAudioSource: {fileID: 0}
+  shootAudioClip: {fileID: 8300000, guid: b4b7b4ffb03317e49a0695aca13dc17c, type: 3}
+  shouldPlayAudio: 1

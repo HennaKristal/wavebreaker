@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
+using TMPro;
 
 [System.Serializable]
 public class Wave
@@ -39,19 +40,24 @@ public class WaveSpawner : MonoBehaviour
     private float waveTimer = 0f;
     private string currentSong = "";
 
+    [Header("Wave Information UI")]
+    [SerializeField] private GameObject waveInformation;
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI enemiesLeftText;
+
     [Header("Between Wave UI")]
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] private Transform FlagshipHQ;
     [SerializeField] private Transform player;
     [SerializeField] private ShopController shopController;
-    private bool isTransitioningToUpgrade = false;
-    public bool waitingForUpgrade = false;
     [SerializeField] private float transitionDuration = 2f;
-
+    [HideInInspector]public bool waitingForUpgrade = false;
+    private bool isTransitioningToUpgrade = false;
 
     private void Start()
     {
         StartNextWave();
+        waveInformation.SetActive(true);
     }
 
     private void Update()
@@ -148,6 +154,7 @@ public class WaveSpawner : MonoBehaviour
     private void StartNextWave()
     {
         currentWave++;
+        waveText.text = currentWave.ToString();
         waveTimer = 0f;
 
         if (currentWave <= waves.Count)
@@ -204,6 +211,21 @@ public class WaveSpawner : MonoBehaviour
     {
         float angle = Random.Range(0f, Mathf.PI * 2);
         return new Vector3(spawnPoint.position.x + Mathf.Cos(angle) * radius, spawnPoint.position.y + Mathf.Sin(angle) * radius, 0);
+    }
+
+    public void OnEnemySpawned()
+    {
+        Invoke(nameof(UpdateEnemiesLeftUI), 0.1f);
+    }
+
+    public void OnEnemyDied()
+    {
+        UpdateEnemiesLeftUI();
+    }
+
+    private void UpdateEnemiesLeftUI()
+    {
+        enemiesLeftText.text = enemyContainer.childCount.ToString();
     }
 }
 

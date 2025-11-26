@@ -17,7 +17,6 @@ public class InputController : MonoBehaviour
     public bool EnterPressed { get; private set; }
     public bool CancelPressed { get; private set; }
 
-
     private void Awake()
     {
         if (_instance != null && _instance != this)

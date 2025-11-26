@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-
 [System.Serializable]
 public struct SoundTrack
 {
@@ -9,7 +8,6 @@ public struct SoundTrack
     public AudioClip clip;
     [Range(0, 1)] public float volume;
 }
-
 
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
@@ -19,7 +17,6 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private SoundTrack[] soundTracks;
     private AudioSource audioSource;
-
 
     private void Awake()
     {

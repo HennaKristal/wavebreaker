@@ -18,11 +18,11 @@ public class MissileExplosion : MonoBehaviour
     {
         startTime = Time.time;
 
-        if (settings.screenShakeEnabled)
-        {
-            Debug.Log("shake");
-            CameraShakerHandler.Shake(explosionShake);
-        }
+        //if (settings.screenShakeEnabled)
+        //{
+        //    Debug.Log("shake");
+        //    CameraShakerHandler.Shake(explosionShake);
+        //}
     }
 
 

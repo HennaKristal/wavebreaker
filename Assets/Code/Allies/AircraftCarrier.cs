@@ -6,14 +6,13 @@ public class AircraftCarrier : MonoBehaviour
     [SerializeField] private float MovementSpeed;
     private Rigidbody2D rigidBody;
 
-    [Header("Spawning")]
+    [Header("Jet Spawning")]
     [SerializeField] private GameObject jetPrefab;
     [SerializeField] private Transform jetSpawnPoint;
     [SerializeField] private int jetsPerWave = 3;
     [SerializeField] private float delayBetweenJets = 0.5f;
     [SerializeField] private float waveCooldown = 30f;
-
-    private bool isSpawning = false;
+    private bool isSpawningJets = false;
 
     private void Start()
     {
@@ -22,37 +21,34 @@ public class AircraftCarrier : MonoBehaviour
 
     private void Update()
     {
-        if (!isSpawning)
-        {
-            StartCoroutine(SpawnWave());
-        }
-
         rigidBody.linearVelocity = transform.up * MovementSpeed;
 
         if (transform.rotation.z != 0)
         {
             transform.rotation = Quaternion.identity;
         }
+
+        if (!isSpawningJets)
+        {
+            StartCoroutine(SpawnJets());
+        }
     }
 
-    private IEnumerator SpawnWave()
+    private IEnumerator SpawnJets()
     {
-        isSpawning = true;
+        isSpawningJets = true;
 
         for (int i = 0; i < jetsPerWave; i++)
         {
-            GameObject jetObj = Instantiate(jetPrefab, jetSpawnPoint.position, jetSpawnPoint.rotation);
-
-            if (jetObj.TryGetComponent(out Jet jet))
-            {
-                jet.SetCarrier(this.transform);
-            }
+            GameObject jetGameobject = Instantiate(jetPrefab, jetSpawnPoint.position, jetSpawnPoint.rotation);
+            Jet jet = jetGameobject.GetComponent<Jet>();
+            jet?.SetCarrier(transform);
 
             yield return new WaitForSeconds(delayBetweenJets);
         }
 
         yield return new WaitForSeconds(waveCooldown);
-        
-        isSpawning = false;
+
+        isSpawningJets = false;
     }
 }

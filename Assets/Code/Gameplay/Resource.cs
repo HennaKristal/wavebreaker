@@ -22,10 +22,15 @@ public class Resource : MonoBehaviour
     [SerializeField] private float attractRadius = 3f;
     [SerializeField] private float attractForce = 2f;
 
+    [Header("Audio")]
+    private AudioSource pickupAudioSource;
+    [SerializeField] private AudioClip pickupAudioClip;
+
     private void Start()
     {
         player = GameManager.Instance.GetPlayerTransform();
         inventory = GameManager.Instance.GetInventoryController();
+        pickupAudioSource = GameObject.Find("PickupAudioSource")?.GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -45,6 +50,8 @@ public class Resource : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            PlayPickupSound();
+
             switch (resourceType)
             {
                 case ResourceType.Coin:
@@ -54,5 +61,10 @@ public class Resource : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void PlayPickupSound()
+    {
+        pickupAudioSource.PlayOneShot(pickupAudioClip);
     }
 }

@@ -51,6 +51,7 @@ MonoBehaviour:
   mouseMoveThreshold: 0.01
   price: 6000
   errorAudioClip: {fileID: 8300000, guid: b4af92c0848063e4591d228c5f239687, type: 3}
+  purchaseAudioClip: {fileID: 8300000, guid: 6443859e64db8d24587bf8e78459fae5, type: 3}
 --- !u!212 &1071660297020019497
 SpriteRenderer:
   m_ObjectHideFlags: 0

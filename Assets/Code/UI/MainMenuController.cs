@@ -28,7 +28,6 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject tutorialUI;
     [SerializeField] private TextMeshProUGUI tutorialText;
 
-
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI[] gameButtons;
     [SerializeField] private Credit[] credits;
@@ -36,6 +35,11 @@ public class MainMenuController : MonoBehaviour
     [Header("Colors")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color highlightColor = new Color(0.3f, 0.9f, 1f);
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource UIAudioSource;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] private AudioClip buttonClickSound;
 
     private enum MainMenuColumn { Credits, Menu };
     private MainMenuColumn column = MainMenuColumn.Menu;
@@ -45,13 +49,16 @@ public class MainMenuController : MonoBehaviour
     private float deadZone = 0.4f;
     [HideInInspector] public bool navigationEnabled = false;
 
-
     private void Start()
     {
-        UpdateVisuals();
-        navigationEnabled = true;
-
         MusicManager.Instance.PlayMusic("BattleTheme");
+        Invoke(nameof(EnableNavigation), 1f);
+    }
+
+    private void EnableNavigation()
+    {
+        UpdateVisuals(playSound: false);
+        navigationEnabled = true;
     }
 
     private void Update()
@@ -69,12 +76,14 @@ public class MainMenuController : MonoBehaviour
     {
         Vector2 move = InputController.Instance.Move;
 
+        // Reset timer if input is not held down
         if (move == Vector2.zero)
         {
             nextInputTime = Time.time;
             return;
         }
 
+        // Have a small cooldown between inputs
         if (Time.time < nextInputTime)
         {
             return;
@@ -83,13 +92,13 @@ public class MainMenuController : MonoBehaviour
         int previousRow = row;
         MainMenuColumn previousColumn = column;
 
-        // Up
+        // Up input
         if (move.y > deadZone)
         {
             row--;
             row = Mathf.Max(row, 1);
         }
-        // Down
+        // Down input
         else if (move.y < -deadZone)
         {
             if (column == MainMenuColumn.Credits)
@@ -103,13 +112,13 @@ public class MainMenuController : MonoBehaviour
                 row = Mathf.Min(row, gameButtons.Length);
             }
         }
-        // Right
+        // Right input
         else if (move.x > deadZone)
         {
             column = MainMenuColumn.Menu;
             row = Mathf.Min(row, gameButtons.Length);
         }
-        // Left
+        // Left input
         else if (move.x < -deadZone)
         {
             column = MainMenuColumn.Credits;
@@ -123,18 +132,20 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
-    private void UpdateVisuals()
+    private void UpdateVisuals(bool playSound = true)
     {
+        if (playSound)
+        {
+            PlayHoverSound();
+        }
+
+        // Set all colors normal
         foreach (var element in gameButtons)
-        {
             element.color = normalColor;
-        }
-
         foreach (var element in credits)
-        {
             element.image.color = normalColor;
-        }
 
+        // Change color for the active button
         if (column == MainMenuColumn.Credits)
         {
             credits[row - 1].image.color = highlightColor;
@@ -149,17 +160,17 @@ public class MainMenuController : MonoBehaviour
     {
         if (InputController.Instance.EnterPressed)
         {
-
             if (column == MainMenuColumn.Menu)
             {
                 switch (row)
                 {
                     case 1: StartGame(); break;
-                    case 2: settingsController.OpenSettingsPanel(); break;
+                    case 2: SettingsClicked(); break;
                 }
             }
             else
             {
+                PlayClickSound();
                 GameManager.Instance.OpenLink(credits[row - 1].url);
             }
         }
@@ -167,12 +178,14 @@ public class MainMenuController : MonoBehaviour
 
     private void StartGame()
     {
-        GameManager.Instance.gameStarted = true;
+
+        GameManager.Instance.StartGame();
+
+        PlayClickSound();
 
         mainMenuPanel.SetActive(false);
 
         healthbarUI.SetActive(true);
-        flagshipHPUI.SetActive(true);
         resourcesUI.SetActive(true);
         controlHintsUI.SetActive(true);
 
@@ -212,11 +225,15 @@ public class MainMenuController : MonoBehaviour
 
     private void Tutorial4()
     {
+        flagshipHPUI.SetActive(true);
         tutorialUI.SetActive(false);
     }
 
     public void DeveloperCreditHovered()
     {
+        if (row == 1 && column == MainMenuColumn.Credits)
+            return;
+
         column = MainMenuColumn.Credits;
         row = 1;
         UpdateVisuals();
@@ -224,6 +241,9 @@ public class MainMenuController : MonoBehaviour
 
     public void MusicCreditHovered()
     {
+        if (row == 2 && column == MainMenuColumn.Credits)
+            return;
+
         column = MainMenuColumn.Credits;
         row = 2;
         UpdateVisuals();
@@ -231,6 +251,9 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGameHovered()
     {
+        if (row == 1 && column == MainMenuColumn.Menu)
+            return;
+
         column = MainMenuColumn.Menu;
         row = 1;
         UpdateVisuals();
@@ -238,6 +261,9 @@ public class MainMenuController : MonoBehaviour
 
     public void SettingsHovered()
     {
+        if (row == 2 && column == MainMenuColumn.Menu)
+            return;
+
         column = MainMenuColumn.Menu;
         row = 2;
         UpdateVisuals();
@@ -245,21 +271,35 @@ public class MainMenuController : MonoBehaviour
 
     public void DeveloperCreditClicked()
     {
+        PlayClickSound();
         GameManager.Instance.OpenLink(credits[row - 1].url);
     }
 
     public void MusicCreditClicked()
     {
+        PlayClickSound();
         GameManager.Instance.OpenLink(credits[row - 1].url);
     }
 
     public void StartGameClicked()
     {
+        PlayClickSound();
         StartGame();
     }
 
     public void SettingsClicked()
     {
+        PlayClickSound();
         settingsController.OpenSettingsPanel();
+    }
+
+    public void PlayHoverSound()
+    {
+        UIAudioSource.PlayOneShot(buttonHoverSound);
+    }
+
+    public void PlayClickSound()
+    {
+        UIAudioSource.PlayOneShot(buttonClickSound);
     }
 }

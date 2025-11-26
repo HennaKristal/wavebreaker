@@ -50,6 +50,7 @@ MonoBehaviour:
   amount: 100
   attractRadius: 2
   attractForce: 2
+  pickupAudioClip: {fileID: 8300000, guid: dd1bc50bd834ae04983a65ce4408dd32, type: 3}
 --- !u!212 &6529333499139964791
 SpriteRenderer:
   m_ObjectHideFlags: 0

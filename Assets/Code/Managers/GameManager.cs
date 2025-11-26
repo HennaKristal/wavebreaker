@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -22,7 +21,6 @@ public class GameManager : MonoBehaviour
     public bool gameEnded = false;
     public bool bossReached = false;
 
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -37,8 +35,6 @@ public class GameManager : MonoBehaviour
         fading = GetComponent<Fading>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
-
 
     private void OnDestroy()
     {
@@ -91,6 +87,12 @@ public class GameManager : MonoBehaviour
     public AudioSource GetUIAudioSource()
     {
         return UIAudioSource;
+    }
+
+    public void StartGame()
+    {
+        gameStarted = true;
+        gameEnded = false;
     }
 
     public void GameOver()

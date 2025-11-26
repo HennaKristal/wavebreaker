@@ -12,17 +12,42 @@ public class AllyTurret : MonoBehaviour
     [SerializeField] private float gunRotationSpeed = 180f;
     [SerializeField] private Vector2 rotationLimits = new Vector2(0, 180);
     [SerializeField] private float shootingRange = 5f;
-    [SerializeField] private float targetRefreshRate = 5f;
+    [SerializeField] private float targetRefreshRate = 2f;
     private Transform currentTarget;
     private float targetTimer;
     private float fireTimer;
     private float distanceToClosestTarget;
     private bool targetWithinRotationLimits;
 
-
     private void Start()
     {
         SelectNewTarget();
+    }
+
+    private void Update()
+    {
+        targetTimer += Time.deltaTime;
+
+        if (targetTimer >= targetRefreshRate)
+        {
+            SelectNewTarget();
+            targetTimer = 0f;
+        }
+
+        if (currentTarget == null)
+            return;
+
+        distanceToClosestTarget = Vector2.Distance(transform.position, currentTarget.position);
+
+        if (distanceToClosestTarget < shootingRange)
+        {
+            RotateGunTowardTarget();
+
+            if (targetWithinRotationLimits)
+            {
+                HandleShooting();
+            }
+        }
     }
 
     private void SelectNewTarget()
@@ -32,15 +57,16 @@ public class AllyTurret : MonoBehaviour
         Transform closest = null;
         distanceToClosestTarget = Mathf.Infinity;
 
-        void CheckTargets(GameObject[] arr)
+        void CheckTargets(GameObject[] array)
         {
-            foreach (var obj in arr)
+            foreach (GameObject gameobject in array)
             {
-                float distanceToTarget = Vector2.Distance(transform.position, obj.transform.position);
+                float distanceToTarget = Vector2.Distance(transform.position, gameobject.transform.position);
+
                 if (distanceToTarget < distanceToClosestTarget)
                 {
                     distanceToClosestTarget = distanceToTarget;
-                    closest = obj.transform;
+                    closest = gameobject.transform;
                 }
             }
         }
@@ -49,36 +75,10 @@ public class AllyTurret : MonoBehaviour
         currentTarget = closest;
     }
 
-    private void Update()
-    {
-        if (currentTarget == null)
-        {
-            SelectNewTarget();
-            return;
-        }
-
-        targetTimer += Time.deltaTime;
-        if (targetTimer >= targetRefreshRate)
-        {
-            SelectNewTarget();
-            targetTimer = 0f;
-        }
-
-        distanceToClosestTarget = Vector2.Distance(transform.position, currentTarget.position);
-
-        if (distanceToClosestTarget < shootingRange)
-        {
-            RotateGunTowardTarget();
-            if (targetWithinRotationLimits)
-            {
-                HandleShooting();
-            }
-        }
-    }
-
     private void RotateGunTowardTarget()
     {
-        if (currentTarget == null) { return; }
+        if (currentTarget == null)
+            return;
 
         Vector3 direction = currentTarget.position - transform.position;
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -93,13 +93,6 @@ public class AllyTurret : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
-    private static float NormalizeAngle360(float angle)
-    {
-        angle %= 360f;
-        if (angle < 0f) angle += 360f;
-        return angle;
-    }
-
     private static float ClampAngleToLimits(float angle, float minLimit, float maxLimit)
     {
         float a = NormalizeAngle360(angle);
@@ -110,15 +103,16 @@ public class AllyTurret : MonoBehaviour
         {
             return Mathf.Clamp(a, min, max);
         }
-        else
-        {
-            bool inside = (a >= min) || (a <= max);
-            if (inside) return a;
 
-            float dToMin = Mathf.Abs(Mathf.DeltaAngle(a, min));
-            float dToMax = Mathf.Abs(Mathf.DeltaAngle(a, max));
-            return dToMin < dToMax ? min : max;
+        bool inside = (a >= min) || (a <= max);
+        if (inside)
+        {
+            return a;
         }
+
+        float dToMin = Mathf.Abs(Mathf.DeltaAngle(a, min));
+        float dToMax = Mathf.Abs(Mathf.DeltaAngle(a, max));
+        return dToMin < dToMax ? min : max;
     }
 
     private static bool IsAngleWithinLimits(float angle, float minLimit, float maxLimit)
@@ -131,21 +125,18 @@ public class AllyTurret : MonoBehaviour
         {
             return a >= min && a <= max;
         }
-        else
-        {
-            return (a >= min) || (a <= max);
-        }
+
+        return (a >= min) || (a <= max);
     }
 
     private void HandleShooting()
     {
         if (projectilePrefab == null || firePoint == null || currentTarget == null)
-        {
             return;
-        }
 
-        // If the target is outside rotation limits, don't shoot
-        if (!targetWithinRotationLimits) return;
+        // Don't shoot if the target is outside rotation limits
+        if (!targetWithinRotationLimits)
+            return;
 
         fireTimer += Time.deltaTime;
 
@@ -161,5 +152,17 @@ public class AllyTurret : MonoBehaviour
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         var projectile = bullet.GetComponent<Projectile>();
         projectile?.Initialize(projectileSpeed, minDamage, maxDamage, 0, 1);
+    }
+
+    private static float NormalizeAngle360(float angle)
+    {
+        angle %= 360f;
+
+        if (angle < 0f)
+        {
+            angle += 360f;
+        }
+
+        return angle;
     }
 }

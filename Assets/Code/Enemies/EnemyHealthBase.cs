@@ -17,6 +17,7 @@ public abstract class EnemyHealthBase : MonoBehaviour
 
     [Header("REFERENCES")]
     [SerializeField] protected GameObject damageNumberPrefab;
+    protected WaveSpawner waveSpawner;
     protected Collider2D enemyCollider;
     public bool isDead = false;
 
@@ -32,6 +33,9 @@ public abstract class EnemyHealthBase : MonoBehaviour
     protected virtual void Start()
     {
         enemyCollider = GetComponent<Collider2D>();
+
+        waveSpawner = GameObject.Find("WaveController").GetComponent<WaveSpawner>();
+        waveSpawner?.OnEnemySpawned();
 
         sr = GetComponent<SpriteRenderer>();
         defaultMaterial = sr.material;
@@ -84,6 +88,8 @@ public abstract class EnemyHealthBase : MonoBehaviour
 
     protected virtual void GiveKillRewards()
     {
+        waveSpawner?.OnEnemyDied();
+
         foreach (ResourceDrop drop in resourceDrops)
         {
             if (drop.prefab == null || drop.amount <= 0) continue;

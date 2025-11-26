@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
 [Serializable]
 public class CursorAnimation
 {
@@ -11,7 +10,6 @@ public class CursorAnimation
     public float animationFrameTime;
     public Vector2 offset;
 }
-
 
 public class CursorManager : MonoBehaviour
 {
@@ -33,7 +31,6 @@ public class CursorManager : MonoBehaviour
         Interact,
         Friendly
     }
-
 
     private void Awake()
     {

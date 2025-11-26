@@ -31,7 +31,6 @@ public class Jet : MonoBehaviour
     private float currentSpeed = 0f;
     private Transform currentTarget;
 
-
     private void Start()
     {
         StartCoroutine(JetRoutine());
@@ -45,7 +44,7 @@ public class Jet : MonoBehaviour
 
     private IEnumerator JetRoutine()
     {
-        // PHASE 1: Acceleration
+        // Take off
         float t = 0;
         while (t < accelerationTime)
         {
@@ -55,7 +54,7 @@ public class Jet : MonoBehaviour
             yield return null;
         }
 
-        // Main behavior loop
+        // Hunt enemies
         while (true)
         {
             if (flyingAway)
@@ -70,7 +69,7 @@ public class Jet : MonoBehaviour
             {
                 yield return StartCoroutine(RotateTowards(currentTarget));
 
-                // Only fire if target is NOT the carrier
+                // Fire if target is not the carrier itself
                 if (currentTarget != carrier)
                 {
                     yield return StartCoroutine(FireBurst());
@@ -84,7 +83,6 @@ public class Jet : MonoBehaviour
                 yield return null;
             }
         }
-
     }
 
     private IEnumerator LifetimeRoutine()
@@ -109,7 +107,6 @@ public class Jet : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     private void Update()
     {
         if (!flyingAway)
@@ -117,7 +114,6 @@ public class Jet : MonoBehaviour
             transform.position += transform.up * currentSpeed * Time.deltaTime;
         }
     }
-
 
     private void AcquireTarget()
     {
@@ -131,24 +127,27 @@ public class Jet : MonoBehaviour
 
         if (enemies.Length > 0)
         {
-            // Filter enemies to those within carrierTargetRange of the carrier (if carrier exists)
             List<GameObject> valid = new List<GameObject>();
+
             for (int i = 0; i < enemies.Length; i++)
             {
-                var e = enemies[i];
-                if (e == null) continue;
+                var enemy = enemies[i];
+
+                if (enemy == null)
+                    continue;
 
                 if (carrier == null)
                 {
                     // If carrier not assigned, consider all enemies valid
-                    valid.Add(e);
+                    valid.Add(enemy);
                 }
                 else
                 {
-                    float dist = Vector2.Distance(e.transform.position, carrier.position);
-                    if (dist <= carrierTargetRange)
+                    // Find enemies within carrierTargetRange
+                    float distance = Vector2.Distance(enemy.transform.position, carrier.position);
+                    if (distance <= carrierTargetRange)
                     {
-                        valid.Add(e);
+                        valid.Add(enemy);
                     }
                 }
             }
@@ -160,10 +159,9 @@ public class Jet : MonoBehaviour
             }
         }
 
-        // No enemies in range: orbit/target the carrier
+        // If no enemies in range, then orbit the aircraft carrier
         currentTarget = carrier;
     }
-
 
     private IEnumerator RotateTowards(Transform target)
     {
@@ -173,16 +171,10 @@ public class Jet : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
             Quaternion goalRotation = Quaternion.Euler(0, 0, angle);
 
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                goalRotation,
-                turnSpeed * Time.deltaTime
-            );
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, goalRotation, turnSpeed * Time.deltaTime);
 
             if (Quaternion.Angle(transform.rotation, goalRotation) < 2f)
-            {
                 break;
-            }
 
             yield return null;
         }

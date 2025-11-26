@@ -5,14 +5,12 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-
 [System.Serializable]
 public class ToggleSlot
 {
     public TextMeshProUGUI label;
     public Toggle toggle;
 }
-
 
 [System.Serializable]
 public class AudioSlot
@@ -21,7 +19,6 @@ public class AudioSlot
     public Slider slider;
     public Image handle;
 }
-
 
 public class SettingsController : MonoBehaviour
 {
@@ -34,6 +31,8 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private MainMenuController mainMenuController;
     [SerializeField] private PauseController pauseController;
+    [SerializeField] private GameObject tutorialPanel;
+    private bool wasTutorialOpen = false;
 
     [Header("Right Column Elements")]
     [SerializeField] private AudioSlot[] audioElements;
@@ -63,6 +62,13 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UIVolumeSliderText;
     private bool isInitializing = true;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource UIAudioSource;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] private AudioSource SFXAudioSource;
+    [SerializeField] private AudioClip shootAudioClip;
+
     [Header("Control Hints")]
     [SerializeField] private GameObject controlsBoth;
     [SerializeField] private GameObject controlsKeyboard;
@@ -70,7 +76,6 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private GameObject mainMenuNavigationBoth;
     [SerializeField] private GameObject mainMenuNavigationKeyboard;
     [SerializeField] private GameObject mainMenuNavigationController;
-
 
     private void Start()
     {
@@ -89,11 +94,14 @@ public class SettingsController : MonoBehaviour
 
     public void OpenSettingsPanel()
     {
+        wasTutorialOpen = tutorialPanel.activeSelf;
+        tutorialPanel.SetActive(false);
+
         Time.timeScale = 0f;
         row = 1;
         column = 1;
         settingsPanel.SetActive(true);
-        UpdateVisuals();
+        UpdateVisuals(playSound: false);
         StartCoroutine(ActivateNavigationDelayed(0.1f));
     }
 
@@ -111,10 +119,13 @@ public class SettingsController : MonoBehaviour
 
     public void CloseSettingsPanel()
     {
-     
         navigationEnabled = false;
         settingsPanel.SetActive(false);
         SaveToggleSettings();
+
+        tutorialPanel.SetActive(wasTutorialOpen);
+
+        PlayClickSound();
 
         Time.timeScale = 1f;
 
@@ -252,18 +263,20 @@ public class SettingsController : MonoBehaviour
         }
     }
 
-    private void UpdateVisuals()
+    private void UpdateVisuals(bool playSound = true)
     {
+        if (playSound)
+        {
+            PlayHoverSound();
+        }
+
+        // Set all colors normal
         foreach (var element in audioElements)
-        {
             element.label.color = normalColor;
-        }
-
         foreach (var element in toggleElements)
-        {
             element.label.color = normalColor;
-        }
 
+        // Change color for the active button
         if (column == 1)
         {
             audioElements[row - 1].label.color = highlightColor;
@@ -280,6 +293,7 @@ public class SettingsController : MonoBehaviour
         {
             if (isEditingSlider)
             {
+                PlayClickSound();
                 isEditingSlider = false;
                 audioElements[row - 1].handle.color = normalColor;
             }
@@ -294,6 +308,7 @@ public class SettingsController : MonoBehaviour
         {
             if (isEditingSlider)
             {
+                PlayClickSound();
                 isEditingSlider = false;
                 audioElements[row - 1].handle.color = normalColor;
             }
@@ -305,12 +320,14 @@ public class SettingsController : MonoBehaviour
                 }
                 else
                 {
+                    PlayClickSound();
                     isEditingSlider = true;
                     audioElements[row - 1].handle.color = highlightColor;
                 }
             }
             else if (column == 2)
             {
+                PlayClickSound();
                 toggleElements[row - 1].toggle.isOn = !toggleElements[row - 1].toggle.isOn;
             }
         }
@@ -408,6 +425,9 @@ public class SettingsController : MonoBehaviour
 
     public void ReturnHovered()
     {
+        if (column == 1 && row == audioElements.Length)
+            return;
+
         column = 1;
         row = audioElements.Length;
         UpdateVisuals();
@@ -415,19 +435,46 @@ public class SettingsController : MonoBehaviour
 
     public void ReturnClicked()
     {
+        PlayClickSound();
         CloseSettingsPanel();
     }
 
     public void OnVolumeSliderChanged()
     {
         if (isInitializing)
-        {
             return;
+
+
+        if (isEditingSlider)
+        {
+            if (row == 3)
+            {
+                PlayShootSound();
+            }
+            else
+            {
+                PlayHoverSound();
+            }
         }
 
         AudioManager.Instance.ApplyVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
         AudioManager.Instance.ApplyVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
         AudioManager.Instance.ApplyVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
         AudioManager.Instance.ApplyVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
+    }
+
+    public void PlayShootSound()
+    {
+        SFXAudioSource.PlayOneShot(shootAudioClip);
+    }
+
+    public void PlayHoverSound()
+    {
+        UIAudioSource.PlayOneShot(buttonHoverSound);
+    }
+
+    public void PlayClickSound()
+    {
+        UIAudioSource.PlayOneShot(buttonClickSound);
     }
 }

@@ -17,6 +17,18 @@ public class TurretShoot : MonoBehaviour
     private float fireTimer;
     public bool isShooting = false;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource SFXAudioSource;
+    [SerializeField] private AudioClip shootAudioClip;
+    [SerializeField] private bool shouldPlayAudio = false;
+
+    private void Start()
+    {
+        if (shouldPlayAudio && SFXAudioSource == null)
+        {
+            SFXAudioSource = GameObject.Find("SFXAudioSource").GetComponent<AudioSource>();
+        }
+    }
 
     private void Update()
     {
@@ -35,8 +47,18 @@ public class TurretShoot : MonoBehaviour
 
     private void Fire()
     {
+        if (shouldPlayAudio && SFXAudioSource != null)
+        {
+            PlayShootSound();
+        }
+ 
         var bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         var projectile = bullet.GetComponent<Projectile>();
         projectile?.Initialize(projectileSpeed, minDamage, maxDamage, criticalChance, criticalMultiplier);
+    }
+
+    public void PlayShootSound()
+    {
+        SFXAudioSource.PlayOneShot(shootAudioClip);
     }
 }

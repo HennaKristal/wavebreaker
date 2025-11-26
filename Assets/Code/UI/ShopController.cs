@@ -28,7 +28,10 @@ public class ShopController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioSource UIAudioSource;
-    [SerializeField] private AudioClip insufficientFundsClip;
+    [SerializeField] private AudioClip errorAudioClip;
+    [SerializeField] private AudioClip purchaseAudioClip;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] private AudioClip buttonClickSound;
 
     private int row = 1;
     private float cooldown = 0.2f;
@@ -61,8 +64,8 @@ public class ShopController : MonoBehaviour
         StartCoroutine(EnableControlsRealtime(0.1f));
         shopPanel.SetActive(true);
         row = 1;
-        UpdateVisuals();
-    
+        UpdateVisuals(playSound: false);
+
     }
 
     public void ReopenShopPanel()
@@ -155,7 +158,7 @@ public class ShopController : MonoBehaviour
                 StartCoroutine(FlashPriceLabel(purchase.priceLabel, priceInsufficientColor, 1f));
             }
 
-            UIAudioSource.PlayOneShot(insufficientFundsClip);
+            PlayErrorSound();
 
             return;
         }
@@ -178,42 +181,54 @@ public class ShopController : MonoBehaviour
         label.color = original;
     }
 
-    private void UpdateVisuals()
+    private void UpdateVisuals(bool playSound = true)
     {
+        if (playSound)
+            PlayHoverSound();
+
         foreach (var purchase in purchaseOptionList)
-        {
             purchase.label.color = normalColor;
-        }
 
         purchaseOptionList[row - 1].label.color = highlightColor;
     }
 
     public void HoverPurchaseDestroyerButton()
     {
+        if (row == 1)
+            return;
+
         row = 1;
         UpdateVisuals();
     }
 
     public void HoverPurchaseAircraftCarrierButton()
     {
+        if (row == 2)
+            return;
+
         row = 2;
         UpdateVisuals();
     }
 
     public void HoverContinueButton()
     {
+        if (row == 3)
+            return;
+
         row = 3;
         UpdateVisuals();
     }
 
     public void ClickPurchaseDestroyerButton()
     {
+        PlayClickSound();
         row = 1;
         PlacePreviewPrefab();
     }
 
     public void ClickPurchaseAircraftCarrierButton()
     {
+        PlayClickSound();
         row = 2;
         PlacePreviewPrefab();
     }
@@ -221,8 +236,23 @@ public class ShopController : MonoBehaviour
     public void ClickContinueButton()
     {
         Time.timeScale = 1f;
+        PlayClickSound();
         CloseShopPanel();
         if (waveSpawner != null) waveSpawner.SpawnNextWave();
     }
 
+    public void PlayHoverSound()
+    {
+        UIAudioSource.PlayOneShot(buttonHoverSound);
+    }
+
+    public void PlayClickSound()
+    {
+        UIAudioSource.PlayOneShot(buttonClickSound);
+    }
+
+    public void PlayErrorSound()
+    {
+        UIAudioSource.PlayOneShot(errorAudioClip);
+    }
 }

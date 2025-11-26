@@ -9,7 +9,6 @@ public class PreviewPlacement : MonoBehaviour
     private Transform flagshipHQTransform;
     private SpriteRenderer spriteRenderer;
     private int allyLayerMask;
-    private PolygonCollider2D polygonCollider;
 
     [Header("Movement")]
     [SerializeField] private float inputMoveSpeed = 3f;
@@ -20,9 +19,9 @@ public class PreviewPlacement : MonoBehaviour
     [SerializeField] private int price = 1000;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip errorAudioClip;
     private AudioSource UIAudioSource;
-
+    [SerializeField] private AudioClip errorAudioClip;
+    [SerializeField] private AudioClip purchaseAudioClip;
 
     private void Start()
     {
@@ -42,8 +41,6 @@ public class PreviewPlacement : MonoBehaviour
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        polygonCollider = GetComponent<PolygonCollider2D>();
 
         allyLayerMask = LayerMask.GetMask("Ally");
     }
@@ -84,12 +81,12 @@ public class PreviewPlacement : MonoBehaviour
         {
             if (IsOverlapping() || !inventory.HasCoins(price))
             {
-                UIAudioSource.PlayOneShot(errorAudioClip);
+                PlayErrorSound();
                 return;
             }
 
             inventory.RemoveCoins(price);
-
+            PlayPurchaseSound();
             shopController.ReopenShopPanel();
 
             Instantiate(prefab, transform.position, Quaternion.identity);
@@ -115,5 +112,15 @@ public class PreviewPlacement : MonoBehaviour
     private void UpdateRendererTint()
     {
         spriteRenderer.color = IsOverlapping() ? new Color(1f, 0f, 0f, 1f) : new Color(150f/255f, 150f/255f, 150f/255f, 200f/255f);
+    }
+
+    public void PlayPurchaseSound()
+    {
+        UIAudioSource.PlayOneShot(purchaseAudioClip);
+    }
+
+    public void PlayErrorSound()
+    {
+        UIAudioSource.PlayOneShot(errorAudioClip);
     }
 }

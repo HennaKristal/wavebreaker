@@ -9,7 +9,6 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance => _instance;
     [SerializeField] private AudioMixer audioMixer;
 
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
