@@ -51,7 +51,7 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.Instance.PlayMusic("BattleTheme");
+        MusicManager.Instance.Play("BattleTheme");
         Invoke(nameof(EnableNavigation), 1f);
     }
 

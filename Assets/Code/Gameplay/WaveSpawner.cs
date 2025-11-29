@@ -32,6 +32,7 @@ public class CustomSpawn
 
 public class WaveSpawner : MonoBehaviour
 {
+    [SerializeField] private GameObject victoryScreen;
     [SerializeField] private Transform enemyContainer;
     [SerializeField] private float spawnRadius = 10f;
     [SerializeField] private Transform spawnPoint;
@@ -44,6 +45,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private GameObject waveInformation;
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
+    private int enemiesLeft = 0;
 
     [Header("Between Wave UI")]
     [SerializeField] private CinemachineCamera cinemachineCamera;
@@ -81,6 +83,7 @@ public class WaveSpawner : MonoBehaviour
             else
             {
                 GameManager.Instance.GameCompleted();
+                Invoke(nameof(ShowVictoryScreen), 5f);
             }
         }
 
@@ -101,6 +104,11 @@ public class WaveSpawner : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ShowVictoryScreen()
+    {
+        victoryScreen.SetActive(true);
     }
 
     private void BeginUpgradeTransition()
@@ -164,7 +172,7 @@ public class WaveSpawner : MonoBehaviour
 
             if (!string.IsNullOrEmpty(wave.playSong) && wave.playSong != currentSong)
             {
-                MusicManager.Instance.PlayMusic(wave.playSong);
+                MusicManager.Instance.Play(wave.playSong);
             }
         }
     }
@@ -215,17 +223,14 @@ public class WaveSpawner : MonoBehaviour
 
     public void OnEnemySpawned()
     {
-        Invoke(nameof(UpdateEnemiesLeftUI), 0.1f);
+        enemiesLeft++;
+        enemiesLeftText.text = enemiesLeft.ToString();
     }
 
     public void OnEnemyDied()
     {
-        UpdateEnemiesLeftUI();
-    }
-
-    private void UpdateEnemiesLeftUI()
-    {
-        enemiesLeftText.text = enemyContainer.childCount.ToString();
+        enemiesLeft--;
+        enemiesLeftText.text = enemiesLeft.ToString();
     }
 }
 

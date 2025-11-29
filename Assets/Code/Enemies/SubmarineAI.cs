@@ -70,7 +70,7 @@ public class BossSubmarineAI : MonoBehaviour
 
     private void Attack()
     {
-        if (!nukeAttackUsed && enemyHealthBase.GetCurrentHealth() * 4 < enemyHealthBase.GetMaxHealth())
+        if (!nukeAttackUsed && enemyHealthBase.GetCurrentHealth() * 3 < enemyHealthBase.GetMaxHealth())
         {
             PerformNukeAttack();
         }

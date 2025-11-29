@@ -37,6 +37,8 @@ public abstract class EnemyHealthBase : MonoBehaviour
         waveSpawner = GameObject.Find("WaveController").GetComponent<WaveSpawner>();
         waveSpawner?.OnEnemySpawned();
 
+        Debug.Log(this.gameObject.name  + " Added to enemy list");
+
         sr = GetComponent<SpriteRenderer>();
         defaultMaterial = sr.material;
         flashMaterial = GameManager.Instance.GetEnemyDamageFlashMaterial();
@@ -89,6 +91,7 @@ public abstract class EnemyHealthBase : MonoBehaviour
     protected virtual void GiveKillRewards()
     {
         waveSpawner?.OnEnemyDied();
+        Debug.Log(this.gameObject.name + " removed from enemy list");
 
         foreach (ResourceDrop drop in resourceDrops)
         {

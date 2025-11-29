@@ -1,13 +1,11 @@
 using UnityEngine;
 
-
 [System.Serializable]
 public class ResourceDrop
 {
     public GameObject prefab;
     public int amount = 1;
 }
-
 
 public class Resource : MonoBehaviour
 {
@@ -18,13 +16,13 @@ public class Resource : MonoBehaviour
     [SerializeField] private ResourceType resourceType;
     [SerializeField] private int amount = 1;
 
-    [Header("MAGNETISM")]
+    [Header("Magnetism")]
     [SerializeField] private float attractRadius = 3f;
     [SerializeField] private float attractForce = 2f;
 
     [Header("Audio")]
     private AudioSource pickupAudioSource;
-    [SerializeField] private AudioClip pickupAudioClip;
+    [SerializeField] private AudioClip[] pickupAudioClips;
 
     private void Start()
     {
@@ -40,7 +38,9 @@ public class Resource : MonoBehaviour
             return;
         }
 
-        if (Vector2.Distance(transform.position, player.position) <= attractRadius)
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= attractRadius)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, attractForce * Time.deltaTime);
         }
@@ -65,6 +65,18 @@ public class Resource : MonoBehaviour
 
     public void PlayPickupSound()
     {
-        pickupAudioSource.PlayOneShot(pickupAudioClip);
+        if (pickupAudioSource == null)
+        {
+            return;
+        }
+
+        if (pickupAudioClips == null || pickupAudioClips.Length == 0)
+        {
+            return;
+        }
+
+        int index = Random.Range(0, pickupAudioClips.Length);
+        AudioClip selectedClip = pickupAudioClips[index];
+        pickupAudioSource.PlayOneShot(selectedClip);
     }
 }

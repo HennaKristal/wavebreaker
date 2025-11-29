@@ -42,7 +42,7 @@ public class PauseController : MonoBehaviour
 
     public void OpenPausePanel(bool cameFromSettings = false)
     {
-        if (shopController.isPlacingShopItems)
+        if (shopController.isPlacingShopItems || GameManager.Instance.gameEnded)
             return;
 
         wasTutorialOpen = tutorialPanel.activeSelf;
