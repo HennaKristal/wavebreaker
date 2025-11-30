@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class AudioSlot
 
 public class SettingsController : MonoBehaviour
 {
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Settings settings;
     [SerializeField] private Volume volume;
     private MotionBlur motionBlur;
@@ -79,10 +81,10 @@ public class SettingsController : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.LoadVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
-        AudioManager.Instance.LoadVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
-        AudioManager.Instance.LoadVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
-        AudioManager.Instance.LoadVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
+        LoadVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
+        LoadVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
+        LoadVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
+        LoadVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
 
         volume.profile.TryGet<MotionBlur>(out motionBlur);
         volume.profile.TryGet<FilmGrain>(out filmGrain);
@@ -165,7 +167,7 @@ public class SettingsController : MonoBehaviour
 
     private void HandleSliders()
     {
-        Vector2 move = InputController.Instance.Move;
+        Vector2 move = InputManager.Instance.Move;
 
         if (move == Vector2.zero)
         {
@@ -192,7 +194,7 @@ public class SettingsController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 move = InputController.Instance.Move;
+        Vector2 move = InputManager.Instance.Move;
 
         if (move == Vector2.zero)
         {
@@ -289,7 +291,7 @@ public class SettingsController : MonoBehaviour
 
     private void HandleAction()
     {
-        if (InputController.Instance.CancelPressed)
+        if (InputManager.Instance.CancelPressed)
         {
             if (isEditingSlider)
             {
@@ -304,7 +306,7 @@ public class SettingsController : MonoBehaviour
                 CloseSettingsPanel();
             }
         }
-        else if (InputController.Instance.EnterPressed)
+        else if (InputManager.Instance.EnterPressed)
         {
             if (isEditingSlider)
             {
@@ -327,10 +329,17 @@ public class SettingsController : MonoBehaviour
             }
             else if (column == 2)
             {
-                PlayClickSound();
                 toggleElements[row - 1].toggle.isOn = !toggleElements[row - 1].toggle.isOn;
             }
         }
+    }
+
+    public void OnToggleChanged()
+    {
+        if (isInitializing)
+            return;
+
+        PlayClickSound();
     }
 
     private void LoadToggleSettings()
@@ -412,13 +421,13 @@ public class SettingsController : MonoBehaviour
         if (motionBlur != null)
         {
             motionBlur.intensity.overrideState = true;
-            motionBlur.intensity.Override(settings.motionBlurEnabled ? 0.3f : 0f);
+            motionBlur.intensity.Override(settings.motionBlurEnabled ? 0.25f : 0f);
         }
 
         if (filmGrain != null)
         {
             filmGrain.intensity.overrideState = true;
-            filmGrain.intensity.Override(settings.filmGrainEnabled ? 0.25f : 0f);
+            filmGrain.intensity.Override(settings.filmGrainEnabled ? 0.15f : 0f);
         }
     }
 
@@ -457,10 +466,32 @@ public class SettingsController : MonoBehaviour
             }
         }
 
-        AudioManager.Instance.ApplyVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
-        AudioManager.Instance.ApplyVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
-        AudioManager.Instance.ApplyVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
-        AudioManager.Instance.ApplyVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
+        ApplyVolume("MusicVolume", MusicVolumeSlider, MusicVolumeSliderText);
+        ApplyVolume("AmbientVolume", AmbientVolumeSlider, AmbientVolumeSliderText);
+        ApplyVolume("SFXVolume", SFXVolumeSlider, SFXVolumeSliderText);
+        ApplyVolume("UIVolume", UIVolumeSlider, UIVolumeSliderText);
+    }
+
+    public void LoadVolume(string parameter, Slider slider, TextMeshProUGUI label)
+    {
+        float value = PlayerPrefs.GetFloat(parameter, 0.8f);
+        slider.value = value;
+        label.text = Mathf.Ceil(value * 100f).ToString() + "%";
+        audioMixer.SetFloat(parameter, LinearToDecibel(value));
+    }
+
+    public void ApplyVolume(string parameter, Slider slider, TextMeshProUGUI label)
+    {
+
+        float value = slider.value;
+        label.text = Mathf.Ceil(value * 100f).ToString() + "%";
+        PlayerPrefs.SetFloat(parameter, value);
+        audioMixer.SetFloat(parameter, LinearToDecibel(value));
+    }
+
+    private float LinearToDecibel(float value)
+    {
+        return Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20f;
     }
 
     public void PlayShootSound()

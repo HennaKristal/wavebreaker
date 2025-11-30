@@ -112,7 +112,7 @@ public class PauseController : MonoBehaviour
 
         if (!navigationEnabled)
         {
-            if (InputController.Instance.PausePressed)
+            if (InputManager.Instance.PausePressed)
             {
                 OpenPausePanel();
             }
@@ -126,7 +126,7 @@ public class PauseController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 move = InputController.Instance.Move;
+        Vector2 move = InputManager.Instance.Move;
 
         if (move == Vector2.zero)
         {
@@ -176,14 +176,14 @@ public class PauseController : MonoBehaviour
 
     private void HandleAction()
     {
-        if (InputController.Instance.CancelPressed)
+        if (InputManager.Instance.CancelPressed)
         {
             PlayClickSound();
             ClosePausePanel();
             return;
         }
 
-        if (InputController.Instance.EnterPressed)
+        if (InputManager.Instance.EnterPressed)
         {
             PlayClickSound();
             ClosePausePanel();

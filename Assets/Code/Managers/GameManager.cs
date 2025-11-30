@@ -2,11 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager _instance;
-    public static GameManager Instance => _instance;
-
     [Header("REFERENCES")]
     [SerializeField] Material playerDamageFlashMaterial;
     [SerializeField] Material enemyDamageFlashMaterial;
@@ -21,27 +18,23 @@ public class GameManager : MonoBehaviour
     public bool gameEnded = false;
     public bool bossReached = false;
 
-    private void Awake()
+   protected override void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
+        base.Awake();
 
         fading = GetComponent<Fading>();
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDestroy()
-    {
-        if (_instance == this)
+        if (fading != null)
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            fading.StartFadeIn(2f);
         }
+
+        gameStarted = false;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform.gameObject.SetActive(false);
+        flagshipHQTransform = GameObject.Find("FlagShipHQ").transform;
+        flagshipHQTransform.gameObject.SetActive(false);
+        UIAudioSource = GameObject.Find("UIAudioSource").GetComponent<AudioSource>();
+        inventoryController = GameObject.Find("InventoryController").GetComponent<Inventory>();
     }
 
     public void ExitApplication()
@@ -104,22 +97,6 @@ public class GameManager : MonoBehaviour
     public void GameCompleted()
     {
         gameEnded = true;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (fading != null)
-        {
-            fading.StartFadeIn(2f);
-        }
-
-        gameStarted = false;
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        playerTransform.gameObject.SetActive(false);
-        flagshipHQTransform = GameObject.Find("FlagShipHQ").transform;
-        flagshipHQTransform.gameObject.SetActive(false);
-        UIAudioSource = GameObject.Find("UIAudioSource").GetComponent<AudioSource>();
-        inventoryController = GameObject.Find("InventoryController").GetComponent<Inventory>();
     }
 
     public void LoadSceneByName(string sceneName)

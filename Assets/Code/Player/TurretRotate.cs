@@ -27,7 +27,7 @@ public class TurretRotate : MonoBehaviour
 
     private void Update()
     {
-        controllerInput = InputController.Instance.RotateGuns;
+        controllerInput = InputManager.Instance.RotateGuns;
         currentMousePos = Input.mousePosition;
 
         DetectInputMethod();

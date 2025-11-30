@@ -32,7 +32,7 @@ public class TurretShoot : MonoBehaviour
 
     private void Update()
     {
-        isShooting = (InputController.Instance.MainWeaponHeld);
+        isShooting = (InputManager.Instance.MainWeaponHeld);
         fireTimer += Time.deltaTime;
 
         if (fireTimer >= fireDelay)

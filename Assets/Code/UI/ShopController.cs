@@ -98,7 +98,7 @@ public class ShopController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 move = InputController.Instance.Move;
+        Vector2 move = InputManager.Instance.Move;
 
         if (move == Vector2.zero)
         {
@@ -133,7 +133,7 @@ public class ShopController : MonoBehaviour
 
     private void HandleAction()
     {
-        if (InputController.Instance.EnterPressed)
+        if (InputManager.Instance.EnterPressed)
         {
             // If last option (Continue) selected
             if (row == purchaseOptionList.Length)

@@ -66,7 +66,7 @@ public class PreviewPlacement : MonoBehaviour
         }
         else
         {
-            Vector2 inputVector = InputController.Instance.Move;
+            Vector2 inputVector = InputManager.Instance.Move;
             if (inputVector != Vector2.zero)
             {
                 transform.position += new Vector3(inputVector.x, inputVector.y, 0f) * inputMoveSpeed * Time.unscaledDeltaTime;
@@ -77,7 +77,7 @@ public class PreviewPlacement : MonoBehaviour
     private void HandleActions()
     {
         // Confirm placement
-        if (InputController.Instance.EnterPressed || InputController.Instance.MainWeaponPressed)
+        if (InputManager.Instance.EnterPressed || InputManager.Instance.MainWeaponPressed)
         {
             if (IsOverlapping() || !inventory.HasCoins(price))
             {
@@ -95,7 +95,7 @@ public class PreviewPlacement : MonoBehaviour
         }
 
         // Cancel placement
-        if (InputController.Instance.CancelPressed)
+        if (InputManager.Instance.CancelPressed)
         {
             shopController.ReopenShopPanel();
             Destroy(gameObject);

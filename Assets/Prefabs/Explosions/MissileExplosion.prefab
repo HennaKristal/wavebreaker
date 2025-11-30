@@ -49,11 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73fa5122d590044aaef0e1af1ed227a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NukeExplosion
-  damage: 100
+  damage: 80
   duration: 1
   fullDamageTimeWindow: 0.1
   settings: {fileID: 0}
-  explosionShake: {fileID: 11400000, guid: 6c1cfc78604eccc4c878bd0d392a0459, type: 2}
 --- !u!114 &1956528545490444214
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector2 inputVector = InputController.Instance.Move;
+        Vector2 inputVector = InputManager.Instance.Move;
         float turnAmount = -inputVector.x * turnSpeed * Time.fixedDeltaTime;
         rigidBody.MoveRotation(rigidBody.rotation + turnAmount);
 

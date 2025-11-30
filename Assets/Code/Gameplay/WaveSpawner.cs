@@ -172,7 +172,7 @@ public class WaveSpawner : MonoBehaviour
 
             if (!string.IsNullOrEmpty(wave.playSong) && wave.playSong != currentSong)
             {
-                MusicManager.Instance.Play(wave.playSong);
+                MusicManager.Instance.PlayMusic(wave.playSong);
             }
         }
     }

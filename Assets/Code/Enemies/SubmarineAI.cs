@@ -131,7 +131,7 @@ public class BossSubmarineAI : MonoBehaviour
 
     private void PerformNukeAttack()
     {
-        MusicManager.Instance.Stop(fadeDuration: 4.75f);
+        MusicManager.Instance.StopMusic(fadeDuration: 4.75f);
         Invoke(nameof(ChangePhaseTwoMusic), 4.9f);
         nukeAttackUsed = true;
         animator.SetTrigger("NukeAttack");
@@ -140,7 +140,7 @@ public class BossSubmarineAI : MonoBehaviour
 
     private void ChangePhaseTwoMusic()
     {
-        MusicManager.Instance.Play(songID: "BossPhase2Theme", isLooping: true, fadeDuration: 0.75f);
+        MusicManager.Instance.PlayMusic (songID: "BossPhase2Theme", isLooping: true, fadeDuration: 0.75f);
     }
 
 

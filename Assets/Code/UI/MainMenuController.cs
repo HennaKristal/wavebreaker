@@ -51,7 +51,8 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.Instance.Play("BattleTheme");
+        MusicManager.Instance.PlayMusic("BattleTheme");
+        MusicManager.Instance.PlayAmbience("Wind");
         Invoke(nameof(EnableNavigation), 1f);
     }
 
@@ -74,7 +75,7 @@ public class MainMenuController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 move = InputController.Instance.Move;
+        Vector2 move = InputManager.Instance.Move;
 
         // Reset timer if input is not held down
         if (move == Vector2.zero)
@@ -158,7 +159,7 @@ public class MainMenuController : MonoBehaviour
 
     private void HandleAction()
     {
-        if (InputController.Instance.EnterPressed)
+        if (InputManager.Instance.EnterPressed)
         {
             if (column == MainMenuColumn.Menu)
             {

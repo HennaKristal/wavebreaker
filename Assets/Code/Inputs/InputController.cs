@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class InputManager : Singleton<InputManager>
 {
-    private static InputController _instance;
-    public static InputController Instance => _instance;
-
     private PlayerInputActions playerInputActions;
     private PlayerInputActions.GameplayActions gameplayInputs;
 
@@ -17,17 +14,9 @@ public class InputController : MonoBehaviour
     public bool EnterPressed { get; private set; }
     public bool CancelPressed { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-
+        base.Awake();
         playerInputActions = new PlayerInputActions();
         gameplayInputs = playerInputActions.Gameplay;
     }
@@ -39,7 +28,7 @@ public class InputController : MonoBehaviour
 
     private void OnDisable()
     {
-        if (playerInputActions != null)
+        if (Instance == this && playerInputActions != null)
         {
             playerInputActions.Disable();
         }
