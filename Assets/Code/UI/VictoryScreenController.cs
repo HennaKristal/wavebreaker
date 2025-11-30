@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class VictoryScreenController : MonoBehaviour
 {
+    [SerializeField] private GameObject victoryScreen;
     [SerializeField] private TextMeshProUGUI restartButton;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip clickSound;
     private bool controlsEnabled = false;
 
-    private void Start()
+    public void ShowEndingScreen()
     {
+        victoryScreen.SetActive(true);
         Invoke(nameof(EnableControls), 2f);
     }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using FirstGearGames.SmoothCameraShaker;
 
 public class MissileExplosion : MonoBehaviour
 {
@@ -11,20 +10,11 @@ public class MissileExplosion : MonoBehaviour
 
     [Header("Shake")]
     [SerializeField] private Settings settings;
-    [SerializeField] private ShakeData explosionShake;
-
 
     private void Start()
     {
         startTime = Time.time;
-
-        //if (settings.screenShakeEnabled)
-        //{
-        //    Debug.Log("shake");
-        //    CameraShakerHandler.Shake(explosionShake);
-        //}
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {

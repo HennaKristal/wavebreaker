@@ -32,7 +32,7 @@ public class CustomSpawn
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject victoryScreen;
+    [SerializeField] private VictoryScreenController victoryScreenController;
     [SerializeField] private Transform enemyContainer;
     [SerializeField] private float spawnRadius = 10f;
     [SerializeField] private Transform spawnPoint;
@@ -108,7 +108,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void ShowVictoryScreen()
     {
-        victoryScreen.SetActive(true);
+        victoryScreenController.ShowEndingScreen();
     }
 
     private void BeginUpgradeTransition()

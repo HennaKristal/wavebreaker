@@ -53,7 +53,6 @@ MonoBehaviour:
   duration: 5
   fullDamageTimeWindow: 0.1
   settings: {fileID: 11400000, guid: 0ffea0f8b00ee0749a0242aa4d46b312, type: 2}
-  explosionShake: {fileID: 11400000, guid: a939373add472254abb0618955add137, type: 2}
 --- !u!114 &8291637412559190393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +231,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ab63f6fe4a201df49a333c93f69761e5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

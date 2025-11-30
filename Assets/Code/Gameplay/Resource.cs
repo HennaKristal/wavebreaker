@@ -10,15 +10,10 @@ public class ResourceDrop
 public class Resource : MonoBehaviour
 {
     private Inventory inventory;
-    private Transform player;
 
     private enum ResourceType { Coin }
     [SerializeField] private ResourceType resourceType;
     [SerializeField] private int amount = 1;
-
-    [Header("Magnetism")]
-    [SerializeField] private float attractRadius = 3f;
-    [SerializeField] private float attractForce = 2f;
 
     [Header("Audio")]
     private AudioSource pickupAudioSource;
@@ -26,24 +21,8 @@ public class Resource : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.Instance.GetPlayerTransform();
         inventory = GameManager.Instance.GetInventoryController();
         pickupAudioSource = GameObject.Find("PickupAudioSource")?.GetComponent<AudioSource>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (player == null)
-        {
-            return;
-        }
-
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= attractRadius)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, attractForce * Time.deltaTime);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,17 +45,13 @@ public class Resource : MonoBehaviour
     public void PlayPickupSound()
     {
         if (pickupAudioSource == null)
-        {
             return;
-        }
 
         if (pickupAudioClips == null || pickupAudioClips.Length == 0)
-        {
             return;
-        }
 
-        int index = Random.Range(0, pickupAudioClips.Length);
-        AudioClip selectedClip = pickupAudioClips[index];
+        int randomIndex = Random.Range(0, pickupAudioClips.Length);
+        AudioClip selectedClip = pickupAudioClips[randomIndex];
         pickupAudioSource.PlayOneShot(selectedClip);
     }
 }

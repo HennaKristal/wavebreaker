@@ -37,8 +37,6 @@ public abstract class EnemyHealthBase : MonoBehaviour
         waveSpawner = GameObject.Find("WaveController").GetComponent<WaveSpawner>();
         waveSpawner?.OnEnemySpawned();
 
-        Debug.Log(this.gameObject.name  + " Added to enemy list");
-
         sr = GetComponent<SpriteRenderer>();
         defaultMaterial = sr.material;
         flashMaterial = GameManager.Instance.GetEnemyDamageFlashMaterial();
@@ -68,7 +66,7 @@ public abstract class EnemyHealthBase : MonoBehaviour
             isDead = true;
             enemyCollider.enabled = false;
 
-            GiveKillRewards();
+            OnDeath();
 
             if (explosionPrefab != null && explosionAmount > 0)
             {
@@ -88,11 +86,16 @@ public abstract class EnemyHealthBase : MonoBehaviour
         sr.material = defaultMaterial;
     }
 
-    protected virtual void GiveKillRewards()
+
+    protected virtual void OnDeath()
     {
         waveSpawner?.OnEnemyDied();
-        Debug.Log(this.gameObject.name + " removed from enemy list");
+        GiveKillRewards();
 
+    }
+
+    protected virtual void GiveKillRewards()
+    {
         foreach (ResourceDrop drop in resourceDrops)
         {
             if (drop.prefab == null || drop.amount <= 0) continue;

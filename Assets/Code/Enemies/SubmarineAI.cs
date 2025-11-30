@@ -37,7 +37,6 @@ public class BossSubmarineAI : MonoBehaviour
     private float sweepTimer = 0f;
     private float sweepBaseAngle;
 
-
     private void Start()
     {
         playerTransform = GameManager.Instance.GetPlayerTransform();
@@ -45,7 +44,6 @@ public class BossSubmarineAI : MonoBehaviour
         animator = GetComponent<Animator>();
         Ascend();
     }
-
 
     private void Update()
     {
@@ -59,14 +57,12 @@ public class BossSubmarineAI : MonoBehaviour
         }
     }
 
-
     private void Ascend()
     {
         TeleportToSurfacePosition();
         animator.SetTrigger("Emerge");
         Invoke(nameof(Attack), 4f);
     }
-
 
     private void Attack()
     {
@@ -101,13 +97,11 @@ public class BossSubmarineAI : MonoBehaviour
         Invoke(nameof(Submerge), 6f);
     }
 
-
     private void Submerge()
     {
         animator.SetTrigger("Submerge");
         Invoke(nameof(Ascend), Random.Range(minSubmergedDuration, maxSubmergedDuration));
     }
-
 
     private void TeleportToSurfacePosition()
     {
@@ -116,13 +110,11 @@ public class BossSubmarineAI : MonoBehaviour
         transform.position = newPos;
     }
 
-
     private void PerformMissileAttack()
     {
         animator.SetTrigger("MissileAttack");
         StartCoroutine(PerformMissileAttackCoroutine());
     }
-
 
     private IEnumerator PerformMissileAttackCoroutine()
     {
@@ -137,13 +129,18 @@ public class BossSubmarineAI : MonoBehaviour
         }
     }
 
-
-
     private void PerformNukeAttack()
     {
+        MusicManager.Instance.Stop(fadeDuration: 4.75f);
+        Invoke(nameof(ChangePhaseTwoMusic), 4.9f);
         nukeAttackUsed = true;
         animator.SetTrigger("NukeAttack");
         Instantiate(NukePrefabWarning, playerTransform.position, Quaternion.identity);
+    }
+
+    private void ChangePhaseTwoMusic()
+    {
+        MusicManager.Instance.Play(songID: "BossPhase2Theme", isLooping: true, fadeDuration: 0.75f);
     }
 
 
@@ -151,7 +148,6 @@ public class BossSubmarineAI : MonoBehaviour
     {
         StartCoroutine(FireTurrets());
     }
-
 
     private IEnumerator FireTurrets()
     {
@@ -180,7 +176,6 @@ public class BossSubmarineAI : MonoBehaviour
 
         isFiringGuns = false;
     }
-
 
     private void RotateGunsTowardPlayer()
     {
