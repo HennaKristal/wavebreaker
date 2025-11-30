@@ -11,8 +11,8 @@ Navigate to your project directory and delete the following folders:
 - ProjectSettings
 - UserSettings
 
-### 4. Apply the Template
-Drag and drop the following folders and file from the template into your project folder:
+### 4. Upload this project
+Drag and drop the following folders and file into your project folder:
 - Assets
 - Packages
 - ProjectSettings
