@@ -36,6 +36,7 @@ public class BossSubmarineAI : MonoBehaviour
     private float sweepDuration = 0f;
     private float sweepTimer = 0f;
     private float sweepBaseAngle;
+    private bool isDying = false;
 
     private void Start()
     {
@@ -49,11 +50,13 @@ public class BossSubmarineAI : MonoBehaviour
     {
         RotateGunsTowardPlayer();
 
-        if (enemyHealthBase.isDead)
+        if (!isDying && enemyHealthBase.isDead)
         {
+            isDying = true;
             CancelInvoke(nameof(Attack));
             CancelInvoke(nameof(Submerge));
             CancelInvoke(nameof(Ascend));
+            Submerge();
         }
     }
 
@@ -66,9 +69,11 @@ public class BossSubmarineAI : MonoBehaviour
 
     private void Attack()
     {
-        if (!nukeAttackUsed && enemyHealthBase.GetCurrentHealth() * 3 < enemyHealthBase.GetMaxHealth())
+        if (!nukeAttackUsed && enemyHealthBase.GetCurrentHealth() * 2 < enemyHealthBase.GetMaxHealth())
         {
             PerformNukeAttack();
+            Invoke(nameof(Submerge), 1f);
+            return;
         }
         else
         {
@@ -131,18 +136,19 @@ public class BossSubmarineAI : MonoBehaviour
 
     private void PerformNukeAttack()
     {
-        MusicManager.Instance.StopMusic(fadeDuration: 4.75f);
-        Invoke(nameof(ChangePhaseTwoMusic), 4.9f);
+        MusicManager.Instance.StopMusic(fadeDuration: 4f);
+
         nukeAttackUsed = true;
         animator.SetTrigger("NukeAttack");
         Instantiate(NukePrefabWarning, playerTransform.position, Quaternion.identity);
+
+        Invoke(nameof(ChangePhaseTwoMusic), 5.75f);
     }
 
     private void ChangePhaseTwoMusic()
     {
-        MusicManager.Instance.PlayMusic (songID: "BossPhase2Theme", isLooping: true, fadeDuration: 0.75f);
+        MusicManager.Instance.PlayMusic (songID: "BossPhase2Theme", isLooping: true, fadeDuration: 2f);
     }
-
 
     private void PerformTurretAttacks()
     {

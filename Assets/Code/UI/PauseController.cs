@@ -36,8 +36,8 @@ public class PauseController : MonoBehaviour
 
     private void Start()
     {
-        musicAudioSource = GameObject.Find("MusicManager")?.GetComponent<AudioSource>();
-        ambienceAudioSource = GameObject.Find("AmbienceAudioSource")?.GetComponent<AudioSource>();
+        musicAudioSource = GameObject.Find("Music Audio Source")?.GetComponent<AudioSource>();
+        ambienceAudioSource = GameObject.Find("Ambience Audio Source")?.GetComponent<AudioSource>();
     }
 
     public void OpenPausePanel(bool cameFromSettings = false)
@@ -53,13 +53,13 @@ public class PauseController : MonoBehaviour
         if (musicAudioSource != null)
         {
             previousMusicVolume = musicAudioSource.volume;
-            musicAudioSource.volume *= 0.25f;
+            musicAudioSource.volume *= 0.2f;
         }
 
         if (ambienceAudioSource != null)
         {
             previousAmbienceVolume = ambienceAudioSource.volume;
-            ambienceAudioSource.volume *= 0.25f;
+            ambienceAudioSource.volume *= 0.2f;
         }
 
         Time.timeScale = 0f;
