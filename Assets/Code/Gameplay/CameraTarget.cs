@@ -5,6 +5,7 @@ public class CameraTarget : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform HQTransform;
+    private Vector2 HQLastTransform;
 
     [Header("Distances")]
     [SerializeField] private float warningDistance = 20f;
@@ -26,7 +27,17 @@ public class CameraTarget : MonoBehaviour
 
     private void UpdateWarningSystem()
     {
-        float playerToHQDistance = Vector2.Distance(player.position, HQTransform.position);
+        float playerToHQDistance = 0;
+
+        if (HQTransform != null)
+        {
+            playerToHQDistance = Vector2.Distance(player.position, HQTransform.position);
+            HQLastTransform = HQTransform.position;
+        }
+        else
+        {
+            playerToHQDistance = Vector2.Distance(player.position, HQLastTransform);
+        }
 
         // Fail if player goes too far from HQ
         if (playerToHQDistance > gameOverDistance)
@@ -51,6 +62,6 @@ public class CameraTarget : MonoBehaviour
 
     private void UpdateWarningLightPosition()
     {
-        warningLight.transform.position = HQTransform.position;
+        warningLight.transform.position = HQLastTransform;
     }
 }
