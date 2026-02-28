@@ -132,11 +132,10 @@ MonoBehaviour:
   resourceType: 0
   amount: 100
   pickupAudioClips:
-  - {fileID: 8300000, guid: 754901140e44d0e4ba5612c33ce2dfaf, type: 3}
-  - {fileID: 8300000, guid: 3ccc394be1233fe4b8758bae2b85949c, type: 3}
-  - {fileID: 8300000, guid: ff4a30d0a2300c14cb9c0fa1509617ad, type: 3}
+  - {fileID: 8300000, guid: ebd190ea3420f00418a2ad1b6958dfa1, type: 3}
 --- !u!212 &8856735608184057914
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,6 +181,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -1468164361, guid: 69bad16b6ff42eb429464f54c751c616, type: 3}
   m_Color: {r: 1, g: 0.9048885, b: 0, a: 1}
   m_FlipX: 0
@@ -191,7 +191,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &778038796771848929
 BoxCollider2D:

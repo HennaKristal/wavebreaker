@@ -75,6 +75,7 @@ MonoBehaviour:
   globalLightStayDimmedTime: 1
 --- !u!212 &4090363095144858691
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,6 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0.47058824, b: 0.011764699, a: 1}
   m_FlipX: 0
@@ -129,7 +131,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5977706233805009422
 MonoBehaviour:
@@ -230,7 +231,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4030100643516294267, guid: 68c3bbb7f188bc84cb3ceda832cd9b5e, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: ab63f6fe4a201df49a333c93f69761e5, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2b2300bee2ecc12ef9d73efa788be52a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

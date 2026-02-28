@@ -68,6 +68,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4499225560253147204
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -112,7 +113,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 101
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: c683892915037774589ac73777b08fe1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -122,7 +124,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1787770922302459081
 MonoBehaviour:
@@ -162,5 +163,5 @@ MonoBehaviour:
   criticalMultiplier: 2.25
   isShooting: 0
   SFXAudioSource: {fileID: 0}
-  shootAudioClip: {fileID: 8300000, guid: a2da7633b5221124fa266410fb0a8271, type: 3}
-  shouldPlayAudio: 1
+  shootAudioClip: {fileID: 8300000, guid: cdb91284841484c4b92c3f8f2c7ce3fa, type: 3}
+  shouldPlayAudio: 0
